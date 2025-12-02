@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccgfm6pu38dm6"]
+[gd_scene load_steps=9 format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="ArrayMesh" uid="uid://cwv2pogyqsvcd" path="res://Objects/elephant.obj" id="1_2l4ix"]
 [ext_resource type="Script" uid="uid://dur8afpdm36fl" path="res://Scripts/ShadowCaster.cs" id="1_8jelc"]
@@ -13,15 +13,20 @@ sky_material = SubResource("ProceduralSkyMaterial_8jelc")
 
 [sub_resource type="Environment" id="Environment_l0lub"]
 background_mode = 2
+background_energy_multiplier = 0.46
 sky = SubResource("Sky_clg0j")
 tonemap_mode = 2
-glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clg0j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0lub"]
 
 [node name="Main3D" type="Node3D"]
 script = ExtResource("1_clg0j")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.273
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -31,8 +36,43 @@ environment = SubResource("Environment_l0lub")
 script = ExtResource("1_8jelc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ShadowCaster"]
+material_override = SubResource("StandardMaterial3D_clg0j")
 mesh = ExtResource("1_2l4ix")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(0.7071068, -0.18301271, -0.6830127, 0, 0.9659259, -0.25881907, 0.7071068, 0.18301271, 0.6830127, -6, -1, 2)
 current = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -7)
+size = Vector3(16, 21, 1)
+material = SubResource("StandardMaterial3D_l0lub")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019955635, 13.694258, 21.982712)
+size = Vector3(23.674438, 15.189514, 1)
+material = SubResource("StandardMaterial3D_l0lub")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019955635, -12.43425, 21.982712)
+size = Vector3(23.674438, 15.037262, 1)
+material = SubResource("StandardMaterial3D_l0lub")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5103245, 7.4816895, 10.747593)
+size = Vector3(16, 52.08252, 1)
+material = SubResource("StandardMaterial3D_l0lub")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.38368, 7.4816895, 10.747593)
+size = Vector3(16, 52.08252, 1)
+material = SubResource("StandardMaterial3D_l0lub")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 63.38362)
+light_energy = 0.691
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.151
+directional_shadow_blend_splits = true
+sky_mode = 1

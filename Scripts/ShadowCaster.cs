@@ -7,13 +7,20 @@ public partial class ShadowCaster : CharacterBody3D
 	public Vector2 Target = new Vector2(0, 0);
 	public Vector2 ScreenSize = new Vector2(0, 0);
 
-	private double CalculateAngle()
+	private Vector2 CalculateAngle()
+	{
+		Vector2 res = new Vector2((float)Target.X / (float)ScreenSize.X * (float)Math.PI * (float)Settings.MouseSens,
+				(float)Target.Y / (float)ScreenSize.Y * (float)Math.PI * (float)Settings.MouseSens);
+		return res;
+	}
+
+	private double CalculateAngleX()
 	{
 		double res = 0;
 		res = Target.X / ScreenSize.X * Math.PI * Settings.MouseSens;
 		return res;
 	}
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		ScreenSize = GetViewport().GetVisibleRect().Size;
@@ -22,7 +29,9 @@ public partial class ShadowCaster : CharacterBody3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Rotation = Rotation with { Y = (float)Mathf.Lerp(Rotation.Y, CalculateAngle(), delta * Settings.RotateVel) };
+		Rotation = Rotation with {
+			Y = (float)Mathf.Lerp(Rotation.Y, CalculateAngle().X, delta * Settings.RotateVel),
+			X = (float)Mathf.Lerp(Rotation.X, CalculateAngle().Y, delta * Settings.RotateVel)};
 	}
 
 	public override void _Input(InputEvent @event)
