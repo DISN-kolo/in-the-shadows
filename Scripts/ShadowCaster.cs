@@ -10,7 +10,7 @@ public partial class ShadowCaster : CharacterBody3D
 	private double CalculateAngle()
 	{
 		double res = 0;
-		res = Target.X / ScreenSize.X * Math.PI;
+		res = Target.X / ScreenSize.X * Math.PI * Settings.MouseSens;
 		return res;
 	}
 	// Called when the node enters the scene tree for the first time.
@@ -22,7 +22,7 @@ public partial class ShadowCaster : CharacterBody3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Rotation = Rotation with { X = (float)Mathf.Lerp(Rotation.X, CalculateAngle(), delta * 10) };
+		Rotation = Rotation with { Y = (float)Mathf.Lerp(Rotation.Y, CalculateAngle(), delta * Settings.RotateVel) };
 	}
 
 	public override void _Input(InputEvent @event)
