@@ -7,8 +7,9 @@ public partial class ShadowCaster : CharacterBody3D
 	public Vector2 Target = new Vector2(0, 0);
 	public Vector2 ScreenSize = new Vector2(0, 0);
 
-	public PackedScene TempVarForModel;
-	public Node InstanceOfTempModel;
+	public string MeshScenePath = "";
+	public PackedScene TempVarForMeshScene;
+	public Node InstanceOfTempMeshScene;
 
 	private Vector2 CalculateAngle()
 	{
@@ -31,9 +32,9 @@ public partial class ShadowCaster : CharacterBody3D
 	public override void _Ready()
 	{
 		ScreenSize = GetViewport().GetVisibleRect().Size;
-		TempVarForModel = GD.Load<PackedScene>("res://Scenes/MeshScenes/ElephantMesh.tscn");
-		InstanceOfTempModel = TempVarForModel.Instantiate();
-		AddChild(InstanceOfTempModel);
+		TempVarForMeshScene = GD.Load<PackedScene>(MeshScenePath);
+		InstanceOfTempMeshScene = TempVarForMeshScene.Instantiate();
+		AddChild(InstanceOfTempMeshScene);
 	}
 
 	public override void _Process(double delta)

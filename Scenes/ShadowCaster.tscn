@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd2r26n18ugim"]
+
+[ext_resource type="Script" uid="uid://dur8afpdm36fl" path="res://Scripts/ShadowCaster.cs" id="1_rv7ul"]
+
+[node name="ShadowCaster" type="CharacterBody3D"]
+script = ExtResource("1_rv7ul")

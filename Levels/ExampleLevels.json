@@ -1,0 +1,16 @@
+{
+	"Levels": [
+		{
+			"Name": "Safari",
+			"MeshPaths": [
+				 "res://Scenes/MeshScenes/ElephantMesh.tscn"
+			]
+		},
+		{
+			"Name": "English",
+			"MeshPaths": [
+				"res://Scenes/MeshScenes/TeaPotMesh.tscn"
+			]
+		}
+	]
+}

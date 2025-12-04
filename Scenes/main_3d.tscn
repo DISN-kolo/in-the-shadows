@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ccgfm6pu38dm6"]
 
-[ext_resource type="Script" uid="uid://dur8afpdm36fl" path="res://Scripts/ShadowCaster.cs" id="1_8jelc"]
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
+[ext_resource type="PackedScene" uid="uid://dd2r26n18ugim" path="res://Scenes/ShadowCaster.tscn" id="2_l0lub"]
 [ext_resource type="Script" uid="uid://tmpruvrnp8sm" path="res://Scripts/label_debug.gd" id="4_l0lub"]
 [ext_resource type="FontFile" uid="uid://ku2535yo8x2n" path="res://Fonts/Space_Mono/SpaceMono-Regular.ttf" id="4_sfmbe"]
 
@@ -35,9 +35,13 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_l0lub")
 
-[node name="ShadowCaster" type="CharacterBody3D" parent="."]
+[node name="Levels" type="Node3D" parent="."]
+
+[node name="Level" type="Node3D" parent="Levels"]
+
+[node name="ShadowCaster" parent="Levels/Level" instance=ExtResource("2_l0lub")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2371461)
-script = ExtResource("1_8jelc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.5, -0.22414386, -0.8365163, 0, 0.9659259, -0.25881904, 0.86602545, 0.1294095, 0.4829629, -8, -1, 3.1000001)

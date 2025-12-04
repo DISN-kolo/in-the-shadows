@@ -1,6 +1,6 @@
 extends Label
 
-@onready var shadow_caster: CharacterBody3D = $"../ShadowCaster"
+@onready var shadow_caster: CharacterBody3D = %ShadowCaster
 
 func _process(delta: float) -> void:
 	self.text = "
