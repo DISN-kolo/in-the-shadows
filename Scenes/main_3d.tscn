@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccgfm6pu38dm6"]
+[gd_scene load_steps=11 format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
 [ext_resource type="PackedScene" uid="uid://dd2r26n18ugim" path="res://Scenes/ShadowCaster.tscn" id="2_l0lub"]
+[ext_resource type="Script" uid="uid://c042p3rugmyhc" path="res://Scripts/Level.cs" id="2_sfmbe"]
 [ext_resource type="Script" uid="uid://tmpruvrnp8sm" path="res://Scripts/label_debug.gd" id="4_l0lub"]
 [ext_resource type="FontFile" uid="uid://ku2535yo8x2n" path="res://Fonts/Space_Mono/SpaceMono-Regular.ttf" id="4_sfmbe"]
 
@@ -38,6 +39,7 @@ environment = SubResource("Environment_l0lub")
 [node name="Levels" type="Node3D" parent="."]
 
 [node name="Level" type="Node3D" parent="Levels"]
+script = ExtResource("2_sfmbe")
 
 [node name="ShadowCaster" parent="Levels/Level" instance=ExtResource("2_l0lub")]
 unique_name_in_owner = true
