@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu2idfc7g1utr"]
+
+[ext_resource type="ArrayMesh" uid="uid://bpejc6j08xf7k" path="res://Objects/tea_pot.obj" id="1_a4dmp"]
+
+[node name="TeaPotMesh" type="MeshInstance3D"]
+mesh = ExtResource("1_a4dmp")

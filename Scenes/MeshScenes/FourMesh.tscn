@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc6464gks0xhl"]
+
+[ext_resource type="ArrayMesh" uid="uid://unmsqd0wdl88" path="res://Objects/logo-4.obj" id="1_53ge4"]
+
+[node name="FourMesh" type="MeshInstance3D"]
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, 0, 0)
+mesh = ExtResource("1_53ge4")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://t6doxyl5x8t7"]
+
+[ext_resource type="ArrayMesh" uid="uid://cqf3qdht4rik3" path="res://Objects/logo-2.obj" id="1_hr508"]
+
+[node name="TwoMesh" type="MeshInstance3D"]
+transform = Transform3D(0.196, 0, 0, 0, 0.196, 0, 0, 0, 0.196, 0, 0, 0)
+mesh = ExtResource("1_hr508")

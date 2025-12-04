@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwjyddkyroofj"]
+
+[ext_resource type="ArrayMesh" uid="uid://cwv2pogyqsvcd" path="res://Objects/elephant.obj" id="1_lgadg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clg0j"]
+
+[node name="ElephantMesh" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_clg0j")
+mesh = ExtResource("1_lgadg")
