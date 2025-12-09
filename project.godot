@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Settings="*res://Scripts/Settings.cs"
+DebugSignals="*res://Scripts/DebugSignals.cs"
 
 [display]
 

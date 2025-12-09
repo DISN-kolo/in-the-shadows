@@ -23,17 +23,17 @@ public partial class Level : Node3D
 	public bool AllowFlippedH = true;
 
 	public PackedScene ShadowCasterScene;
-	public Node CurrentShadowCasterInstance;
+	public ShadowCaster CurrentShadowCasterInstance;
 
 	public override void _Ready()
 	{
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		int MesheScenesAmt = MeshScenesPaths.Length;
-		for (int i = 0; i < MeshesAmt; i++)
+		for (int i = 0; i < MesheScenesAmt; i++)
 		{
-			CurrentShadowCasterInstance = ShadowCasterScene.Instantiate();
+			CurrentShadowCasterInstance = (ShadowCaster)ShadowCasterScene.Instantiate();
 			CurrentShadowCasterInstance.MeshScenePath = MeshScenesPaths[i];
-			// TODO position like a cake
+			GD.Print(MeshScenesPaths[i], " ", MeshScenesPaths[i].GetType());
 			AddChild(CurrentShadowCasterInstance);
 		}
 	}

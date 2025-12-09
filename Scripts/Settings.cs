@@ -4,8 +4,8 @@ public partial class Settings : Node
 {
 	public static Settings Instance { get; private set; }
 
-	public static double MouseSens { get; set; }
-	public static double RotateVel { get; set; }
+	public double MouseSens { get; set; }
+	public double RotateVel { get; set; }
 
 	public override void _Ready()
 	{
