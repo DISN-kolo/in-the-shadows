@@ -7,6 +7,7 @@ public partial class Level : Node3D
 	public string[] MeshScenesPaths = {};
 
 	// please note the linear array. it's actually {x, y, z, x, y, z...}
+	// please note the mathematical "type" of data entered. It should be radians divided by Pi.
 	[Export]
 	public float[] SCRotations = {};
 

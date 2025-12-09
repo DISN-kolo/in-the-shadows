@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
-[ext_resource type="Script" uid="uid://c042p3rugmyhc" path="res://Scripts/Level.cs" id="2_sfmbe"]
+[ext_resource type="PackedScene" uid="uid://cle83rvsxg6ly" path="res://Scenes/Level.tscn" id="4_24ajx"]
 [ext_resource type="Script" uid="uid://fd6ggyegekxs" path="res://Scripts/LabelDebug.cs" id="4_l0lub"]
 [ext_resource type="FontFile" uid="uid://ku2535yo8x2n" path="res://Fonts/Space_Mono/SpaceMono-Regular.ttf" id="4_sfmbe"]
 
@@ -48,10 +48,9 @@ environment = SubResource("Environment_l0lub")
 [node name="Levels" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="Level" type="Node3D" parent="Levels"]
-script = ExtResource("2_sfmbe")
+[node name="LevelElephant" parent="Levels" instance=ExtResource("4_24ajx")]
 MeshScenesPaths = PackedStringArray("res://Scenes/MeshScenes/ElephantMesh.tscn")
-SCRotations = PackedFloat32Array(0, 1.571, 0)
+SCRotations = PackedFloat32Array(0.53, 1.01, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -7)

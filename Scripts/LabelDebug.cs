@@ -25,9 +25,9 @@ public partial class LabelDebug : Label
 	{
 		if (SCLoaded)
 		{
-			this.Text = String.Format("rotx: {0} | {1}\n", ShadowCatcher.Rotation.X, ShadowCatcher.Rotation.X / Math.PI)
-				+ String.Format("roty: {0} | {1}\n", ShadowCatcher.Rotation.Y, ShadowCatcher.Rotation.Y / Math.PI)
-				+ String.Format("rotz: {0} | {1}\n", ShadowCatcher.Rotation.Z, ShadowCatcher.Rotation.Z / Math.PI);
+			this.Text = String.Format("rotx: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.X, ShadowCatcher.Rotation.X / Math.PI)
+				+ String.Format("roty: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.Y, ShadowCatcher.Rotation.Y / Math.PI)
+				+ String.Format("rotz: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.Z, ShadowCatcher.Rotation.Z / Math.PI);
 		}
 	}
 }
