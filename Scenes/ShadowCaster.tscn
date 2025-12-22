@@ -4,3 +4,6 @@
 
 [node name="ShadowCaster" type="CharacterBody3D"]
 script = ExtResource("1_rv7ul")
+
+[node name="DiscoveredCorrectTimer" type="Timer" parent="."]
+one_shot = true

@@ -32,11 +32,16 @@ public partial class Level : Node3D
 	{
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		MeshScenesAmt = MeshScenesPaths.Length;
+		// TODO oob checks
 		for (int i = 0; i < MeshScenesAmt; i++)
 		{
 			CurrentShadowCasterInstance = (ShadowCaster)ShadowCasterScene.Instantiate();
 			CurrentShadowCasterInstance.MeshScenePath = MeshScenesPaths[i];
-			GD.Print(MeshScenesPaths[i], " ", MeshScenesPaths[i].GetType());
+			CurrentShadowCasterInstance.IntendedRot = new Vector3(
+				SCRotations[i*3] * (float)Math.PI,
+				SCRotations[i*3 + 1] * (float)Math.PI,
+				SCRotations[i*3 + 2] * (float)Math.PI
+			);
 			AddChild(CurrentShadowCasterInstance);
 		}
 	}
