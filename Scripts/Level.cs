@@ -42,6 +42,8 @@ public partial class Level : Node3D
 				SCRotations[i*3 + 1] * (float)Math.PI,
 				SCRotations[i*3 + 2] * (float)Math.PI
 			);
+			CurrentShadowCasterInstance.FlippableX = AllowFlippedV;
+			CurrentShadowCasterInstance.FlippableY = AllowFlippedH;
 			AddChild(CurrentShadowCasterInstance);
 		}
 	}

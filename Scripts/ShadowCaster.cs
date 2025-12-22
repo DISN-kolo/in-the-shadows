@@ -23,20 +23,72 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public bool CurrentlyInsideSolution = false;
 
-	private bool AreAnglesClose(float Rot, float Tgt, float Diff)
+	public bool FlippableX = false;
+	public bool FlippableY = false;
+
+	private bool AreAnglesClose(float Rot, float Tgt, float Diff, bool XOrY)
 	{
-		if ((Rot - Tgt > Diff) || (Tgt - Rot > Diff))
+		float Temp = Tgt;
+		if (Rot > Tgt)
+		{
+			Tgt = Rot;
+			Rot = Temp;
+		}
+		float OtherEnd = 0;
+		if (XOrY)
+		{
+			if (FlippableX)
+			{
+				OtherEnd = (float)Math.PI - Diff;
+			}
+			else
+			{
+				OtherEnd = 2 * (float)Math.PI - Diff;
+			}
+		}
+		else
+		{
+			if (FlippableY)
+			{
+				OtherEnd = (float)Math.PI - Diff;
+			}
+			else
+			{
+				OtherEnd = 2 * (float)Math.PI - Diff;
+			}
+		}
+		if ((Tgt - Rot > Diff) && (Tgt - Rot < (float)Math.PI - Diff))
 		{
 			return false;
 		}
 		return true;
 	}
 
+	// Please keep in mind that all this flippability is here because we basically don't consider symmetry of 3d objects at all
 	private bool AreRotsClose(Vector3 Rot, Vector3 Tgt, float Diff)
 	{
-		if (AreAnglesClose(Rot.X, Tgt.X, Diff)
-			&& AreAnglesClose(Rot.Y, Tgt.Y, Diff)
-			&& AreAnglesClose(Rot.Z, Tgt.Z, Diff))
+		if (FlippableX)
+		{
+			Rot = Rot with { X = Rot.X % (float)Math.PI };
+			Tgt = Tgt with { X = Tgt.X % (float)Math.PI };
+		}
+		else
+		{
+			Rot = Rot with { X = Rot.X % (2 * (float)Math.PI) };
+			Tgt = Tgt with { X = Tgt.X % (2 * (float)Math.PI) };
+		}
+		if (FlippableY)
+		{
+			Rot = Rot with { Y = Rot.Y % (float)Math.PI };
+			Tgt = Tgt with { Y = Tgt.Y % (float)Math.PI };
+		}
+		else
+		{
+			Rot = Rot with { Y = Rot.Y % (2 * (float)Math.PI) };
+			Tgt = Tgt with { Y = Tgt.Y % (2 * (float)Math.PI) };
+		}
+		if (AreAnglesClose(Rot.X, Tgt.X, Diff, true)
+			&& AreAnglesClose(Rot.Y, Tgt.Y, Diff, false))
 		{
 			return true;
 		}
