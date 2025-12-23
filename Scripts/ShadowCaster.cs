@@ -64,28 +64,38 @@ public partial class ShadowCaster : CharacterBody3D
 		return true;
 	}
 
+	private void VecPiRemainder(ref Vector3 Input, int Ax)
+	{
+		Input[Ax] = Input[Ax] % (float)Math.PI;
+	}
+
+	private void VecTwoPiRemainder(ref Vector3 Input, int Ax)
+	{
+		Input[Ax] = Input[Ax] % (2 * (float)Math.PI);
+	}
+
 	// Please keep in mind that all this flippability is here because we basically don't consider symmetry of 3d objects at all
 	private bool AreRotsClose(Vector3 Rot, Vector3 Tgt, float Diff)
 	{
 		if (FlippableX)
 		{
-			Rot = Rot with { X = Rot.X % (float)Math.PI };
-			Tgt = Tgt with { X = Tgt.X % (float)Math.PI };
+			VecPiRemainder(ref Rot, 0);
+			VecPiRemainder(ref Tgt, 0);
 		}
 		else
 		{
-			Rot = Rot with { X = Rot.X % (2 * (float)Math.PI) };
-			Tgt = Tgt with { X = Tgt.X % (2 * (float)Math.PI) };
+			VecTwoPiRemainder(ref Rot, 0);
+			VecTwoPiRemainder(ref Tgt, 0);
 		}
 		if (FlippableY)
 		{
-			Rot = Rot with { Y = Rot.Y % (float)Math.PI };
-			Tgt = Tgt with { Y = Tgt.Y % (float)Math.PI };
+			VecPiRemainder(ref Rot, 1);
+			VecPiRemainder(ref Tgt, 1);
 		}
 		else
 		{
-			Rot = Rot with { Y = Rot.Y % (2 * (float)Math.PI) };
-			Tgt = Tgt with { Y = Tgt.Y % (2 * (float)Math.PI) };
+			VecTwoPiRemainder(ref Rot, 1);
+			VecTwoPiRemainder(ref Tgt, 1);
 		}
 		if (AreAnglesClose(Rot.X, Tgt.X, Diff, true)
 			&& AreAnglesClose(Rot.Y, Tgt.Y, Diff, false))
