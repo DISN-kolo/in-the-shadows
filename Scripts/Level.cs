@@ -18,10 +18,10 @@ public partial class Level : Node3D
 	public float[] SCOffsets = {};
 
 	[Export]
-	public bool AllowFlippedV = true;
+	public Godot.Collections.Array<bool> AllowFlippedVEx;
 
 	[Export]
-	public bool AllowFlippedH = true;
+	public Godot.Collections.Array<bool> AllowFlippedHEx;
 
 	public int MeshScenesAmt = 0;
 
@@ -30,6 +30,8 @@ public partial class Level : Node3D
 
 	public override void _Ready()
 	{
+		if (!this.Visible)
+			return ;
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		MeshScenesAmt = MeshScenesPaths.Length;
 		// TODO oob checks
@@ -42,8 +44,8 @@ public partial class Level : Node3D
 				SCRotations[i*3 + 1] * (float)Math.PI,
 				SCRotations[i*3 + 2] * (float)Math.PI
 			);
-			CurrentShadowCasterInstance.FlippableX = AllowFlippedV;
-			CurrentShadowCasterInstance.FlippableY = AllowFlippedH;
+			CurrentShadowCasterInstance.FlippableX = AllowFlippedVEx[i];
+			CurrentShadowCasterInstance.FlippableY = AllowFlippedHEx[i];
 			AddChild(CurrentShadowCasterInstance);
 		}
 	}

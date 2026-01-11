@@ -2,6 +2,8 @@
 
 [ext_resource type="ArrayMesh" uid="uid://dmxj2x621c71n" path="res://Objects/globe-earth.obj" id="1_hevdk"]
 
-[node name="GlobeEarthMesh" type="MeshInstance3D"]
+[node name="GlobeEarthParent" type="Node3D"]
+
+[node name="GlobeEarthMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 mesh = ExtResource("1_hevdk")

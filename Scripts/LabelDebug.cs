@@ -9,9 +9,13 @@ public partial class LabelDebug : Label
 
 	private void OnFirstSpawned(CharacterBody3D SC)
 	{
+		if (SCLoaded)
+			return ;
 		GD.Print("oh, hello");
 		ShadowCatcher = SC;
 		SCLoaded = true;
+		GD.Print("Showing SC: ", ShadowCatcher);
+		GD.Print("its kids: ", ShadowCatcher.GetChildren());
 	}
 
 	public override void _Ready()

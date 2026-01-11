@@ -29,33 +29,28 @@ public partial class ShadowCaster : CharacterBody3D
 	private bool AreAnglesClose(float Rot, float Tgt, float Diff, bool XOrY)
 	{
 		float Temp = Tgt;
+		bool localFlip = false;
+		if (XOrY)
+		{
+			localFlip = FlippableX;
+		}
+		else
+		{
+			localFlip = FlippableY;
+		}
 		if (Rot > Tgt)
 		{
 			Tgt = Rot;
 			Rot = Temp;
 		}
 		float OtherEnd = 0;
-		if (XOrY)
+		if (localFlip)
 		{
-			if (FlippableX)
-			{
-				OtherEnd = (float)Math.PI - Diff;
-			}
-			else
-			{
-				OtherEnd = 2 * (float)Math.PI - Diff;
-			}
+			OtherEnd = (float)Math.PI - Diff;
 		}
 		else
 		{
-			if (FlippableY)
-			{
-				OtherEnd = (float)Math.PI - Diff;
-			}
-			else
-			{
-				OtherEnd = 2 * (float)Math.PI - Diff;
-			}
+			OtherEnd = 2 * (float)Math.PI - Diff;
 		}
 		if ((Tgt - Rot > Diff) && (Tgt - Rot < (float)Math.PI - Diff))
 		{
