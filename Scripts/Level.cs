@@ -30,7 +30,6 @@ public partial class Level : Node3D
 
 	public void LoadLevel()
 	{
-		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		MeshScenesAmt = MeshScenesPaths.Length;
 		// TODO oob checks ?
 		for (int i = 0; i < MeshScenesAmt; i++)
@@ -60,6 +59,7 @@ public partial class Level : Node3D
 
 	public override void _Ready()
 	{
+		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		if (!this.Visible)
 			return ;
 		LoadLevel();

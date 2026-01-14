@@ -52,7 +52,7 @@ public partial class ShadowCaster : CharacterBody3D
 		{
 			OtherEnd = 2 * (float)Math.PI - Diff;
 		}
-		if ((Tgt - Rot > Diff) && (Tgt - Rot < (float)Math.PI - Diff))
+		if ((Tgt - Rot > Diff) && (Tgt - Rot < OtherEnd))
 		{
 			return false;
 		}
@@ -112,7 +112,7 @@ public partial class ShadowCaster : CharacterBody3D
 
 	private void _OnDCTTimeout()
 	{
-		GD.Print("KARAMBA!");
+		GD.Print("KARAMBA! from ", this);
 		CurrentlyInsideSolution = true;
 	}
 
