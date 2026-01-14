@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccgfm6pu38dm6"]
+[gd_scene load_steps=17 format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
 [ext_resource type="Script" uid="uid://bdmj6y8davwud" path="res://Scripts/GeneralInterface.cs" id="2_sfmbe"]
@@ -8,10 +8,15 @@
 [ext_resource type="FontFile" uid="uid://ku2535yo8x2n" path="res://Fonts/Space_Mono/SpaceMono-Regular.ttf" id="4_sfmbe"]
 [ext_resource type="Script" uid="uid://38ail0drfvc0" path="res://Scripts/Levels.cs" id="5_24ajx"]
 [ext_resource type="Script" uid="uid://cfbop3xnstk5" path="res://Scripts/DropdownLevel.cs" id="6_cv0dx"]
+[ext_resource type="Script" uid="uid://dhy7um38ve4m8" path="res://Scripts/MoveModeCheck.cs" id="7_18old"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0lub"]
 font = ExtResource("4_sfmbe")
 font_size = 20
+
+[sub_resource type="Theme" id="Theme_18old"]
+default_font = ExtResource("3_5wo3a")
+default_font_size = 20
 
 [sub_resource type="Theme" id="Theme_cv0dx"]
 default_font = ExtResource("3_5wo3a")
@@ -56,6 +61,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_18old")
 script = ExtResource("2_sfmbe")
 
 [node name="DropdownLevel" type="OptionButton" parent="GeneralInterface"]
@@ -74,6 +80,17 @@ popup/item_2/id = 2
 popup/item_3/text = "4"
 popup/item_3/id = 3
 script = ExtResource("6_cv0dx")
+
+[node name="MoveModeCheck" type="CheckButton" parent="GeneralInterface"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_right = 44.0
+grow_vertical = 0
+text = "Move Mode"
+script = ExtResource("7_18old")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)

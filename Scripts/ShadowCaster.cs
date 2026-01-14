@@ -29,7 +29,7 @@ public partial class ShadowCaster : CharacterBody3D
 	public bool FlippableX = false;
 	public bool FlippableY = false;
 
-	public bool RotMode = false;
+	public bool MoveMode = false;
 
 	public float LocalDepth = 0.0f;
 
@@ -147,6 +147,11 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 	}
 
+	private void OnAskedUpdateMoveMode(bool ToggledOn)
+	{
+		this.MoveMode = ToggledOn;
+	}
+
 	public override void _Ready()
 	{
 		ScreenSize = GetViewport().GetVisibleRect().Size;
@@ -178,6 +183,7 @@ public partial class ShadowCaster : CharacterBody3D
 		AddChild(InstanceOfTempMeshScene);
 		var NodeOfDebugSignals = GetNode<DebugSignals>("/root/DebugSignals");
 		NodeOfDebugSignals.EmitSignal(DebugSignals.SignalName.FirstSpawned, this);
+		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
 		DiscoveredCorrectTimerNode = GetNode<Timer>("./DiscoveredCorrectTimer");
 		DiscoveredCorrectTimerNode.Timeout += _OnDCTTimeout;
 	}
@@ -231,7 +237,7 @@ public partial class ShadowCaster : CharacterBody3D
 		{
 			if (LMBDown)
 			{
-				if (RotMode)
+				if (!MoveMode)
 				{
 					Target += EventMouseMotion.Relative
 						* new Vector2(
