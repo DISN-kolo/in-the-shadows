@@ -7,12 +7,19 @@ public partial class LabelDebug : Label
 
 	private CharacterBody3D ShadowCatcher;
 
+	private void OnTreeExiting()
+	{
+		ShadowCatcher = null;
+		SCLoaded = false;
+	}
+
 	private void OnFirstSpawned(CharacterBody3D SC)
 	{
 		if (SCLoaded)
 			return ;
 		GD.Print("oh, hello");
 		ShadowCatcher = SC;
+		ShadowCatcher.TreeExiting += OnTreeExiting;
 		SCLoaded = true;
 		GD.Print("Showing SC: ", ShadowCatcher);
 		GD.Print("its kids: ", ShadowCatcher.GetChildren());

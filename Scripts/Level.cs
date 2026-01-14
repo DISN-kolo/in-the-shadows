@@ -28,13 +28,11 @@ public partial class Level : Node3D
 	public PackedScene ShadowCasterScene;
 	public ShadowCaster CurrentShadowCasterInstance;
 
-	public override void _Ready()
+	public void LoadLevel()
 	{
-		if (!this.Visible)
-			return ;
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		MeshScenesAmt = MeshScenesPaths.Length;
-		// TODO oob checks
+		// TODO oob checks ?
 		for (int i = 0; i < MeshScenesAmt; i++)
 		{
 			CurrentShadowCasterInstance = (ShadowCaster)ShadowCasterScene.Instantiate();
@@ -48,6 +46,23 @@ public partial class Level : Node3D
 			CurrentShadowCasterInstance.FlippableY = AllowFlippedHEx[i];
 			AddChild(CurrentShadowCasterInstance);
 		}
+		this.Visible = true;
+	}
+
+	public void UnloadLevel()
+	{
+		foreach (var LocalNode in this.GetChildren())
+		{
+			LocalNode.QueueFree();
+		}
+		this.Visible = false;
+	}
+
+	public override void _Ready()
+	{
+		if (!this.Visible)
+			return ;
+		LoadLevel();
 	}
 
 	public override void _Process(double delta)
