@@ -146,7 +146,6 @@ material = SubResource("StandardMaterial3D_l0lub")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 63.38362)
 light_energy = 0.691
 shadow_enabled = true
-directional_shadow_mode = 1
 directional_shadow_split_1 = 0.151
 directional_shadow_blend_splits = true
 sky_mode = 1

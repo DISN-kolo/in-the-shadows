@@ -5,10 +5,13 @@ public partial class ShadowCaster : CharacterBody3D
 {
 	public bool LMBDown = false;
 	public Vector2 Target = new Vector2(0, 0);
-	public Vector3 TargetRot = new Vector3(0, 0, 0);
+	public Vector2 MovTarget = new Vector2(0, 0);
+	public Vector3 TargetReal = new Vector3(0, 0, 0);
+	public Vector3 MovTargetReal = new Vector3(0, 0, 0);
 	public Vector2 ScreenSize = new Vector2(0, 0);
 
 	public Vector3 IntendedRot = new Vector3(0, 0, 0);
+	public Vector3 IntendedPos = new Vector3(0, 0, 0);
 
 	public string MeshScenePath { get; set; } = "";
 	public PackedScene TempVarForMeshScene;
@@ -25,6 +28,10 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public bool FlippableX = false;
 	public bool FlippableY = false;
+
+	public bool RotMode = false;
+
+	public float LocalDepth = 0.0f;
 
 	private bool AreAnglesClose(float Rot, float Tgt, float Diff, bool XOrY)
 	{
@@ -110,6 +117,20 @@ public partial class ShadowCaster : CharacterBody3D
 		return res;
 	}
 
+	private Vector3 CalculateMov()
+	{
+		MovTarget = MovTarget with {
+			X = (float)Math.Clamp(MovTarget.X, 0.0, ScreenSize.X),
+			Y = (float)Math.Clamp(MovTarget.Y, 0.0, ScreenSize.Y)
+		};
+		Vector3 res = new Vector3(
+			MovTarget.X / ScreenSize.X * 6.0f - 3.0f,
+			MovTarget.Y / ScreenSize.Y * 6.0f - 3.0f,
+			LocalDepth
+		);
+		return res;
+	}
+
 	private void _OnDCTTimeout()
 	{
 		GD.Print("KARAMBA! from ", this);
@@ -134,10 +155,23 @@ public partial class ShadowCaster : CharacterBody3D
 			X = (float)rand.NextDouble() * (float)Math.PI * 2.0f,
 			Y = (float)rand.NextDouble() * (float)Math.PI * 2.0f
 		};
-		TargetRot = Rotation;
+		TargetReal = Rotation;
 		Target = Target with {
 			X = Rotation.Y * ScreenSize.X / (float)Math.PI,
 			Y = Rotation.X * ScreenSize.Y / (float)Math.PI
+		};
+		Position = Position with {
+			X = (float)rand.NextDouble() * 6.0f - 3.0f,
+			Y = (float)rand.NextDouble() * 6.0f - 3.0f,
+			Z = LocalDepth
+		};
+		MovTargetReal = Position;
+		// 6 by 6 square of real estate where we move stuff.
+		// must convert to REAL SCREEN PIXELS for the mouse stuff
+		// therefore, this.
+		MovTarget = MovTarget with {
+			X = (Position.X + 3.0f) * ScreenSize.X / 6.0f,
+			Y = (Position.Y + 3.0f) * ScreenSize.Y / 6.0f
 		};
 		TempVarForMeshScene = GD.Load<PackedScene>(MeshScenePath);
 		InstanceOfTempMeshScene = TempVarForMeshScene.Instantiate();
@@ -150,16 +184,24 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		TargetRot = CalculateAngle();
+		TargetReal = CalculateAngle();
 		Rotation = Rotation with {
 			X = (float)Mathf.Lerp(
-				Rotation.X, TargetRot.X, delta * Settings.Instance.RotateVel
+				Rotation.X, TargetReal.X, delta * Settings.Instance.RotateVel
 			),
 			Y = (float)Mathf.Lerp(
-				Rotation.Y, TargetRot.Y, delta * Settings.Instance.RotateVel
+				Rotation.Y, TargetReal.Y, delta * Settings.Instance.RotateVel
 			)
 		};
-		// keep in mind this is yet to factor all the symmetry features. TODO
+		MovTargetReal = CalculateMov();
+		Position = Position with {
+			X = (float)Math.Clamp(Mathf.Lerp(
+				Position.X, MovTargetReal.X, delta * Settings.Instance.RotateVel
+			), -3.0, 3.0),
+			Y = (float)Math.Clamp(Mathf.Lerp(
+				Position.Y, MovTargetReal.Y, delta * Settings.Instance.RotateVel
+			), -3.0, 3.0)
+		};
 		if (AreRotsClose(Rotation, IntendedRot, Delta))
 		{
 			if (!LMBDown && DiscoveredCorrectTimerNode.IsStopped() && !CurrentlyInsideSolution)
@@ -185,15 +227,26 @@ public partial class ShadowCaster : CharacterBody3D
 		{
 			LMBDown = false;
 		}
-		if (@event is InputEventMouseMotion eventMouseMotion)
+		if (@event is InputEventMouseMotion EventMouseMotion)
 		{
 			if (LMBDown)
 			{
-				Target += eventMouseMotion.Relative
-					* new Vector2(
-						(float)Settings.Instance.MouseSens,
-						(float)Settings.Instance.MouseSens
-						);
+				if (RotMode)
+				{
+					Target += EventMouseMotion.Relative
+						* new Vector2(
+							(float)Settings.Instance.MouseSens,
+							(float)Settings.Instance.MouseSens
+							);
+				}
+				else
+				{
+					MovTarget += EventMouseMotion.Relative
+						* new Vector2(
+							(float)Settings.Instance.MouseSensMov,
+							-(float)Settings.Instance.MouseSensMov
+							);
+				}
 			}
 		}
 	}
