@@ -9,6 +9,9 @@ public partial class Levels : Node3D
 	public override void _Ready()
 	{
 		ChangeLevelTo(0);
+		Settings.Instance.LevelCount = this.GetChildren().Count;
+		var NodeOfSignals = GetNode<Signals>("/root/Signals");
+		NodeOfSignals.EmitSignal(Signals.SignalName.LevelsInitialized);
 	}
 
 	public void ChangeLevelTo(int NextLevel)

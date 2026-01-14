@@ -6,6 +6,7 @@ public partial class Settings : Node
 
 	public double MouseSens { get; set; }
 	public double RotateVel { get; set; }
+	public int LevelCount { get; set; }
 
 	public override void _Ready()
 	{
