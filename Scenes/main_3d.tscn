@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccgfm6pu38dm6"]
+[gd_scene load_steps=18 format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
 [ext_resource type="Script" uid="uid://bdmj6y8davwud" path="res://Scripts/GeneralInterface.cs" id="2_sfmbe"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://38ail0drfvc0" path="res://Scripts/Levels.cs" id="5_24ajx"]
 [ext_resource type="Script" uid="uid://cfbop3xnstk5" path="res://Scripts/DropdownLevel.cs" id="6_cv0dx"]
 [ext_resource type="Script" uid="uid://dhy7um38ve4m8" path="res://Scripts/MoveModeCheck.cs" id="7_18old"]
+[ext_resource type="Script" uid="uid://c2ty13hnoebqd" path="res://Scripts/SelectO.cs" id="8_txsha"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0lub"]
 font = ExtResource("4_sfmbe")
@@ -83,14 +84,51 @@ script = ExtResource("6_cv0dx")
 
 [node name="MoveModeCheck" type="CheckButton" parent="GeneralInterface"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -24.0
-offset_right = 44.0
+offset_left = -159.0
+offset_top = -39.0
+grow_horizontal = 0
 grow_vertical = 0
 text = "Move Mode"
 script = ExtResource("7_18old")
+
+[node name="SelectObjectController" type="VBoxContainer" parent="GeneralInterface"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 446.0
+grow_vertical = 0
+
+[node name="SelectorText" type="Label" parent="GeneralInterface/SelectObjectController"]
+layout_mode = 2
+text = " Select which object to control:"
+
+[node name="HSelectorObj" type="HBoxContainer" parent="GeneralInterface/SelectObjectController"]
+layout_mode = 2
+
+[node name="SelectO1" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj"]
+layout_mode = 2
+button_pressed = true
+text = "Object 1"
+script = ExtResource("8_txsha")
+
+[node name="SelectO2" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj"]
+layout_mode = 2
+text = "Object 2"
+script = ExtResource("8_txsha")
+Number = 1
+
+[node name="SelectO3" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj"]
+layout_mode = 2
+text = "Object 3"
+script = ExtResource("8_txsha")
+Number = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)

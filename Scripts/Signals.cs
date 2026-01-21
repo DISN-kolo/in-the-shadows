@@ -13,6 +13,9 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void AskUpdateMoveModeEventHandler(bool ToggledOn);
 
+	[Signal]
+	public delegate void ActivateObjectEventHandler(int Number);
+
 	public override void _Ready()
 	{
 		Instance = this;
