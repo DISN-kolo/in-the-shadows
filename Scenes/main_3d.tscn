@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccgfm6pu38dm6"]
+[gd_scene load_steps=19 format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
 [ext_resource type="Script" uid="uid://bdmj6y8davwud" path="res://Scripts/GeneralInterface.cs" id="2_sfmbe"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://38ail0drfvc0" path="res://Scripts/Levels.cs" id="5_24ajx"]
 [ext_resource type="Script" uid="uid://cfbop3xnstk5" path="res://Scripts/DropdownLevel.cs" id="6_cv0dx"]
 [ext_resource type="Script" uid="uid://dhy7um38ve4m8" path="res://Scripts/MoveModeCheck.cs" id="7_18old"]
+[ext_resource type="Script" uid="uid://dccpx1hon74g3" path="res://Scripts/SelectObjectController.cs" id="8_rnmgt"]
 [ext_resource type="Script" uid="uid://c2ty13hnoebqd" path="res://Scripts/SelectO.cs" id="8_txsha"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0lub"]
@@ -104,6 +105,7 @@ anchor_bottom = 1.0
 offset_top = -40.0
 offset_right = 446.0
 grow_vertical = 0
+script = ExtResource("8_rnmgt")
 
 [node name="SelectorText" type="Label" parent="GeneralInterface/SelectObjectController"]
 layout_mode = 2

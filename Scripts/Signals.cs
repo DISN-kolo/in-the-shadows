@@ -16,6 +16,9 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void ActivateObjectEventHandler(int Number);
 
+	[Signal]
+	public delegate void LevelLoadedEventHandler(int MeshesAmt);
+
 	public override void _Ready()
 	{
 		Instance = this;

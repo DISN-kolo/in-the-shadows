@@ -3,6 +3,8 @@ using System;
 
 public partial class Level : Node3D
 {
+	private Signals NodeOfSignals;
+
 	[Export]
 	public string[] MeshScenesPaths = {};
 
@@ -31,10 +33,13 @@ public partial class Level : Node3D
 	public void LoadLevel()
 	{
 		MeshScenesAmt = MeshScenesPaths.Length;
-		// TODO oob checks ?
 		for (int i = 0; i < MeshScenesAmt; i++)
 		{
 			CurrentShadowCasterInstance = (ShadowCaster)ShadowCasterScene.Instantiate();
+			if (i == 0)
+			{
+				CurrentShadowCasterInstance.Activated = true;
+			}
 			CurrentShadowCasterInstance.MeshScenePath = MeshScenesPaths[i];
 			CurrentShadowCasterInstance.IntendedRot = new Vector3(
 				SCRotations[i*3] * (float)Math.PI,
@@ -43,13 +48,16 @@ public partial class Level : Node3D
 			);
 			CurrentShadowCasterInstance.FlippableX = AllowFlippedVEx[i];
 			CurrentShadowCasterInstance.FlippableY = AllowFlippedHEx[i];
+			CurrentShadowCasterInstance.Number = i;
 			AddChild(CurrentShadowCasterInstance);
 		}
 		this.Visible = true;
+		NodeOfSignals.EmitSignal(Signals.SignalName.LevelLoaded, MeshScenesAmt);
 	}
 
 	public void UnloadLevel()
 	{
+		// TODO disconnect signals
 		foreach (var LocalNode in this.GetChildren())
 		{
 			LocalNode.QueueFree();
@@ -59,6 +67,7 @@ public partial class Level : Node3D
 
 	public override void _Ready()
 	{
+		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		if (!this.Visible)
 			return ;

@@ -11,16 +11,12 @@ public partial class SelectO : CheckButton
 	private void OnPressed()
 	{
 		bool ToggledOn = this.ButtonPressed;
-		GD.Print("Just got onPressed from ", this);
 		if (ToggledOn)
 		{
-			GD.Print("and we're YES toggled on");
 			NodeOfSignals.EmitSignal(Signals.SignalName.ActivateObject, this.Number);
-			GD.Print("signal emitted!");
 		}
 		else
 		{
-			GD.Print("NO we're toggled OFF");
 			if (this.Number == 0)
 			{
 				NodeOfSignals.EmitSignal(Signals.SignalName.ActivateObject, 1);
@@ -34,8 +30,27 @@ public partial class SelectO : CheckButton
 
 	private void OnToggledOtherSelector(int RecNumber)
 	{
-		GD.Print("I, ", this, " just received: ", RecNumber, " while my own number was ", this.Number);
 		if (RecNumber == this.Number)
+		{
+			this.ButtonPressed = true;
+		}
+		else
+		{
+			this.ButtonPressed = false;
+		}
+	}
+
+	private void OnLevelLoaded(int MeshesAmt)
+	{
+		if (MeshesAmt - 1 >= this.Number)
+		{
+			this.Visible = true;
+		}
+		else
+		{
+			this.Visible = false;
+		}
+		if (this.Number == 0)
 		{
 			this.ButtonPressed = true;
 		}
@@ -49,7 +64,8 @@ public partial class SelectO : CheckButton
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		this.Pressed += OnPressed;
-		NodeOfSignals.ActivateObject += OnToggledOtherSelector;
+		Signals.Instance.ActivateObject += OnToggledOtherSelector;
+		Signals.Instance.LevelLoaded += OnLevelLoaded;
 	}
 
 	public override void _Process(double delta)

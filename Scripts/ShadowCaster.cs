@@ -3,6 +3,8 @@ using System;
 
 public partial class ShadowCaster : CharacterBody3D
 {
+	public bool Activated = false;
+	public int Number = 0;
 	public bool LMBDown = false;
 	public Vector2 Target = new Vector2(0, 0);
 	public Vector2 MovTarget = new Vector2(0, 0);
@@ -152,6 +154,18 @@ public partial class ShadowCaster : CharacterBody3D
 		this.MoveMode = ToggledOn;
 	}
 
+	private void OnActivatedObject(int N)
+	{
+		if (N == this.Number)
+		{
+			this.Activated = true;
+		}
+		else
+		{
+			this.Activated = false;
+		}
+	}
+
 	public override void _Ready()
 	{
 		ScreenSize = GetViewport().GetVisibleRect().Size;
@@ -186,6 +200,7 @@ public partial class ShadowCaster : CharacterBody3D
 		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
 		DiscoveredCorrectTimerNode = GetNode<Timer>("./DiscoveredCorrectTimer");
 		DiscoveredCorrectTimerNode.Timeout += _OnDCTTimeout;
+		Signals.Instance.ActivateObject += OnActivatedObject;
 	}
 
 	public override void _Process(double delta)
@@ -224,6 +239,10 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (!this.Activated)
+		{
+			return ;
+		}
 		if (Input.IsActionJustPressed("LMB"))
 		{
 			LMBDown = true;
