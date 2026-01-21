@@ -237,7 +237,7 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 	}
 
-	public override void _Input(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (!this.Activated)
 		{
