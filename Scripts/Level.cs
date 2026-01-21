@@ -30,9 +30,36 @@ public partial class Level : Node3D
 	public PackedScene ShadowCasterScene;
 	public ShadowCaster CurrentShadowCasterInstance;
 
+	private bool[] InRotations = {};
+
+	private void CheckAllIns()
+	{
+		for (int i = 0; i < MeshScenesAmt; i++)
+		{
+			if (!InRotations[i])
+			{
+				GD.Print("Whoops! ", i, " isn't in rotation");
+				return ;
+			}
+		}
+		GD.Print("Congratulations! Everyone is in correct rotation.");
+	}
+
+	private void OnSCInRot(int Number)
+	{
+		InRotations[Number] = true;
+		CheckAllIns();
+	}
+
+	private void OnSCOuttaRot(int Number)
+	{
+		InRotations[Number] = false;
+	}
+
 	public void LoadLevel()
 	{
 		MeshScenesAmt = MeshScenesPaths.Length;
+		InRotations = new bool[MeshScenesAmt];
 		for (int i = 0; i < MeshScenesAmt; i++)
 		{
 			CurrentShadowCasterInstance = (ShadowCaster)ShadowCasterScene.Instantiate();
@@ -49,6 +76,8 @@ public partial class Level : Node3D
 			CurrentShadowCasterInstance.FlippableX = AllowFlippedVEx[i];
 			CurrentShadowCasterInstance.FlippableY = AllowFlippedHEx[i];
 			CurrentShadowCasterInstance.Number = i;
+			CurrentShadowCasterInstance.ImInRotation += OnSCInRot;
+			CurrentShadowCasterInstance.ImOuttaRotation += OnSCOuttaRot;
 			AddChild(CurrentShadowCasterInstance);
 		}
 		this.Visible = true;

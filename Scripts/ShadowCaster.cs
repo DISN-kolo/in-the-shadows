@@ -19,8 +19,6 @@ public partial class ShadowCaster : CharacterBody3D
 	public PackedScene TempVarForMeshScene;
 	public Node InstanceOfTempMeshScene;
 
-	public int MyIndex { get; set; } = 0;
-
 	private Timer DiscoveredCorrectTimerNode;
 
 	public float Epsilon = 0.01f;
@@ -34,6 +32,12 @@ public partial class ShadowCaster : CharacterBody3D
 	public bool MoveMode = false;
 
 	public float LocalDepth = 0.0f;
+
+	[Signal]
+	public delegate void ImInRotationEventHandler(int MyNumber);
+
+	[Signal]
+	public delegate void ImOuttaRotationEventHandler(int MyNumber);
 
 	private bool AreAnglesClose(float Rot, float Tgt, float Diff, bool XOrY)
 	{
@@ -137,11 +141,13 @@ public partial class ShadowCaster : CharacterBody3D
 	{
 		GD.Print("KARAMBA! from ", this);
 		CurrentlyInsideSolution = true;
+		EmitSignal(SignalName.ImInRotation, this.Number);
 	}
 
 	private void AbortCount()
 	{
 		CurrentlyInsideSolution = false;
+		EmitSignal(SignalName.ImOuttaRotation, this.Number);
 		if (!DiscoveredCorrectTimerNode.IsStopped())
 		{
 			DiscoveredCorrectTimerNode.Stop();
