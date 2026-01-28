@@ -3,6 +3,7 @@ using System;
 
 public partial class Level : Node3D
 {
+	private Timer LocalTimer;
 	private Signals NodeOfSignals;
 
 	[Export]
@@ -33,6 +34,7 @@ public partial class Level : Node3D
 	private bool[] InRotations = {};
 
 	private double MagicMargin = 0.1;
+	private bool InMovementSolution = false;
 
 	private void CheckAllIns()
 	{
@@ -97,8 +99,16 @@ public partial class Level : Node3D
 		this.Visible = false;
 	}
 
+	private void MovementSolved()
+	{
+		InMovementSolution = true;
+		GD.Print("Movement solved!");
+	}
+
 	public override void _Ready()
 	{
+		LocalTimer = GetNode<Timer>("../../MovementSolvedTimer");
+		LocalTimer.Timeout += MovementSolved;
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		if (!this.Visible)
@@ -115,18 +125,29 @@ public partial class Level : Node3D
 		return true;
 	}
 
+	private void AbortMovementCount()
+	{
+		InMovementSolution = false;
+		if (!LocalTimer.IsStopped())
+		{
+			LocalTimer.Stop();
+			GD.Print("mov timer pre-stopped");
+		}
+	}
+
 	public override void _Process(double delta)
 	{
 		if (this.Visible && this.MeshScenesAmt == 2)
 		{
 			DebugSignals.OffsetCurrent = ((CharacterBody3D)this.GetChildren()[1]).GlobalPosition - ((CharacterBody3D)this.GetChildren()[0]).GlobalPosition;
-			if (OffsetClose(DebugSignals.OffsetCurrent, new Vector3(this.SCOffsets[0], this.SCOffsets[1], this.SCOffsets[2]), MagicMargin))
+			if (OffsetClose(DebugSignals.OffsetCurrent, new Vector3(this.SCOffsets[0], this.SCOffsets[1], this.SCOffsets[2]), MagicMargin) && LocalTimer.IsStopped())
 			{
 				GD.Print("You're within marings");
+				LocalTimer.Start();
 			}
 			else
 			{
-				GD.Print("out of margins");
+				AbortMovementCount();
 			}
 		}
 	}

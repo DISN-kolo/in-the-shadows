@@ -141,6 +141,10 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903346720]
 environment = SubResource("Environment_l0lub")
 
+[node name="MovementSolvedTimer" type="Timer" parent="." unique_id=718504195]
+wait_time = 1.5
+one_shot = true
+
 [node name="Levels" type="Node3D" parent="." unique_id=1445560181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 script = ExtResource("5_24ajx")
