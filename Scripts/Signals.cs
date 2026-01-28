@@ -12,6 +12,7 @@ public partial class Signals : Node
 
 	[Signal]
 	public delegate void AskUpdateMoveModeEventHandler(bool ToggledOn);
+	public static bool CurrentMoveMode { get; set; }
 
 	[Signal]
 	public delegate void ActivateObjectEventHandler(int Number);
@@ -19,8 +20,15 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void LevelLoadedEventHandler(int MeshesAmt);
 
+	private void OnAskUpdateMoveModeGlobal(bool ToggledOn)
+	{
+		CurrentMoveMode = ToggledOn;
+	}
+
 	public override void _Ready()
 	{
 		Instance = this;
+		AskUpdateMoveMode += OnAskUpdateMoveModeGlobal;
+		CurrentMoveMode = false;
 	}
 }

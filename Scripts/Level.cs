@@ -32,6 +32,8 @@ public partial class Level : Node3D
 
 	private bool[] InRotations = {};
 
+	private double MagicMargin = 0.1;
+
 	private void CheckAllIns()
 	{
 		for (int i = 0; i < MeshScenesAmt; i++)
@@ -58,6 +60,7 @@ public partial class Level : Node3D
 
 	public void LoadLevel()
 	{
+		GD.Print("BAM!");
 		MeshScenesAmt = MeshScenesPaths.Length;
 		InRotations = new bool[MeshScenesAmt];
 		for (int i = 0; i < MeshScenesAmt; i++)
@@ -103,7 +106,28 @@ public partial class Level : Node3D
 		LoadLevel();
 	}
 
+	private bool OffsetClose(Vector3 Off, Vector3 Tgt, double Margin)
+	{
+		if ((Off.X - Margin > Tgt.X) || (Off.X + Margin < Tgt.X))
+			return false;
+		if ((Off.Y - Margin > Tgt.Y) || (Off.Y + Margin < Tgt.Y))
+			return false;
+		return true;
+	}
+
 	public override void _Process(double delta)
 	{
+		if (this.Visible && this.MeshScenesAmt == 2)
+		{
+			DebugSignals.OffsetCurrent = ((CharacterBody3D)this.GetChildren()[1]).GlobalPosition - ((CharacterBody3D)this.GetChildren()[0]).GlobalPosition;
+			if (OffsetClose(DebugSignals.OffsetCurrent, new Vector3(this.SCOffsets[0], this.SCOffsets[1], this.SCOffsets[2]), MagicMargin))
+			{
+				GD.Print("You're within marings");
+			}
+			else
+			{
+				GD.Print("out of margins");
+			}
+		}
 	}
 }

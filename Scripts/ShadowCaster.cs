@@ -202,11 +202,13 @@ public partial class ShadowCaster : CharacterBody3D
 		InstanceOfTempMeshScene = TempVarForMeshScene.Instantiate();
 		AddChild(InstanceOfTempMeshScene);
 		var NodeOfDebugSignals = GetNode<DebugSignals>("/root/DebugSignals");
+		GD.Print("I really need to emit 'first spawned'");
 		NodeOfDebugSignals.EmitSignal(DebugSignals.SignalName.FirstSpawned, this);
 		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
 		DiscoveredCorrectTimerNode = GetNode<Timer>("./DiscoveredCorrectTimer");
 		DiscoveredCorrectTimerNode.Timeout += _OnDCTTimeout;
 		Signals.Instance.ActivateObject += OnActivatedObject;
+		this.MoveMode = Signals.CurrentMoveMode;
 	}
 
 	public override void _Process(double delta)
