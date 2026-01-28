@@ -13,7 +13,7 @@ public partial class MoveModeCheck : CheckButton
 	public override void _Ready()
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
-		this.Toggled += OnToggledMoveMode;
+		Toggled += OnToggledMoveMode;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -16,6 +16,6 @@ public partial class Settings : Node
 		MouseSens = 2.5;
 		MouseSensMov = 2.5;
 		RotateVel = 15.0;
-		MoveVel = 15.0;
+		MoveVel = 10.0;
 	}
 }

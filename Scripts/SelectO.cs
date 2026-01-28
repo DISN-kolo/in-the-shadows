@@ -10,14 +10,14 @@ public partial class SelectO : CheckButton
 
 	private void OnPressed()
 	{
-		bool ToggledOn = this.ButtonPressed;
+		bool ToggledOn = ButtonPressed;
 		if (ToggledOn)
 		{
-			NodeOfSignals.EmitSignal(Signals.SignalName.ActivateObject, this.Number);
+			NodeOfSignals.EmitSignal(Signals.SignalName.ActivateObject, Number);
 		}
 		else
 		{
-			if (this.Number == 0)
+			if (Number == 0)
 			{
 				NodeOfSignals.EmitSignal(Signals.SignalName.ActivateObject, 1);
 			}
@@ -30,40 +30,40 @@ public partial class SelectO : CheckButton
 
 	private void OnToggledOtherSelector(int RecNumber)
 	{
-		if (RecNumber == this.Number)
+		if (RecNumber == Number)
 		{
-			this.ButtonPressed = true;
+			ButtonPressed = true;
 		}
 		else
 		{
-			this.ButtonPressed = false;
+			ButtonPressed = false;
 		}
 	}
 
 	private void OnLevelLoaded(int MeshesAmt)
 	{
-		if (MeshesAmt - 1 >= this.Number)
+		if (MeshesAmt - 1 >= Number)
 		{
-			this.Visible = true;
+			Visible = true;
 		}
 		else
 		{
-			this.Visible = false;
+			Visible = false;
 		}
-		if (this.Number == 0)
+		if (Number == 0)
 		{
-			this.ButtonPressed = true;
+			ButtonPressed = true;
 		}
 		else
 		{
-			this.ButtonPressed = false;
+			ButtonPressed = false;
 		}
 	}
 
 	public override void _Ready()
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
-		this.Pressed += OnPressed;
+		Pressed += OnPressed;
 		Signals.Instance.ActivateObject += OnToggledOtherSelector;
 		Signals.Instance.LevelLoaded += OnLevelLoaded;
 	}

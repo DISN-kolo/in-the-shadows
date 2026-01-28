@@ -34,10 +34,10 @@ public partial class LabelDebug : Label
 	{
 		if (SCLoaded)
 		{
-//			this.Text = String.Format("rotx: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.X, ShadowCatcher.Rotation.X / Math.PI)
+//			Text = String.Format("rotx: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.X, ShadowCatcher.Rotation.X / Math.PI)
 //				+ String.Format("roty: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.Y, ShadowCatcher.Rotation.Y / Math.PI)
 //				+ String.Format("rotz: {0,8:##0.00} | {1,8:##0.00}\n", ShadowCatcher.Rotation.Z, ShadowCatcher.Rotation.Z / Math.PI);
-			this.Text = String.Format("offx: {0,8:##0.00}\n", DebugSignals.OffsetCurrent.X)
+			Text = String.Format("offx: {0,8:##0.00}\n", DebugSignals.OffsetCurrent.X)
 				+ String.Format("offy: {0,8:##0.00}\n", DebugSignals.OffsetCurrent.Y)
 				+ String.Format("offz: {0,8:##0.00}", DebugSignals.OffsetCurrent.Z);
 		}

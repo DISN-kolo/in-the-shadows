@@ -3,7 +3,6 @@ using System;
 
 public partial class Level : Node3D
 {
-	private Timer LocalTimer;
 	private Signals NodeOfSignals;
 
 	[Export]
@@ -46,7 +45,16 @@ public partial class Level : Node3D
 				return ;
 			}
 		}
-		GD.Print("Congratulations! Everyone is in correct rotation.");
+		if (MeshScenesAmt == 2)
+		{
+			UnsolveMovement();
+			GD.Print("Congratulations! Everyone is in correct rotation. Begin pos check");
+			if (OffsetClose(DebugSignals.OffsetCurrent, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
+			{
+				GD.Print("You're within marings");
+				MovementSolved();
+			}
+		}
 	}
 
 	private void OnSCInRot(int Number)
@@ -85,18 +93,18 @@ public partial class Level : Node3D
 			CurrentShadowCasterInstance.ImOuttaRotation += OnSCOuttaRot;
 			AddChild(CurrentShadowCasterInstance);
 		}
-		this.Visible = true;
+		Visible = true;
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelLoaded, MeshScenesAmt);
 	}
 
 	public void UnloadLevel()
 	{
 		// TODO disconnect signals
-		foreach (var LocalNode in this.GetChildren())
+		foreach (var LocalNode in GetChildren())
 		{
 			LocalNode.QueueFree();
 		}
-		this.Visible = false;
+		Visible = false;
 	}
 
 	private void MovementSolved()
@@ -107,11 +115,9 @@ public partial class Level : Node3D
 
 	public override void _Ready()
 	{
-		LocalTimer = GetNode<Timer>("../../MovementSolvedTimer");
-		LocalTimer.Timeout += MovementSolved;
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
-		if (!this.Visible)
+		if (!Visible)
 			return ;
 		LoadLevel();
 	}
@@ -125,29 +131,20 @@ public partial class Level : Node3D
 		return true;
 	}
 
-	private void AbortMovementCount()
+	private void UnsolveMovement()
 	{
 		InMovementSolution = false;
-		if (!LocalTimer.IsStopped())
-		{
-			LocalTimer.Stop();
-			GD.Print("mov timer pre-stopped");
-		}
+		GD.Print("Unsolved movement...");
 	}
 
 	public override void _Process(double delta)
 	{
-		if (this.Visible && this.MeshScenesAmt == 2)
+		if (Visible && MeshScenesAmt == 2)
 		{
-			DebugSignals.OffsetCurrent = ((CharacterBody3D)this.GetChildren()[1]).GlobalPosition - ((CharacterBody3D)this.GetChildren()[0]).GlobalPosition;
-			if (OffsetClose(DebugSignals.OffsetCurrent, new Vector3(this.SCOffsets[0], this.SCOffsets[1], this.SCOffsets[2]), MagicMargin) && LocalTimer.IsStopped())
+			DebugSignals.OffsetCurrent = ((CharacterBody3D)GetChildren()[1]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
+			if (InMovementSolution && !OffsetClose(DebugSignals.OffsetCurrent, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
 			{
-				GD.Print("You're within marings");
-				LocalTimer.Start();
-			}
-			else
-			{
-				AbortMovementCount();
+				UnsolveMovement();
 			}
 		}
 	}

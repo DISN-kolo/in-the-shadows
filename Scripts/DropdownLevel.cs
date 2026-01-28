@@ -15,7 +15,7 @@ public partial class DropdownLevel : OptionButton
 	public override void _Ready()
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
-		this.ItemSelected += OnDropdownLevelAsked;
+		ItemSelected += OnDropdownLevelAsked;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

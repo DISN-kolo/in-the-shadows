@@ -9,11 +9,11 @@ public partial class SelectObjectController : VBoxContainer
 	{
 		if (MeshesAmt <= 1)
 		{
-			this.Visible = false;
+			Visible = false;
 		}
 		else
 		{
-			this.Visible = true;
+			Visible = true;
 		}
 	}
 

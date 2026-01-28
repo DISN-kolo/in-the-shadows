@@ -141,13 +141,13 @@ public partial class ShadowCaster : CharacterBody3D
 	{
 		GD.Print("KARAMBA! from ", this);
 		CurrentlyInsideSolution = true;
-		EmitSignal(SignalName.ImInRotation, this.Number);
+		EmitSignal(SignalName.ImInRotation, Number);
 	}
 
 	private void AbortCount()
 	{
 		CurrentlyInsideSolution = false;
-		EmitSignal(SignalName.ImOuttaRotation, this.Number);
+		EmitSignal(SignalName.ImOuttaRotation, Number);
 		if (!DiscoveredCorrectTimerNode.IsStopped())
 		{
 			DiscoveredCorrectTimerNode.Stop();
@@ -157,18 +157,18 @@ public partial class ShadowCaster : CharacterBody3D
 
 	private void OnAskedUpdateMoveMode(bool ToggledOn)
 	{
-		this.MoveMode = ToggledOn;
+		MoveMode = ToggledOn;
 	}
 
 	private void OnActivatedObject(int N)
 	{
-		if (N == this.Number)
+		if (N == Number)
 		{
-			this.Activated = true;
+			Activated = true;
 		}
 		else
 		{
-			this.Activated = false;
+			Activated = false;
 		}
 	}
 
@@ -193,7 +193,7 @@ public partial class ShadowCaster : CharacterBody3D
 		MovTargetReal = Position;
 		// 6 by 6 square of real estate where we move stuff.
 		// must convert to REAL SCREEN PIXELS for the mouse stuff
-		// therefore, this.
+		// therefore, this happens:
 		MovTarget = MovTarget with {
 			X = (Position.X + 3.0f) * ScreenSize.X / 6.0f,
 			Y = (Position.Y + 3.0f) * ScreenSize.Y / 6.0f
@@ -208,7 +208,7 @@ public partial class ShadowCaster : CharacterBody3D
 		DiscoveredCorrectTimerNode = GetNode<Timer>("./DiscoveredCorrectTimer");
 		DiscoveredCorrectTimerNode.Timeout += _OnDCTTimeout;
 		Signals.Instance.ActivateObject += OnActivatedObject;
-		this.MoveMode = Signals.CurrentMoveMode;
+		MoveMode = Signals.CurrentMoveMode;
 	}
 
 	public override void _Process(double delta)
@@ -247,7 +247,7 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (!this.Activated)
+		if (!Activated)
 		{
 			return ;
 		}

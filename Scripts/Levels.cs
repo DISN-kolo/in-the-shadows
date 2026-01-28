@@ -9,7 +9,7 @@ public partial class Levels : Node3D
 	public override void _Ready()
 	{
 		ChangeLevelTo(0);
-		Settings.Instance.LevelCount = this.GetChildren().Count;
+		Settings.Instance.LevelCount = GetChildren().Count;
 		var NodeOfSignals = GetNode<Signals>("/root/Signals");
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelsInitialized);
 		Signals.Instance.AskToChangeLevel += ChangeLevelTo;
@@ -19,14 +19,14 @@ public partial class Levels : Node3D
 	{
 		if (FirstLoaded)
 		{
-			Level TempCurrent = (Level)this.GetChildren()[CurrentLevel];
+			Level TempCurrent = (Level)GetChildren()[CurrentLevel];
 			TempCurrent.UnloadLevel();
 		}
 		else
 		{
 			FirstLoaded = true;
 		}
-		Level TempNext = (Level)this.GetChildren()[NextLevel];
+		Level TempNext = (Level)GetChildren()[NextLevel];
 		TempNext.LoadLevel();
 		CurrentLevel = NextLevel;
 	}
