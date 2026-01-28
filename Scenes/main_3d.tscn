@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccgfm6pu38dm6"]
+[gd_scene format=3 uid="uid://ccgfm6pu38dm6"]
 
 [ext_resource type="Script" uid="uid://2u2pyb1gs4n7" path="res://Scripts/Main3d.cs" id="1_clg0j"]
 [ext_resource type="Script" uid="uid://bdmj6y8davwud" path="res://Scripts/GeneralInterface.cs" id="2_sfmbe"]
@@ -39,14 +39,14 @@ tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0lub"]
 
-[node name="Main3D" type="Node3D"]
+[node name="Main3D" type="Node3D" unique_id=546329301]
 script = ExtResource("1_clg0j")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1671489789]
 transform = Transform3D(0.5, -0.22414386, -0.8365163, 0, 0.9659259, -0.25881904, 0.86602545, 0.1294095, 0.4829629, -8, -2.4, 3.1000001)
 current = true
 
-[node name="LabelDebug" type="Label" parent="."]
+[node name="LabelDebug" type="Label" parent="." unique_id=2059174815]
 visible = false
 anchors_preset = 1
 anchor_left = 1.0
@@ -57,7 +57,7 @@ grow_horizontal = 0
 label_settings = SubResource("LabelSettings_l0lub")
 script = ExtResource("4_l0lub")
 
-[node name="GeneralInterface" type="Control" parent="."]
+[node name="GeneralInterface" type="Control" parent="." unique_id=250874135]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,7 +68,7 @@ mouse_filter = 1
 theme = SubResource("Theme_18old")
 script = ExtResource("2_sfmbe")
 
-[node name="DropdownLevel" type="OptionButton" parent="GeneralInterface"]
+[node name="DropdownLevel" type="OptionButton" parent="GeneralInterface" unique_id=514992112]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 20.0
@@ -85,7 +85,7 @@ popup/item_3/text = "4"
 popup/item_3/id = 3
 script = ExtResource("6_cv0dx")
 
-[node name="MoveModeCheck" type="CheckButton" parent="GeneralInterface"]
+[node name="MoveModeCheck" type="CheckButton" parent="GeneralInterface" unique_id=899926451]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -99,7 +99,7 @@ grow_vertical = 0
 text = "Move Mode"
 script = ExtResource("7_18old")
 
-[node name="SelectObjectController" type="VBoxContainer" parent="GeneralInterface"]
+[node name="SelectObjectController" type="VBoxContainer" parent="GeneralInterface" unique_id=1560157275]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -109,58 +109,58 @@ offset_right = 446.0
 grow_vertical = 0
 script = ExtResource("8_rnmgt")
 
-[node name="SelectorText" type="Label" parent="GeneralInterface/SelectObjectController"]
+[node name="SelectorText" type="Label" parent="GeneralInterface/SelectObjectController" unique_id=1156457106]
 layout_mode = 2
 text = " Select which object to control:"
 
-[node name="HSelectorObj" type="HBoxContainer" parent="GeneralInterface/SelectObjectController"]
+[node name="HSelectorObj" type="HBoxContainer" parent="GeneralInterface/SelectObjectController" unique_id=701776251]
 layout_mode = 2
 
-[node name="SelectO1" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj"]
+[node name="SelectO1" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj" unique_id=527278225]
 layout_mode = 2
 button_pressed = true
 text = "Object 1"
 script = ExtResource("8_txsha")
 
-[node name="SelectO2" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj"]
+[node name="SelectO2" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj" unique_id=113905560]
 layout_mode = 2
 text = "Object 2"
 script = ExtResource("8_txsha")
 Number = 1
 
-[node name="SelectO3" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj"]
+[node name="SelectO3" type="CheckButton" parent="GeneralInterface/SelectObjectController/HSelectorObj" unique_id=928973252]
 layout_mode = 2
 text = "Object 3"
 script = ExtResource("8_txsha")
 Number = 2
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1457574330]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 light_energy = 0.273
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903346720]
 environment = SubResource("Environment_l0lub")
 
-[node name="Levels" type="Node3D" parent="."]
+[node name="Levels" type="Node3D" parent="." unique_id=1445560181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 script = ExtResource("5_24ajx")
 
-[node name="LevelTeapot" parent="Levels" instance=ExtResource("4_24ajx")]
+[node name="LevelTeapot" parent="Levels" unique_id=2109112050 instance=ExtResource("4_24ajx")]
 visible = false
 MeshScenesPaths = PackedStringArray("res://Scenes/MeshScenes/TeaPotMesh.tscn")
 SCRotations = PackedFloat32Array(0.02, 0.02, 0)
 AllowFlippedVEx = Array[bool]([false])
 AllowFlippedHEx = Array[bool]([true])
 
-[node name="LevelElephant" parent="Levels" instance=ExtResource("4_24ajx")]
+[node name="LevelElephant" parent="Levels" unique_id=742428848 instance=ExtResource("4_24ajx")]
 visible = false
 MeshScenesPaths = PackedStringArray("res://Scenes/MeshScenes/ElephantMesh.tscn")
 SCRotations = PackedFloat32Array(0.53, 1.01, 0)
 AllowFlippedVEx = Array[bool]([true])
 AllowFlippedHEx = Array[bool]([true])
 
-[node name="LevelGlobe" parent="Levels" instance=ExtResource("4_24ajx")]
+[node name="LevelGlobe" parent="Levels" unique_id=1640763 instance=ExtResource("4_24ajx")]
 visible = false
 MeshScenesPaths = PackedStringArray("res://Scenes/MeshScenes/GlobeBaseMesh.tscn", "res://Scenes/MeshScenes/GlobeEarthMesh.tscn")
 SCRotations = PackedFloat32Array(1.5, 0, 0, 0.5, 0, 0)
@@ -168,7 +168,7 @@ SCOffsets = PackedFloat32Array(0, 0, 0)
 AllowFlippedVEx = Array[bool]([false, true])
 AllowFlippedHEx = Array[bool]([true, true])
 
-[node name="Level42" parent="Levels" instance=ExtResource("4_24ajx")]
+[node name="Level42" parent="Levels" unique_id=1841831335 instance=ExtResource("4_24ajx")]
 visible = false
 MeshScenesPaths = PackedStringArray("res://Scenes/MeshScenes/FourMesh.tscn", "res://Scenes/MeshScenes/TwoMesh.tscn")
 SCRotations = PackedFloat32Array(0, 0, 0, 0, 0, 0)
@@ -176,32 +176,32 @@ SCOffsets = PackedFloat32Array(2.8, 0, 0)
 AllowFlippedVEx = Array[bool]([false, false])
 AllowFlippedHEx = Array[bool]([false, false])
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1032416890]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -7)
 size = Vector3(16, 21, 1)
 material = SubResource("StandardMaterial3D_l0lub")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=172212125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.694258, 39.98271)
 size = Vector3(23.674438, 15.189514, 1)
 material = SubResource("StandardMaterial3D_l0lub")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1409299831]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.43425, 39.488125)
 size = Vector3(23.674438, 15.037262, 1)
 material = SubResource("StandardMaterial3D_l0lub")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=452691079]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 7.482, 28.748)
 size = Vector3(16, 52.08252, 1)
 material = SubResource("StandardMaterial3D_l0lub")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=197989842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 7.482, 28.748)
 size = Vector3(16, 52.08252, 1)
 material = SubResource("StandardMaterial3D_l0lub")
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=147058029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 63.38362)
 light_energy = 0.691
 shadow_enabled = true
