@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dluqhlikkk6yt"]
+[gd_scene format=3 uid="uid://dluqhlikkk6yt"]
 
 [ext_resource type="ArrayMesh" uid="uid://tm8t1wetsmq" path="res://Objects/globe_base.obj" id="1_rxkmw"]
 
-[node name="GlobeBaseParent" type="Node3D"]
+[node name="GlobeBaseParent" type="Node3D" unique_id=1196684500]
 
-[node name="GlobeBaseMesh" type="MeshInstance3D" parent="."]
+[node name="GlobeBaseMesh" type="MeshInstance3D" parent="." unique_id=989893622]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 mesh = ExtResource("1_rxkmw")

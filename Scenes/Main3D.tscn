@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dhy7um38ve4m8" path="res://Scripts/MoveModeCheck.cs" id="7_18old"]
 [ext_resource type="Script" uid="uid://dccpx1hon74g3" path="res://Scripts/SelectObjectController.cs" id="8_rnmgt"]
 [ext_resource type="Script" uid="uid://c2ty13hnoebqd" path="res://Scripts/SelectO.cs" id="8_txsha"]
+[ext_resource type="Script" uid="uid://crqha6nb2m7c2" path="res://Scripts/BackToMenuButton.cs" id="10_qbgkv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0lub"]
 font = ExtResource("4_sfmbe")
@@ -132,6 +133,17 @@ layout_mode = 2
 text = "Object 3"
 script = ExtResource("8_txsha")
 Number = 2
+
+[node name="BackToMenuButton" type="Button" parent="GeneralInterface" unique_id=1024304353]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Main Menu"
+script = ExtResource("10_qbgkv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1457574330]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
