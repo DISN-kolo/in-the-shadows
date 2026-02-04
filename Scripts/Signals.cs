@@ -20,6 +20,9 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void LevelLoadedEventHandler(int MeshesAmt);
 
+	[Signal]
+	public delegate void SayNoToBackingEventHandler();
+
 	private void OnAskUpdateMoveModeGlobal(bool ToggledOn)
 	{
 		CurrentMoveMode = ToggledOn;

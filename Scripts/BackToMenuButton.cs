@@ -15,9 +15,15 @@ public partial class BackToMenuButton : Button
 		GetParent().AddChild(AYSInstance);
 	}
 
+	private void OnPressedNope()
+	{
+		Disabled = false;
+	}
+
 	public override void _Ready()
 	{
 		YesOrNoThing = GD.Load<PackedScene>("res://Scenes/AreYouSure.tscn");
 		Pressed += OnPressedBackToMenu;
+		Signals.Instance.SayNoToBacking += OnPressedNope;
 	}
 }

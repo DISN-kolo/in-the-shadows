@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cpxbur032k3rh"]
 
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_6gdxa"]
+[ext_resource type="Script" uid="uid://bjh0sabbpcc0w" path="res://Scripts/AreYouSure.cs" id="1_jnjxg"]
+[ext_resource type="Script" uid="uid://cx2ulckwg1yg7" path="res://Scripts/BackYeahButton.cs" id="2_2dd5m"]
+[ext_resource type="Script" uid="uid://cwgg6xxyxyr0w" path="res://Scripts/BackNopeButton.cs" id="3_jnjxg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gdxa"]
 bg_color = Color(0.23495764, 0.23495767, 0.23495752, 1)
@@ -13,6 +16,7 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("1_jnjxg")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1651276325]
 layout_mode = 1
@@ -42,13 +46,15 @@ label_settings = SubResource("LabelSettings_todxj")
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1731135686]
 layout_mode = 2
 
-[node name="YeahButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=633924697]
+[node name="BackYeahButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=633924697]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yeah"
+script = ExtResource("2_2dd5m")
 
-[node name="NopeButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1441590796]
+[node name="BackNopeButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1441590796]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Nope
 "
+script = ExtResource("3_jnjxg")
