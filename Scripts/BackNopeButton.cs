@@ -15,4 +15,9 @@ public partial class BackNopeButton : Button
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Pressed += OnPressedNope;
 	}
+
+	public override void _ExitTree()
+	{
+		Pressed -= OnPressedNope;
+	}
 }

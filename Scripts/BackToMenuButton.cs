@@ -26,4 +26,10 @@ public partial class BackToMenuButton : Button
 		Pressed += OnPressedBackToMenu;
 		Signals.Instance.SayNoToBacking += OnPressedNope;
 	}
+
+	public override void _ExitTree()
+	{
+		Pressed -= OnPressedBackToMenu;
+		Signals.Instance.SayNoToBacking -= OnPressedNope;
+	}
 }

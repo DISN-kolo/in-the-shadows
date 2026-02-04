@@ -12,4 +12,9 @@ public partial class AreYouSure : Control
 	{
 		Signals.Instance.SayNoToBacking += OnPressedNope;
 	}
+
+	public override void _ExitTree()
+	{
+		Signals.Instance.SayNoToBacking -= OnPressedNope;
+	}
 }
