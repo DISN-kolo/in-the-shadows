@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bjyh2m03tp6uq"]
 
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://b0ee8posntayh" path="res://Scripts/NewGameButton.cs" id="2_8saeu"]
+[ext_resource type="Script" uid="uid://b6ip2dik3ycbv" path="res://Scripts/GetOutButton.cs" id="3_ghw46"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_853f1"]
 font = ExtResource("1_tt5f1")
@@ -44,6 +46,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_tt5f1")
 theme_override_font_sizes/font_size = 24
 text = "New Game"
+script = ExtResource("2_8saeu")
 
 [node name="GetOutButton" type="Button" parent="Centrerer/StuffVBox/Container/VBoxContainer" unique_id=963783177]
 layout_mode = 2
@@ -51,3 +54,4 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_tt5f1")
 theme_override_font_sizes/font_size = 24
 text = "Get me out of here"
+script = ExtResource("3_ghw46")

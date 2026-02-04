@@ -3,6 +3,8 @@ using System;
 
 public partial class ShadowCaster : CharacterBody3D
 {
+	private DebugSignals NodeOfDebugSignals;
+
 	public bool Activated = false;
 	public int Number = 0;
 	public bool LMBDown = false;
@@ -201,7 +203,7 @@ public partial class ShadowCaster : CharacterBody3D
 		TempVarForMeshScene = GD.Load<PackedScene>(MeshScenePath);
 		InstanceOfTempMeshScene = TempVarForMeshScene.Instantiate();
 		AddChild(InstanceOfTempMeshScene);
-		var NodeOfDebugSignals = GetNode<DebugSignals>("/root/DebugSignals");
+		NodeOfDebugSignals = GetNode<DebugSignals>("/root/DebugSignals");
 		GD.Print("I really need to emit 'first spawned'");
 		NodeOfDebugSignals.EmitSignal(DebugSignals.SignalName.FirstSpawned, this);
 		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
@@ -282,5 +284,12 @@ public partial class ShadowCaster : CharacterBody3D
 				}
 			}
 		}
+	}
+
+	public override void _ExitTree()
+	{
+		Signals.Instance.AskUpdateMoveMode -= OnAskedUpdateMoveMode;
+		DiscoveredCorrectTimerNode.Timeout -= _OnDCTTimeout;
+		Signals.Instance.ActivateObject -= OnActivatedObject;
 	}
 }

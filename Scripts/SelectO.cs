@@ -68,7 +68,10 @@ public partial class SelectO : CheckButton
 		Signals.Instance.LevelLoaded += OnLevelLoaded;
 	}
 
-	public override void _Process(double delta)
+	public override void _ExitTree()
 	{
+		Pressed -= OnPressed;
+		Signals.Instance.ActivateObject -= OnToggledOtherSelector;
+		Signals.Instance.LevelLoaded -= OnLevelLoaded;
 	}
 }

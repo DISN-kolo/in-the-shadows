@@ -15,8 +15,14 @@ public partial class SceneSwitcher : Node
 		ChangeSceneToPath("res://Scenes/MainMenu.tscn");
 	}
 
+	private void NewGame()
+	{
+		ChangeSceneToPath("res://Scenes/Main3D.tscn");
+	}
+
 	public override void _Ready()
 	{
 		Signals.Instance.SayYesToBacking += BackToMenu;
+		Signals.Instance.NewGame += NewGame;
 	}
 }

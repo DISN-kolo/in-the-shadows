@@ -26,6 +26,9 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void SayYesToBackingEventHandler();
 
+	[Signal]
+	public delegate void NewGameEventHandler();
+
 	private void OnAskUpdateMoveModeGlobal(bool ToggledOn)
 	{
 		CurrentMoveMode = ToggledOn;

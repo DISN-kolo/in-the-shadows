@@ -30,8 +30,9 @@ public partial class Levels : Node3D
 		TempNext.LoadLevel();
 		CurrentLevel = NextLevel;
 	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+
+	public override void _ExitTree()
 	{
+		Signals.Instance.AskToChangeLevel -= ChangeLevelTo;
 	}
 }

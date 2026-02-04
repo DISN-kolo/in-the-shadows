@@ -23,7 +23,8 @@ public partial class SelectObjectController : VBoxContainer
 		Signals.Instance.LevelLoaded += OnLevelLoaded;
 	}
 
-	public override void _Process(double delta)
+	public override void _ExitTree()
 	{
+		Signals.Instance.LevelLoaded -= OnLevelLoaded;
 	}
 }

@@ -42,4 +42,9 @@ public partial class LabelDebug : Label
 				+ String.Format("offz: {0,8:##0.00}", DebugSignals.OffsetCurrent.Z);
 		}
 	}
+
+	public override void _ExitTree()
+	{
+		DebugSignals.Instance.FirstSpawned -= OnFirstSpawned;
+	}
 }

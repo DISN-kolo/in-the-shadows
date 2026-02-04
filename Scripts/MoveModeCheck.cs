@@ -15,4 +15,9 @@ public partial class MoveModeCheck : CheckButton
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Toggled += OnToggledMoveMode;
 	}
+
+	public override void _ExitTree()
+	{
+		Toggled -= OnToggledMoveMode;
+	}
 }

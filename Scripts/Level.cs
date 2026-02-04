@@ -107,6 +107,8 @@ public partial class Level : Node3D
 		foreach (var LocalNode in GetChildren())
 		{
 			LocalNode.QueueFree();
+			((ShadowCaster)LocalNode).ImInRotation -= OnSCInRot;
+			((ShadowCaster)LocalNode).ImOuttaRotation -= OnSCOuttaRot;
 		}
 		Visible = false;
 	}
@@ -151,5 +153,12 @@ public partial class Level : Node3D
 				UnsolveMovement();
 			}
 		}
+	}
+
+	public override void _ExitTree()
+	{
+		GD.Print("Quitting level. Children: ", GetChildren());
+		if (Visible)
+			UnloadLevel();
 	}
 }
