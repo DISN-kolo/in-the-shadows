@@ -91,6 +91,10 @@ public partial class Level : Node3D
 			CurrentShadowCasterInstance.Number = i;
 			CurrentShadowCasterInstance.ImInRotation += OnSCInRot;
 			CurrentShadowCasterInstance.ImOuttaRotation += OnSCOuttaRot;
+			if (MeshScenesAmt > 1)
+			{
+				CurrentShadowCasterInstance.LocalDepth = -2 + i*3;
+			}
 			AddChild(CurrentShadowCasterInstance);
 		}
 		Visible = true;
