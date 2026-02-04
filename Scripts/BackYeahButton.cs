@@ -3,13 +3,21 @@ using System;
 
 public partial class BackYeahButton : Button
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	private Signals NodeOfSignals;
+
+	private void OnPressedYeah()
 	{
+		NodeOfSignals.EmitSignal(Signals.SignalName.SayYesToBacking);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _Ready()
 	{
+		NodeOfSignals = GetNode<Signals>("/root/Signals");
+		Pressed += OnPressedYeah;
+	}
+
+	public override void _ExitTree()
+	{
+		Pressed -= OnPressedYeah;
 	}
 }

@@ -8,7 +8,7 @@ public partial class DebugSignals : Node
 	
 	[Signal]
 	public delegate void FirstSpawnedEventHandler(CharacterBody3D SC);
-	
+
 	public override void _Ready()
 	{
 		Instance = this;

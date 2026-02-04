@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bjyh2m03tp6uq"]
+
+[ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_tt5f1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_853f1"]
+font = ExtResource("1_tt5f1")
+font_size = 36
+
+[node name="MainMenu" type="Control" unique_id=991988751]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Centrerer" type="CenterContainer" parent="." unique_id=413274322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StuffVBox" type="VBoxContainer" parent="Centrerer" unique_id=345606463]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TheTitle" type="Label" parent="Centrerer/StuffVBox" unique_id=1665370763]
+layout_mode = 2
+text = "In The Shadows: The Movie: The song: The GAME"
+label_settings = SubResource("LabelSettings_853f1")
+horizontal_alignment = 1
+
+[node name="Container" type="MarginContainer" parent="Centrerer/StuffVBox" unique_id=1346660]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Centrerer/StuffVBox/Container" unique_id=1493697134]
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="Centrerer/StuffVBox/Container/VBoxContainer" unique_id=75179396]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tt5f1")
+theme_override_font_sizes/font_size = 24
+text = "New Game"
+
+[node name="GetOutButton" type="Button" parent="Centrerer/StuffVBox/Container/VBoxContainer" unique_id=963783177]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_tt5f1")
+theme_override_font_sizes/font_size = 24
+text = "Get me out of here"

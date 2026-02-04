@@ -9,4 +9,14 @@ public partial class SceneSwitcher : Node
 		GetTree().ChangeSceneToFile(ScenePath);
 		GD.Print("Alledgedly, changed!");
 	}
+
+	private void BackToMenu()
+	{
+		ChangeSceneToPath("res://Scenes/MainMenu.tscn");
+	}
+
+	public override void _Ready()
+	{
+		Signals.Instance.SayYesToBacking += BackToMenu;
+	}
 }
