@@ -2,11 +2,16 @@
 
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_tt5f1"]
 [ext_resource type="Script" uid="uid://b0ee8posntayh" path="res://Scripts/NewGameButton.cs" id="2_8saeu"]
+[ext_resource type="Script" uid="uid://dep3lqts2pt8x" path="res://Scripts/LoadGameButton.cs" id="3_8um5k"]
+[ext_resource type="Script" uid="uid://bisainsbxjofc" path="res://Scripts/DevModeButton.cs" id="3_df05h"]
 [ext_resource type="Script" uid="uid://b6ip2dik3ycbv" path="res://Scripts/GetOutButton.cs" id="3_ghw46"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_853f1"]
 font = ExtResource("1_tt5f1")
 font_size = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df05h"]
+bg_color = Color(0, 0.2787313, 0.25268033, 1)
 
 [node name="MainMenu" type="Control" unique_id=991988751]
 layout_mode = 3
@@ -48,10 +53,27 @@ theme_override_font_sizes/font_size = 24
 text = "New Game"
 script = ExtResource("2_8saeu")
 
+[node name="LoadGameButton" type="Button" parent="Centrerer/StuffVBox/Container/VBoxContainer" unique_id=1475119649]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tt5f1")
+theme_override_font_sizes/font_size = 24
+disabled = true
+text = "Continue"
+script = ExtResource("3_8um5k")
+
+[node name="DevModeButton" type="Button" parent="Centrerer/StuffVBox/Container/VBoxContainer" unique_id=1609857626]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tt5f1")
+theme_override_font_sizes/font_size = 24
+text = "Developer mode"
+script = ExtResource("3_df05h")
+
 [node name="GetOutButton" type="Button" parent="Centrerer/StuffVBox/Container/VBoxContainer" unique_id=963783177]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.88, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_tt5f1")
 theme_override_font_sizes/font_size = 24
-text = "Get me out of here"
+theme_override_styles/normal = SubResource("StyleBoxFlat_df05h")
+text = "  Get me out of here  "
 script = ExtResource("3_ghw46")

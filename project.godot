@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="In The Shadows"
-run/main_scene="uid://ccgfm6pu38dm6"
+run/main_scene="uid://bjyh2m03tp6uq"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

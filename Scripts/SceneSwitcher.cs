@@ -18,11 +18,19 @@ public partial class SceneSwitcher : Node
 	private void NewGame()
 	{
 		ChangeSceneToPath("res://Scenes/Main3D.tscn");
+		GD.Print("This should be a regular game!");
+	}
+
+	private void DevGame()
+	{
+		ChangeSceneToPath("res://Scenes/Main3D.tscn");
+		GD.Print("Dev mode enabled!");
 	}
 
 	public override void _Ready()
 	{
 		Signals.Instance.SayYesToBacking += BackToMenu;
 		Signals.Instance.NewGame += NewGame;
+		Signals.Instance.NewDevGame += DevGame;
 	}
 }
