@@ -7,8 +7,13 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void LevelsInitializedEventHandler();
 
+	// This signal should be used for changing levels when the Main3D is loaded.
 	[Signal]
 	public delegate void AskToChangeLevelEventHandler(int NextLevel);
+
+	// This signal should be used to enter into a level from the level select scene.
+	[Signal]
+	public delegate void PrepareLevelEventHandler(int WhichLevel);
 
 	[Signal]
 	public delegate void AskUpdateMoveModeEventHandler(bool ToggledOn);

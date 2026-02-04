@@ -8,7 +8,7 @@ public partial class Levels : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		ChangeLevelTo(0);
+		ChangeLevelTo(Settings.Instance.YouNeedThisLevel);
 		Settings.Instance.LevelCount = GetChildren().Count;
 		var NodeOfSignals = GetNode<Signals>("/root/Signals");
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelsInitialized);

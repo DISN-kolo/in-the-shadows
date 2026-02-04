@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cox31sotfykrx"]
+
+[ext_resource type="PackedScene" uid="uid://xkpuauraudoi" path="res://Scenes/Selector.tscn" id="1_wglqq"]
+
+[node name="BeautifulLevelMenu" type="Control" unique_id=908225304]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TeapotSelector" parent="." unique_id=470632917 instance=ExtResource("1_wglqq")]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 334.0
+offset_right = 294.0
+offset_bottom = 505.0
+DesiredLabel = "England"
+
+[node name="ElephantSelector" parent="." unique_id=837811573 instance=ExtResource("1_wglqq")]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 223.0
+offset_right = 586.0
+offset_bottom = 394.0
+LevelNumber = 1
+DesiredLabel = "Trunk"
+
+[node name="GlobeSelector" parent="." unique_id=2138558527 instance=ExtResource("1_wglqq")]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 365.0
+offset_right = 878.0
+offset_bottom = 536.0
+LevelNumber = 2
+DesiredLabel = "Za Warudo!"
+
+[node name="42Selector" parent="." unique_id=1828937612 instance=ExtResource("1_wglqq")]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 205.0
+offset_right = 1112.0
+offset_bottom = 376.0
+LevelNumber = 3
+DesiredLabel = "The Answer"
+
+[node name="FinalSelector" parent="." unique_id=1829289249 instance=ExtResource("1_wglqq")]
+layout_mode = 0
+offset_left = 1222.0
+offset_top = 381.0
+offset_right = 1358.0
+offset_bottom = 552.0
+DesiredLabel = ":^)"

@@ -9,6 +9,7 @@ public partial class Settings : Node
 	public double RotateVel { get; set; }
 	public double MoveVel { get; set; }
 	public int LevelCount { get; set; }
+	public int YouNeedThisLevel { get; set; }
 
 	public override void _Ready()
 	{
@@ -17,5 +18,6 @@ public partial class Settings : Node
 		MouseSensMov = 2.5;
 		RotateVel = 15.0;
 		MoveVel = 10.0;
+		YouNeedThisLevel = 0;
 	}
 }
