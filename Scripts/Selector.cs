@@ -21,7 +21,15 @@ public partial class Selector : VBoxContainer
 	{
 		GetNode<Button>("SelectorButton").Pressed += OnPressed;
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
-		GetNode<Label>("SelectorLabel").Text = DesiredLabel;
+		if (LevelNumber > Settings.Instance.MaxAvailableLevel)
+		{
+			GetNode<Button>("SelectorButton").Disabled = true;
+			GetNode<Label>("SelectorLabel").Text = "???";
+		}
+		else
+		{
+			GetNode<Label>("SelectorLabel").Text = DesiredLabel;
+		}
 	}
 
 	public override void _ExitTree()

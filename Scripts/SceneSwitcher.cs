@@ -68,6 +68,34 @@ public partial class SceneSwitcher : Node
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
 
+	private void LoadGame()
+	{
+		GD.Print("This should be a load of the game");
+		GD.Print("Attempting to read savefile...");
+		try
+		{
+			var localText = File.ReadAllText(Settings.Instance.SavePath);
+			int localLevel = 0;
+
+			if (Int32.TryParse(localText, out localLevel))
+			{
+				GD.Print("Succeeded parsing level number: ", localLevel);
+				Settings.Instance.MaxAvailableLevel = localLevel;
+			}
+			else
+			{
+				GD.Print("Level parsing failed");
+				Settings.Instance.MaxAvailableLevel = 0;
+			}
+		}
+		catch (Exception e)
+		{
+			GD.Print("Failed in reading a savefile:", e.Message);
+			// TODO go into "savefileless" mode
+		}
+		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
+	}
+
 	private void DevGame()
 	{
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
@@ -86,6 +114,7 @@ public partial class SceneSwitcher : Node
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Signals.Instance.SayYesToBacking += BackToMenu;
 		Signals.Instance.NewGame += NewGame;
+		Signals.Instance.LoadGame += LoadGame;
 		Signals.Instance.NewDevGame += DevGame;
 		Signals.Instance.PrepareLevel += PrepareAndEnter;
 		Signals.Instance.ConfirmOverwrite += OverwriteNewGame;

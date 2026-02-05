@@ -11,6 +11,7 @@ public partial class Settings : Node
 	public int LevelCount { get; set; }
 	public int YouNeedThisLevel { get; set; }
 	public string SavePath { get; set; }
+	public int MaxAvailableLevel { get; set; }
 
 	public override void _Ready()
 	{
@@ -21,5 +22,6 @@ public partial class Settings : Node
 		MoveVel = 10.0;
 		YouNeedThisLevel = 0;
 		SavePath = "./savefile";
+		MaxAvailableLevel = 0;
 	}
 }
