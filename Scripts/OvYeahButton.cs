@@ -1,23 +1,23 @@
 using Godot;
 using System;
 
-public partial class BackNopeButton : Button
+public partial class OvYeahButton : Button
 {
 	private Signals NodeOfSignals;
 
-	private void OnPressedNope()
+	private void OnPressedYeah()
 	{
-		NodeOfSignals.EmitSignal(Signals.SignalName.SayNoToBacking);
+		NodeOfSignals.EmitSignal(Signals.SignalName.ConfirmOverwrite);
 	}
 
 	public override void _Ready()
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
-		Pressed += OnPressedNope;
+		Pressed += OnPressedYeah;
 	}
 
 	public override void _ExitTree()
 	{
-		Pressed -= OnPressedNope;
+		Pressed -= OnPressedYeah;
 	}
 }

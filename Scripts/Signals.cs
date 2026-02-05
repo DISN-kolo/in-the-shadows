@@ -35,6 +35,12 @@ public partial class Signals : Node
 	public delegate void NewGameEventHandler();
 
 	[Signal]
+	public delegate void PromptOverwriteEventHandler();
+
+	[Signal]
+	public delegate void ConfirmOverwriteEventHandler();
+
+	[Signal]
 	public delegate void NewDevGameEventHandler();
 
 	private void OnAskUpdateMoveModeGlobal(bool ToggledOn)

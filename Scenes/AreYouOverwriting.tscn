@@ -1,21 +1,21 @@
-[gd_scene format=3 uid="uid://cpxbur032k3rh"]
+[gd_scene format=3 uid="uid://dce4tfpa3ke3n"]
 
-[ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_6gdxa"]
-[ext_resource type="Script" uid="uid://bjh0sabbpcc0w" path="res://Scripts/AreYouSure.cs" id="1_jnjxg"]
-[ext_resource type="Script" uid="uid://cx2ulckwg1yg7" path="res://Scripts/BackYeahButton.cs" id="2_2dd5m"]
+[ext_resource type="Script" uid="uid://b1idju1krnth3" path="res://Scripts/AreYouOverwriting.cs" id="1_4tuek"]
+[ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="2_oq7ss"]
+[ext_resource type="Script" uid="uid://cejhspawy6l2w" path="res://Scripts/OvYeahButton.cs" id="3_hpih4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gdxa"]
 bg_color = Color(0.23495764, 0.23495767, 0.23495752, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_todxj"]
-font = ExtResource("1_6gdxa")
+font = ExtResource("2_oq7ss")
 
-[node name="AreYouSure" type="Control" unique_id=1245749225]
+[node name="AreYouOverwriting" type="Control" unique_id=1245749225]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_jnjxg")
+script = ExtResource("1_4tuek")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1651276325]
 layout_mode = 1
@@ -39,22 +39,25 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=257553873]
 layout_mode = 2
-text = "Are you sure you wanna leave?"
+text = "You already have a savefile.
+Overwrite it with a new one?"
 label_settings = SubResource("LabelSettings_todxj")
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1731135686]
 layout_mode = 2
 
-[node name="BackYeahButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=633924697]
+[node name="OvYeahButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=633924697]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_6gdxa")
+theme_override_fonts/font = ExtResource("2_oq7ss")
 text = "Yeah"
-script = ExtResource("2_2dd5m")
+script = ExtResource("3_hpih4")
+theme_override_fonts/font = ExtResource("2_oq7ss")
 
-[node name="BackNopeButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1441590796]
+[node name="OvNopeButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1441590796]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_6gdxa")
+theme_override_fonts/font = ExtResource("2_oq7ss")
 text = "Nope
 "
