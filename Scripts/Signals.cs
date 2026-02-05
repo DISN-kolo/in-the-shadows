@@ -4,10 +4,11 @@ public partial class Signals : Node
 {
 	public static Signals Instance { get; private set; }
 
+	// This is (was?) used for debug purposes so that some parameters don't get passed into unloaded nodes
 	[Signal]
 	public delegate void LevelsInitializedEventHandler();
 
-	// This signal should be used for changing levels when the Main3D is loaded.
+	// This signal should be used for changing levels when the Main3D is loaded. (Probably only debug stuff)
 	[Signal]
 	public delegate void AskToChangeLevelEventHandler(int NextLevel);
 
@@ -19,12 +20,17 @@ public partial class Signals : Node
 	public delegate void AskUpdateMoveModeEventHandler(bool ToggledOn);
 	public static bool CurrentMoveMode { get; set; }
 
+	// For switching control between different objects
 	[Signal]
 	public delegate void ActivateObjectEventHandler(int Number);
 
 	[Signal]
 	public delegate void LevelLoadedEventHandler(int MeshesAmt);
 
+	[Signal]
+	public delegate void LevelFinishedEventHandler(int WhichLevel);
+
+	// These two for mainmenu-ing
 	[Signal]
 	public delegate void SayNoToBackingEventHandler();
 
@@ -34,6 +40,7 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void NewGameEventHandler();
 
+	// Here it refers to the savegame file
 	[Signal]
 	public delegate void PromptOverwriteEventHandler();
 

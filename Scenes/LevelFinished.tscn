@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cglaid2515m5o"]
+
+[ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_5ag5p"]
+[ext_resource type="Script" uid="uid://deegdh3ebxb80" path="res://Scripts/LevelFinished.cs" id="1_opcev"]
+[ext_resource type="Script" uid="uid://ctv7sqmn6qai6" path="res://Scripts/ReturnFromFinished.cs" id="3_64d30"]
+[ext_resource type="Script" uid="uid://d24wune40y88l" path="res://Scripts/NextLevelPls.cs" id="4_2olve"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hgxut"]
+
+[sub_resource type="Gradient" id="Gradient_qbgkv"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.33203125, 1)
+colors = PackedColorArray(0, 0, 0, 0.46666667, 0, 0, 0, 0.83137256)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d7535"]
+gradient = SubResource("Gradient_qbgkv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="LevelFinished" type="PanelContainer" unique_id=801052678]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hgxut")
+script = ExtResource("1_opcev")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=772930477]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_d7535")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=592589232]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=748554742]
+layout_mode = 2
+
+[node name="FinishedLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1714378426]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5ag5p")
+theme_override_font_sizes/font_size = 46
+text = "Level solved!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=629842222]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ReturnFromFinished" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1204896309]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5ag5p")
+text = "Return to menu"
+script = ExtResource("3_64d30")
+
+[node name="NextLevelPls" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1186943025]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5ag5p")
+text = "Next level"
+script = ExtResource("4_2olve")

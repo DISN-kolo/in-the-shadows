@@ -111,6 +111,32 @@ public partial class SceneSwitcher : Node
 		GD.Print("Trying to access level: ", WhichLevel);
 	}
 
+	private void SaveProgress(int WhichLevel)
+	{
+		WhichLevel += 1;
+		try
+		{
+			using (FileStream fs = File.Create(Settings.Instance.SavePath))
+			{
+				byte[] info = new UTF8Encoding(true).GetBytes(WhichLevel.ToString());
+				fs.Write(info, 0, info.Length);
+			}
+		}
+		catch (Exception e)
+		{
+			GD.Print("Failed in rewriting a savefile:", e.Message);
+			// TODO go into "savefileless" mode?
+		}
+	}
+
+	private void UpdateMaxLvl(int WhichLevel)
+	{
+		if (Settings.Instance.MaxAvailableLevel < WhichLevel + 1)
+		{
+			Settings.Instance.MaxAvailableLevel = WhichLevel + 1;
+		}
+	}
+
 	public override void _Ready()
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
@@ -120,5 +146,7 @@ public partial class SceneSwitcher : Node
 		Signals.Instance.NewDevGame += DevGame;
 		Signals.Instance.PrepareLevel += PrepareAndEnter;
 		Signals.Instance.ConfirmOverwrite += OverwriteNewGame;
+		Signals.Instance.LevelFinished += SaveProgress;
+		Signals.Instance.LevelFinished += UpdateMaxLvl;
 	}
 }

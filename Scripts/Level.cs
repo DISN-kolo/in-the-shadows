@@ -4,6 +4,7 @@ using System;
 public partial class Level : Node3D
 {
 	private Signals NodeOfSignals;
+	public int LevelNumber;
 
 	[Export]
 	public string[] MeshScenesPaths = {};
@@ -53,7 +54,13 @@ public partial class Level : Node3D
 			{
 				GD.Print("You're within marings");
 				MovementSolved();
+				return ;
 			}
+		}
+		else
+		{
+			// XXX if you're ever gonna go for 3 meshes, remember to implement better conditions here
+			MovementSolved();
 		}
 	}
 
@@ -103,7 +110,6 @@ public partial class Level : Node3D
 
 	public void UnloadLevel()
 	{
-		// TODO disconnect signals
 		foreach (var LocalNode in GetChildren())
 		{
 			LocalNode.QueueFree();
@@ -117,6 +123,8 @@ public partial class Level : Node3D
 	{
 		InMovementSolution = true;
 		GD.Print("Movement solved!");
+		NodeOfSignals.EmitSignal(Signals.SignalName.LevelFinished, LevelNumber);
+		GD.Print("YOU NEED TO BLOCK CONTROLS IMMEDIATELY"); // TODO
 	}
 
 	public override void _Ready()
