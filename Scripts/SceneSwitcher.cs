@@ -38,6 +38,7 @@ public partial class SceneSwitcher : Node
 				GD.Print("Failed in creating a new savefile:", e.Message);
 				// TODO go into "savefileless" mode
 			}
+			Settings.Instance.MaxAvailableLevel = 0;
 		}
 		else
 		{
@@ -65,6 +66,7 @@ public partial class SceneSwitcher : Node
 			GD.Print("Failed in creating a new savefile:", e.Message);
 			// TODO go into "savefileless" mode
 		}
+		Settings.Instance.MaxAvailableLevel = 0;
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
 
