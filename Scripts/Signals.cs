@@ -30,6 +30,9 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void LevelFinishedEventHandler(int WhichLevel);
 
+	[Signal]
+	public delegate void ReturnFromFinishedEventHandler();
+
 	// These two for mainmenu-ing
 	[Signal]
 	public delegate void SayNoToBackingEventHandler();

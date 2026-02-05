@@ -141,6 +141,7 @@ public partial class SceneSwitcher : Node
 	{
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Signals.Instance.SayYesToBacking += BackToMenu;
+		Signals.Instance.ReturnFromFinished += BackToMenu;
 		Signals.Instance.NewGame += NewGame;
 		Signals.Instance.LoadGame += LoadGame;
 		Signals.Instance.NewDevGame += DevGame;

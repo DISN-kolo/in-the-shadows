@@ -5,9 +5,11 @@ public partial class GeneralInterface : Control
 {
 	private PackedScene LevelFinishedPS;
 	private LevelFinished LFInstance;
+
 	private void OnLevelFinished(int WhichLevel)
 	{
 		LFInstance = (LevelFinished)LevelFinishedPS.Instantiate();
+		LFInstance.CurrentLevel = WhichLevel;
 		AddChild(LFInstance);
 		// here we prolly should only make the window show up
 	}
