@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class MainMenu : Control
 {
@@ -18,6 +19,10 @@ public partial class MainMenu : Control
 	{
 		OvPromptScene = GD.Load<PackedScene>("res://Scenes/AreYouOverwriting.tscn");
 		Signals.Instance.PromptOverwrite += SpawnOvPromptWindow;
+		if (File.Exists(Settings.Instance.SavePath))
+		{
+			GetNode<Button>("Centrerer/StuffVBox/Container/VBoxContainer/LoadGameButton").Disabled = false;
+		}
 	}
 
 	public override void _ExitTree()

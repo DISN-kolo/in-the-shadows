@@ -5,7 +5,6 @@ using System.Text;
 
 public partial class SceneSwitcher : Node
 {
-	private string SavePath = "./savefile";
 	private Signals NodeOfSignals;
 
 	public void ChangeSceneToPath(string ScenePath)
@@ -24,11 +23,11 @@ public partial class SceneSwitcher : Node
 	{
 		GD.Print("This should be a regular game!");
 		GD.Print("Attempting to create a savefile...");
-		if (!File.Exists(SavePath))
+		if (!File.Exists(Settings.Instance.SavePath))
 		{
 			try
 			{
-				using (FileStream fs = File.Create(SavePath))
+				using (FileStream fs = File.Create(Settings.Instance.SavePath))
 				{
 					byte[] info = new UTF8Encoding(true).GetBytes("0");
 					fs.Write(info, 0, info.Length);
@@ -55,7 +54,7 @@ public partial class SceneSwitcher : Node
 		GD.Print("Attempting to create a savefile...");
 		try
 		{
-			using (FileStream fs = File.Create(SavePath))
+			using (FileStream fs = File.Create(Settings.Instance.SavePath))
 			{
 				byte[] info = new UTF8Encoding(true).GetBytes("0");
 				fs.Write(info, 0, info.Length);
