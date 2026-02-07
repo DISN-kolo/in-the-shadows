@@ -21,6 +21,7 @@ public partial class SceneSwitcher : Node
 
 	private void NewGame()
 	{
+		Settings.Instance.DevMode = false;
 		GD.Print("This should be a regular game!");
 		GD.Print("Attempting to create a savefile...");
 		if (!File.Exists(Settings.Instance.SavePath))
@@ -72,6 +73,7 @@ public partial class SceneSwitcher : Node
 
 	private void LoadGame()
 	{
+		Settings.Instance.DevMode = false;
 		GD.Print("This should be a load of the game");
 		GD.Print("Attempting to read savefile...");
 		try
@@ -100,6 +102,7 @@ public partial class SceneSwitcher : Node
 
 	private void DevGame()
 	{
+		Settings.Instance.DevMode = true;
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 		GD.Print("Dev mode enabled!");
 	}
@@ -113,6 +116,10 @@ public partial class SceneSwitcher : Node
 
 	private void SaveProgress(int WhichLevel)
 	{
+		if (Settings.Instance.DevMode)
+		{
+			return ;
+		}
 		WhichLevel += 1;
 		try
 		{

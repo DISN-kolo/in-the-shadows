@@ -21,7 +21,7 @@ public partial class Selector : VBoxContainer
 	{
 		GetNode<Button>("SelectorButton").Pressed += OnPressed;
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
-		if (LevelNumber > Settings.Instance.MaxAvailableLevel)
+		if ((LevelNumber > Settings.Instance.MaxAvailableLevel) && (Settings.Instance.DevMode == false))
 		{
 			GetNode<Button>("SelectorButton").Disabled = true;
 			GetNode<Label>("SelectorLabel").Text = "???";
