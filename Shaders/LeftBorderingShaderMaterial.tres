@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bckssxr3hfnb5"]
+
+[ext_resource type="Shader" uid="uid://b8j1dctsuva21" path="res://Shaders/Bordering.gdshader" id="1_ruovm"]
+
+[resource]
+shader = ExtResource("1_ruovm")
+shader_parameter/intensity = 0.0

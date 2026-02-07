@@ -3,13 +3,24 @@ using System;
 
 public partial class LeftBordering : TextureRect
 {
-	// Called when the node enters the scene tree for the first time.
+	public double MPosX;
+	private ShaderMaterial ThingMat;
+
 	public override void _Ready()
 	{
+		ThingMat = (ShaderMaterial)GetMaterial();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		MPosX = GetViewport().GetMousePosition().X;
+		if (MPosX < Size.X)
+		{
+			ThingMat.SetShaderParameter("intensity", Math.Clamp(1.0f - MPosX / Size.X, 0.0f, 1.0f));
+		}
+		else
+		{
+			ThingMat.SetShaderParameter("intensity", 0.0);
+		}
 	}
 }
