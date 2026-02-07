@@ -3,8 +3,9 @@ using System;
 
 public partial class RightBordering : TextureRect
 {
-	public double MPosX;
+	private double MPosX;
 	private double VPSizeX;
+	public double Intensity = 0.0;
 	private ShaderMaterial ThingMat;
 
 	public override void _Ready()
@@ -18,10 +19,12 @@ public partial class RightBordering : TextureRect
 		MPosX = GetViewport().GetMousePosition().X;
 		if (MPosX > VPSizeX - Size.X)
 		{
-			ThingMat.SetShaderParameter("intensity", Math.Clamp(1.0f + (MPosX - VPSizeX)/Size.X, 0.0f, 1.0f));
+			Intensity = Math.Clamp(1.0f + (MPosX - VPSizeX)/Size.X, 0.0f, 1.0f);
+			ThingMat.SetShaderParameter("intensity", Intensity);
 		}
 		else
 		{
+			Intensity = 0.0;
 			ThingMat.SetShaderParameter("intensity", 0.0);
 		}
 	}

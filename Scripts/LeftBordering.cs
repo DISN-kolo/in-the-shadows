@@ -3,7 +3,8 @@ using System;
 
 public partial class LeftBordering : TextureRect
 {
-	public double MPosX;
+	private double MPosX;
+	public double Intensity = 0.0;
 	private ShaderMaterial ThingMat;
 
 	public override void _Ready()
@@ -16,11 +17,13 @@ public partial class LeftBordering : TextureRect
 		MPosX = GetViewport().GetMousePosition().X;
 		if (MPosX < Size.X)
 		{
-			ThingMat.SetShaderParameter("intensity", Math.Clamp(1.0f - MPosX / Size.X, 0.0f, 1.0f));
+			Intensity = Math.Clamp(1.0f - MPosX / Size.X, 0.0f, 1.0f);
+			ThingMat.SetShaderParameter("intensity", Intensity);
 		}
 		else
 		{
 			ThingMat.SetShaderParameter("intensity", 0.0);
+			Intensity = 0.0;
 		}
 	}
 }

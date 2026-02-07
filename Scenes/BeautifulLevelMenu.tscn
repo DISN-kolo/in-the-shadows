@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cox31sotfykrx"]
 
+[ext_resource type="Script" uid="uid://1b1fxi73ecde" path="res://Scripts/BeautifulLevelMenu.cs" id="1_ttatj"]
 [ext_resource type="PackedScene" uid="uid://xkpuauraudoi" path="res://Scenes/Selector.tscn" id="1_wglqq"]
 [ext_resource type="Script" uid="uid://c01j0u6tssoeo" path="res://Scripts/LeftBordering.cs" id="2_8taqd"]
 [ext_resource type="Material" uid="uid://bckssxr3hfnb5" path="res://Shaders/LeftBorderingShaderMaterial.tres" id="2_hovvf"]
@@ -30,6 +31,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ttatj")
+MoveSpeed = 500.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=318581051]
 layout_mode = 1
@@ -89,6 +92,7 @@ offset_left = 1222.0
 offset_top = 381.0
 offset_right = 1358.0
 offset_bottom = 552.0
+LevelNumber = 4
 DesiredLabel = ":^)"
 
 [node name="LeftBordering" type="TextureRect" parent="." unique_id=1709764563]
