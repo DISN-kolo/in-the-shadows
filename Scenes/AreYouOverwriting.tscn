@@ -17,6 +17,17 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_4tuek")
 
+[node name="Blocker" type="Panel" parent="." unique_id=1787393278]
+custom_minimum_size = Vector2(5000, 5000)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1651276325]
 layout_mode = 1
 anchors_preset = 8
@@ -53,7 +64,6 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_oq7ss")
 text = "Yeah"
 script = ExtResource("3_hpih4")
-theme_override_fonts/font = ExtResource("2_oq7ss")
 
 [node name="OvNopeButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1441590796]
 layout_mode = 2
