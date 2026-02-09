@@ -49,7 +49,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=257553873]
+custom_minimum_size = Vector2(276, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "You already have a savefile.
 Overwrite it with a new one?"
 label_settings = SubResource("LabelSettings_todxj")
