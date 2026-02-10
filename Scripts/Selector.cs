@@ -24,22 +24,29 @@ public partial class Selector : VBoxContainer
 		SelectorButton = GetNode<Button>("SelectorButton");
 		WinGreen = GetNode<TextureRect>("SelectorButton/WinGreen");
 		WinAnimPlayer = GetNode<AnimationPlayer>("SelectorButton/WinAnimPlayer");
-		if (LevelNumber < Settings.Instance.MaxAvailableLevel)
+		if (Settings.Instance.DevMode)
 		{
-			WinGreen.Visible = true;
-			if (Settings.Instance.CompletionShown[LevelNumber])
-			{
-				WinAnimPlayer.SetCurrentAnimation("RESET");
-			}
-			else
-			{
-				WinAnimPlayer.SetCurrentAnimation("PlopDown");
-				Settings.Instance.CompletionShown[LevelNumber] = true;
-			}
+			WinGreen.Visible = false;
 		}
 		else
 		{
-			WinGreen.Visible = false;
+			if (LevelNumber < Settings.Instance.MaxAvailableLevel)
+			{
+				WinGreen.Visible = true;
+				if (Settings.Instance.CompletionShown[LevelNumber])
+				{
+					WinAnimPlayer.SetCurrentAnimation("RESET");
+				}
+				else
+				{
+					WinAnimPlayer.SetCurrentAnimation("PlopDown");
+					Settings.Instance.CompletionShown[LevelNumber] = true;
+				}
+			}
+			else
+			{
+				WinGreen.Visible = false;
+			}
 		}
 		SelectorButton.Icon = GD.Load<Texture2D>($"res://Icons/iconsOfSin{LevelNumber + 1}.png");
 		SelectorButton.Pressed += OnPressed;

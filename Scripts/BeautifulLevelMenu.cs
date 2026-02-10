@@ -9,6 +9,7 @@ public partial class BeautifulLevelMenu : Control
 	private double ScreenMid;
 	private double MinX = 65536.0;
 	private double MaxX = 0.0;
+	private double DesiredStart = 0.0;
 
 	[Export]
 	public float MoveSpeed = 10.0f;
@@ -18,8 +19,9 @@ public partial class BeautifulLevelMenu : Control
 		LeftRef = GetNode<LeftBordering>("LeftBordering");
 		RightRef = GetNode<RightBordering>("RightBordering");
 		MoveMe = GetNode<Control>("AllTheLevels");
+		ScreenMid = GetViewport().GetVisibleRect().Size.X / 2.0;
 
-		foreach (Control LocalNode in MoveMe.GetChildren())
+		foreach (Selector LocalNode in MoveMe.GetChildren())
 		{
 			if (LocalNode.Position.X < MinX)
 			{
@@ -29,6 +31,17 @@ public partial class BeautifulLevelMenu : Control
 			{
 				MaxX = LocalNode.Position.X;
 			}
+			if (LocalNode.LevelNumber == Settings.Instance.MaxAvailableLevel)
+			{
+				DesiredStart = LocalNode.Position.X;
+			}
+		}
+		MaxX += ScreenMid/3.0;
+		MinX += ScreenMid/3.0;
+
+		if (Settings.Instance.DevMode == false)
+		{
+			MoveMe.Position = MoveMe.Position with { X = (float)ScreenMid - (float)DesiredStart};
 		}
 	}
 
