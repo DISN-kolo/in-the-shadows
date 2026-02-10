@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cvjwrf8oq2cl7"]
+
+[ext_resource type="Shader" uid="uid://l7prvfigjhvk" path="res://Shaders/Blur.gdshader" id="1_4ler3"]
+[ext_resource type="Texture2D" uid="uid://b8bsamilbrxa8" path="res://Icons/levelDoneMark.png" id="2_8rwhp"]
+
+[resource]
+shader = ExtResource("1_4ler3")
+shader_parameter/uTexture = ExtResource("2_8rwhp")
+shader_parameter/opacity_mod = 1.0
+shader_parameter/offset = 0.0

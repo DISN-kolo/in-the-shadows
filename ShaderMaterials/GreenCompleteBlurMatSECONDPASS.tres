@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c1gnjhvn1xjow"]
+
+[ext_resource type="Shader" uid="uid://l7prvfigjhvk" path="res://Shaders/Blur.gdshader" id="1_cm2gf"]
+
+[resource]
+shader = ExtResource("1_cm2gf")
+shader_parameter/offset = 10.0

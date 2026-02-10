@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://blnlhvvexl684" path="res://Scripts/Selector.cs" id="1_q75pq"]
 [ext_resource type="Texture2D" uid="uid://rfhk4maiffj6" path="res://icon.svg" id="2_c44gr"]
+[ext_resource type="Texture2D" uid="uid://b8bsamilbrxa8" path="res://Icons/levelDoneMark.png" id="3_c44gr"]
+[ext_resource type="Material" uid="uid://cvjwrf8oq2cl7" path="res://ShaderMaterials/GreenCompleteBlurMat.tres" id="3_h32ys"]
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="3_ji8yk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q75pq"]
@@ -13,6 +15,115 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q75pq"]
 
+[sub_resource type="Animation" id="Animation_c44gr"]
+resource_name = "PlopDown"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1.8024999, 1),
+"update": 0,
+"values": [Vector2(4.11, 4.11), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.36666673, 0.5),
+"transitions": PackedFloat32Array(0.6372803, 2.6390154, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.815, 0.815), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:material:shader_parameter/offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:material:shader_parameter/opacity_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ji8yk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:material:shader_parameter/offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:material:shader_parameter/opacity_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ji8yk"]
+_data = {
+&"PlopDown": SubResource("Animation_c44gr"),
+&"RESET": SubResource("Animation_ji8yk")
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_8taqd"]
 font = ExtResource("3_ji8yk")
 font_size = 20
@@ -20,10 +131,10 @@ font_size = 20
 [node name="Selector" type="VBoxContainer" unique_id=470632917]
 offset_right = 136.0
 offset_bottom = 171.0
+pivot_offset = Vector2(68, 70)
 script = ExtResource("1_q75pq")
 
 [node name="SelectorButton" type="Button" parent="." unique_id=888963911]
-clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/icon_pressed_color = Color(0.4255801, 0.72283226, 0.9391896, 1)
@@ -35,6 +146,19 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_c44gr")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_q75pq")
 icon = ExtResource("2_c44gr")
 icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SelectorButton" unique_id=384258120]
+self_modulate = Color(1, 1, 1, 0)
+material = ExtResource("3_h32ys")
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(21.654501, 71.289536)
+mouse_filter = 2
+texture = ExtResource("3_c44gr")
+
+[node name="WinAnimPlayyer" type="AnimationPlayer" parent="SelectorButton" unique_id=1390327136]
+libraries/ = SubResource("AnimationLibrary_ji8yk")
 
 [node name="SelectorLabel" type="Label" parent="." unique_id=1826702530]
 layout_mode = 2
