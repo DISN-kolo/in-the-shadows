@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dbox7qcd03ti2"]
+
+[ext_resource type="ArrayMesh" uid="uid://bjlwu6j27ypuh" path="res://Objects/Heart.obj" id="1_fjsnf"]
+
+[node name="HeartParent" type="Node3D" unique_id=853948575]
+
+[node name="HeartMesh" type="MeshInstance3D" parent="." unique_id=1881358426]
+mesh = ExtResource("1_fjsnf")

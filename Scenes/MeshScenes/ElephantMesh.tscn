@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwjyddkyroofj"]
+[gd_scene format=3 uid="uid://dwjyddkyroofj"]
 
 [ext_resource type="ArrayMesh" uid="uid://cwv2pogyqsvcd" path="res://Objects/elephant.obj" id="1_lgadg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clg0j"]
 
-[node name="ElephantParent" type="Node3D"]
+[node name="ElephantParent" type="Node3D" unique_id=406620155]
 
-[node name="ElephantMesh" type="MeshInstance3D" parent="."]
+[node name="ElephantMesh" type="MeshInstance3D" parent="." unique_id=1933191018]
 material_override = SubResource("StandardMaterial3D_clg0j")
 mesh = ExtResource("1_lgadg")

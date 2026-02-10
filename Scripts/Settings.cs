@@ -29,7 +29,7 @@ public partial class Settings : Node
 		DevMode = false;
 		CompletionShown = [false, false, false, false, false, false];
 		LevelNames = [
-			"Baby Don't Hurt Me",
+			"Baby Don't Hurt Me", /* a very simple heart that can only be rotated horizontally */
 			"Trunk",
 			"England",
 			"80 Days",

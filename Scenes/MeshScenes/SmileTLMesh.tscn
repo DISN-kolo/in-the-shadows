@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dad1t10ppwv6c"]
+
+[ext_resource type="ArrayMesh" uid="uid://d84hhbwjqtki" path="res://Objects/SmileTL.obj" id="1_6d3ft"]
+
+[node name="SmileTLParent" type="Node3D" unique_id=236919219]
+
+[node name="SmileTLMesh" type="MeshInstance3D" parent="." unique_id=1879188800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4826684, -0.66842103, 0)
+mesh = ExtResource("1_6d3ft")
