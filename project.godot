@@ -30,6 +30,10 @@ SceneSwitcher="*uid://cq58nwxk87b24"
 
 project/assembly_name="In The Shadows"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 LMB={
