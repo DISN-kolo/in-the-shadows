@@ -4,6 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://rfhk4maiffj6" path="res://icon.svg" id="2_c44gr"]
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="3_ji8yk"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q75pq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ji8yk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c44gr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q75pq"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_8taqd"]
 font = ExtResource("3_ji8yk")
 font_size = 20
@@ -14,8 +23,18 @@ offset_bottom = 171.0
 script = ExtResource("1_q75pq")
 
 [node name="SelectorButton" type="Button" parent="." unique_id=888963911]
+clip_contents = true
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/icon_pressed_color = Color(0.4255801, 0.72283226, 0.9391896, 1)
+theme_override_colors/icon_hover_color = Color(0.7471748, 0.91741335, 0.96216553, 1)
+theme_override_colors/icon_disabled_color = Color(0.19285911, 0.34150025, 0.3981458, 0.4627451)
+theme_override_styles/normal = SubResource("StyleBoxFlat_q75pq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ji8yk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_c44gr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_q75pq")
 icon = ExtResource("2_c44gr")
+icon_alignment = 1
 
 [node name="SelectorLabel" type="Label" parent="." unique_id=1826702530]
 layout_mode = 2

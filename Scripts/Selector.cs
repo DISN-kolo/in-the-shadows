@@ -4,6 +4,7 @@ using System;
 public partial class Selector : VBoxContainer
 {
 	private Signals NodeOfSignals;
+	private Button SelectorButton;
 
 	[Export]
 	public int LevelNumber = 0;
@@ -13,17 +14,18 @@ public partial class Selector : VBoxContainer
 
 	private void OnPressed()
 	{
-		// TODO conditional for the unlocks in the normal mode
 		NodeOfSignals.EmitSignal(Signals.SignalName.PrepareLevel, LevelNumber);
 	}
 
 	public override void _Ready()
 	{
-		GetNode<Button>("SelectorButton").Pressed += OnPressed;
+		SelectorButton = GetNode<Button>("SelectorButton");
+		SelectorButton.Icon = GD.Load<Texture2D>($"res://Icons/iconsOfSin{LevelNumber + 1}.png");
+		SelectorButton.Pressed += OnPressed;
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		if ((LevelNumber > Settings.Instance.MaxAvailableLevel) && (Settings.Instance.DevMode == false))
 		{
-			GetNode<Button>("SelectorButton").Disabled = true;
+			SelectorButton.Disabled = true;
 			GetNode<Label>("SelectorLabel").Text = "???";
 		}
 		else
@@ -34,6 +36,6 @@ public partial class Selector : VBoxContainer
 
 	public override void _ExitTree()
 	{
-		GetNode<Button>("SelectorButton").Pressed -= OnPressed;
+		SelectorButton.Pressed -= OnPressed;
 	}
 }
