@@ -6,6 +6,8 @@
 [ext_resource type="Material" uid="uid://bckssxr3hfnb5" path="res://ShaderMaterials/LeftBorderingShaderMaterial.tres" id="2_hovvf"]
 [ext_resource type="Script" uid="uid://eiqgydletesq" path="res://Scripts/RightBordering.cs" id="3_lu74g"]
 [ext_resource type="Material" uid="uid://u5dboc56jn3u" path="res://ShaderMaterials/RightBorderingShaderMaterial.tres" id="4_ttatj"]
+[ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="7_w7wot"]
+[ext_resource type="Script" uid="uid://bfhy672tnadmk" path="res://Scripts/BackToMenuButtonLM.cs" id="8_w7wot"]
 
 [sub_resource type="Gradient" id="Gradient_wglqq"]
 colors = PackedColorArray(0.43529412, 0.43529412, 0.5529412, 1, 0.105882354, 0.06666667, 0.21960784, 1)
@@ -53,11 +55,10 @@ grow_vertical = 2
 
 [node name="WhatIsItSelector" parent="AllTheLevels" unique_id=470632917 instance=ExtResource("1_wglqq")]
 layout_mode = 0
-offset_left = 219.0
-offset_top = 188.0
-offset_right = 355.0
-offset_bottom = 359.0
-DesiredLabel = "Baby Don't Hurt Me"
+offset_left = 179.0
+offset_top = 186.0
+offset_right = 315.0
+offset_bottom = 357.0
 
 [node name="TeapotSelector" parent="AllTheLevels" unique_id=742027133 instance=ExtResource("1_wglqq")]
 layout_mode = 0
@@ -66,7 +67,6 @@ offset_top = 354.0
 offset_right = 678.0
 offset_bottom = 525.0
 LevelNumber = 1
-DesiredLabel = "England"
 
 [node name="ElephantSelector" parent="AllTheLevels" unique_id=837811573 instance=ExtResource("1_wglqq")]
 layout_mode = 0
@@ -75,7 +75,6 @@ offset_top = 230.0
 offset_right = 1030.0
 offset_bottom = 401.0
 LevelNumber = 2
-DesiredLabel = "Trunk"
 
 [node name="GlobeSelector" parent="AllTheLevels" unique_id=2138558527 instance=ExtResource("1_wglqq")]
 layout_mode = 0
@@ -84,7 +83,6 @@ offset_top = 319.0
 offset_right = 1407.0
 offset_bottom = 490.0
 LevelNumber = 3
-DesiredLabel = "Za Warudo!"
 
 [node name="42Selector" parent="AllTheLevels" unique_id=1828937612 instance=ExtResource("1_wglqq")]
 layout_mode = 0
@@ -93,7 +91,6 @@ offset_top = 120.0
 offset_right = 1699.0
 offset_bottom = 291.0
 LevelNumber = 4
-DesiredLabel = "The Answer"
 
 [node name="FinalSelector" parent="AllTheLevels" unique_id=1829289249 instance=ExtResource("1_wglqq")]
 layout_mode = 0
@@ -102,7 +99,6 @@ offset_top = 381.0
 offset_right = 1986.0
 offset_bottom = 552.0
 LevelNumber = 5
-DesiredLabel = ":^)"
 
 [node name="LeftBordering" type="TextureRect" parent="." unique_id=1709764563]
 material = ExtResource("2_hovvf")
@@ -129,3 +125,17 @@ texture = SubResource("GradientTexture1D_wglqq")
 expand_mode = 1
 flip_h = true
 script = ExtResource("3_lu74g")
+
+[node name="BackToMenuButtonLM" type="Button" parent="." unique_id=1619625982]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.5
+offset_right = 59.5
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("7_w7wot")
+theme_override_font_sizes/font_size = 20
+text = "Main Menu"
+script = ExtResource("8_w7wot")

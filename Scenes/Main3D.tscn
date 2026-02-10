@@ -25,6 +25,13 @@ default_font_size = 20
 default_font = ExtResource("3_5wo3a")
 default_font_size = 30
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbgkv"]
+bg_color = Color(0, 0, 0, 0.67058825)
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8jelc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -145,6 +152,21 @@ offset_bottom = 8.0
 grow_horizontal = 0
 text = "Main Menu"
 script = ExtResource("10_qbgkv")
+
+[node name="LevelNamePanel" type="PanelContainer" parent="GeneralInterface" unique_id=48330104]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_right = 104.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbgkv")
+
+[node name="LevelName" type="Label" parent="GeneralInterface/LevelNamePanel" unique_id=1339948842]
+layout_mode = 2
+text = "Example Long Text"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1457574330]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)

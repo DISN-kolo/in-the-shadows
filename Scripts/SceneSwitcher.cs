@@ -39,6 +39,7 @@ public partial class SceneSwitcher : Node
 				GD.Print("Failed in creating a new savefile:", e.Message);
 				// TODO go into "savefileless" mode
 			}
+			Settings.Instance.CompletionShown = [false, false, false, false, false, false];
 			Settings.Instance.MaxAvailableLevel = 0;
 		}
 		else
@@ -68,6 +69,7 @@ public partial class SceneSwitcher : Node
 			// TODO go into "savefileless" mode
 		}
 		Settings.Instance.MaxAvailableLevel = 0;
+		Settings.Instance.CompletionShown = [false, false, false, false, false, false];
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
 
@@ -149,6 +151,7 @@ public partial class SceneSwitcher : Node
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Signals.Instance.SayYesToBacking += BackToMenu;
 		Signals.Instance.ReturnFromFinished += BackToMenu;
+		Signals.Instance.BackFromLevels += BackToMenu;
 		Signals.Instance.NewGame += NewGame;
 		Signals.Instance.LoadGame += LoadGame;
 		Signals.Instance.NewDevGame += DevGame;

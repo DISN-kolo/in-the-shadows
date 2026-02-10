@@ -11,8 +11,8 @@ public partial class Selector : VBoxContainer
 	[Export]
 	public int LevelNumber = 0;
 
-	[Export]
-	public string DesiredLabel = "";
+//	[Export]
+//	public string DesiredLabel = "";
 
 	private void OnPressed()
 	{
@@ -58,7 +58,7 @@ public partial class Selector : VBoxContainer
 		}
 		else
 		{
-			GetNode<Label>("SelectorLabel").Text = DesiredLabel;
+			GetNode<Label>("SelectorLabel").Text = Settings.Instance.LevelNames[LevelNumber];
 		}
 	}
 

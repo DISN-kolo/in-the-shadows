@@ -33,12 +33,15 @@ public partial class Signals : Node
 	[Signal]
 	public delegate void ReturnFromFinishedEventHandler();
 
-	// These two for mainmenu-ing
+	// These three for mainmenu-ing
 	[Signal]
 	public delegate void SayNoToBackingEventHandler();
 
 	[Signal]
 	public delegate void SayYesToBackingEventHandler();
+
+	[Signal]
+	public delegate void BackFromLevelsEventHandler();
 
 	[Signal]
 	public delegate void NewGameEventHandler();
