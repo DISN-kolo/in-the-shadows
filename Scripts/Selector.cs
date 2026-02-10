@@ -5,6 +5,9 @@ public partial class Selector : VBoxContainer
 {
 	private Signals NodeOfSignals;
 	private Button SelectorButton;
+	private TextureRect WinGreen;
+
+	private bool CompletionShown;
 
 	[Export]
 	public int LevelNumber = 0;
@@ -20,6 +23,7 @@ public partial class Selector : VBoxContainer
 	public override void _Ready()
 	{
 		SelectorButton = GetNode<Button>("SelectorButton");
+		WinGreen = GetNode<TextureRect>("SelectorButton/WinGreen");
 		SelectorButton.Icon = GD.Load<Texture2D>($"res://Icons/iconsOfSin{LevelNumber + 1}.png");
 		SelectorButton.Pressed += OnPressed;
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
