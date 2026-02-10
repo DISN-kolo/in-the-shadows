@@ -13,6 +13,7 @@ public partial class Settings : Node
 	public string SavePath { get; set; }
 	public int MaxAvailableLevel { get; set; }
 	public bool DevMode { get; set; }
+	public bool[] CompletionShown;
 
 	public override void _Ready()
 	{
@@ -25,5 +26,6 @@ public partial class Settings : Node
 		SavePath = "./savefile";
 		MaxAvailableLevel = 0;
 		DevMode = false;
+		CompletionShown = [false, false, false, false, false, false];
 	}
 }

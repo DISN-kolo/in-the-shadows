@@ -59,7 +59,7 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("WinGreen:material:shader_parameter/opacity_mod")
 tracks/3/interp = 1
-tracks/3/loop_wrap = true
+tracks/3/loop_wrap = false
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
@@ -149,6 +149,7 @@ icon_alignment = 1
 
 [node name="WinGreen" type="TextureRect" parent="SelectorButton" unique_id=384258120]
 self_modulate = Color(1, 1, 1, 0)
+z_index = 15
 material = ExtResource("3_h32ys")
 layout_mode = 0
 offset_right = 128.0
@@ -157,7 +158,7 @@ pivot_offset = Vector2(21.654501, 71.289536)
 mouse_filter = 2
 texture = ExtResource("3_c44gr")
 
-[node name="WinAnimPlayyer" type="AnimationPlayer" parent="SelectorButton" unique_id=1390327136]
+[node name="WinAnimPlayer" type="AnimationPlayer" parent="SelectorButton" unique_id=1390327136]
 libraries/ = SubResource("AnimationLibrary_ji8yk")
 
 [node name="SelectorLabel" type="Label" parent="." unique_id=1826702530]

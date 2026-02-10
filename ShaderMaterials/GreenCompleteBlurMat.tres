@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8bsamilbrxa8" path="res://Icons/levelDoneMark.png" id="2_8rwhp"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_4ler3")
 shader_parameter/uTexture = ExtResource("2_8rwhp")
 shader_parameter/opacity_mod = 1.0
