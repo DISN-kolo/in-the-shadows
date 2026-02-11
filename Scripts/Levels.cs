@@ -15,12 +15,14 @@ public partial class Levels : Node3D
 		var NodeOfSignals = GetNode<Signals>("/root/Signals");
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelsInitialized);
 		Signals.Instance.AskToChangeLevel += ChangeLevelTo;
-		int x = 0;
-		foreach (var LocalNode in GetChildren())
-		{
-			((Level)LocalNode).LevelNumber = x;
-			x += 1;
-		}
+//		int x = 0;
+//		foreach (Level LocalNode in GetChildren())
+//		{
+//			LocalNode.LevelNumber = x;
+//			GD.Print(x);
+//			GD.Print(LocalNode.LevelNumber);
+//			x += 1;
+//		}
 	}
 
 	public void ChangeLevelTo(int NextLevel)

@@ -77,7 +77,7 @@ public partial class Level : Node3D
 
 	public void LoadLevel()
 	{
-		GD.Print("BAM!");
+		GD.Print("BAM!, ", LevelNumber);
 		MeshScenesAmt = MeshScenesPaths.Length;
 		InRotations = new bool[MeshScenesAmt];
 		for (int i = 0; i < MeshScenesAmt; i++)
@@ -106,6 +106,10 @@ public partial class Level : Node3D
 			{
 				CurrentShadowCasterInstance.HMovOnly = true;
 			}
+			else
+			{
+				CurrentShadowCasterInstance.HMovOnly = false;
+			}
 			AddChild(CurrentShadowCasterInstance);
 		}
 		Visible = true;
@@ -133,6 +137,8 @@ public partial class Level : Node3D
 
 	public override void _Ready()
 	{
+		LevelNumber = GetIndex();
+		GD.Print("LevelNumber: ", LevelNumber);
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
 		if (!Visible)
