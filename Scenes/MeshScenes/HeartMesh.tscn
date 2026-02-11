@@ -5,4 +5,5 @@
 [node name="HeartParent" type="Node3D" unique_id=853948575]
 
 [node name="HeartMesh" type="MeshInstance3D" parent="." unique_id=1881358426]
+transform = Transform3D(1.6505727, 0, 0, 0, 1.6505727, 0, 0, 0, 1.6505727, 0, 0, 0)
 mesh = ExtResource("1_fjsnf")

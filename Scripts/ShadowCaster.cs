@@ -6,6 +6,7 @@ public partial class ShadowCaster : CharacterBody3D
 	private DebugSignals NodeOfDebugSignals;
 
 	public bool Activated = false;
+	public bool HMovOnly = false;
 	public int Number = 0;
 	public bool LMBDown = false;
 	public Vector2 Target = new Vector2(0, 0);
@@ -178,10 +179,20 @@ public partial class ShadowCaster : CharacterBody3D
 	{
 		ScreenSize = GetViewport().GetVisibleRect().Size;
 		var rand = new Random();
-		Rotation = Rotation with {
-			X = (float)rand.NextDouble() * (float)Math.PI * 2.0f,
-			Y = (float)rand.NextDouble() * (float)Math.PI * 2.0f
-		};
+		if (HMovOnly)
+		{
+			Rotation = Rotation with {
+				X = IntendedRot.X,
+				Y = IntendedRot.Y + ((float)rand.NextDouble()/2.0f + 0.25f) * (float)Math.PI
+			};
+		}
+		else
+		{
+			Rotation = Rotation with {
+				X = (float)rand.NextDouble() * (float)Math.PI * 2.0f,
+				Y = (float)rand.NextDouble() * (float)Math.PI * 2.0f
+			};
+		}
 		TargetReal = Rotation;
 		Target = Target with {
 			X = Rotation.Y * ScreenSize.X / (float)Math.PI,
@@ -268,11 +279,21 @@ public partial class ShadowCaster : CharacterBody3D
 			{
 				if (!MoveMode)
 				{
-					Target += EventMouseMotion.Relative
-						* new Vector2(
-							(float)Settings.Instance.MouseSens,
-							(float)Settings.Instance.MouseSens
-							);
+					if (HMovOnly)
+					{
+						Target += EventMouseMotion.Relative
+							* new Vector2(
+								(float)Settings.Instance.MouseSens,
+								0.0f);
+					}
+					else
+					{
+						Target += EventMouseMotion.Relative
+							* new Vector2(
+								(float)Settings.Instance.MouseSens,
+								(float)Settings.Instance.MouseSens
+								);
+					}
 				}
 				else
 				{

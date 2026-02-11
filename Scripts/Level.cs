@@ -102,6 +102,10 @@ public partial class Level : Node3D
 			{
 				CurrentShadowCasterInstance.LocalDepth = -2 + i*3;
 			}
+			if (LevelNumber == 0)
+			{
+				CurrentShadowCasterInstance.HMovOnly = true;
+			}
 			AddChild(CurrentShadowCasterInstance);
 		}
 		Visible = true;
