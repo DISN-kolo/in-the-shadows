@@ -4,19 +4,29 @@ using System;
 public partial class GeneralInterface : Control
 {
 	private PackedScene LevelFinishedPS;
+	private PackedScene LastLevelFinishedPS;
 	private LevelFinished LFInstance;
+	private LastLevelFinished LLFInstance;
 
 	private void OnLevelFinished(int WhichLevel)
 	{
-		LFInstance = (LevelFinished)LevelFinishedPS.Instantiate();
-		LFInstance.CurrentLevel = WhichLevel;
-		AddChild(LFInstance);
-		// here we prolly should only make the window show up
+		if (WhichLevel + 1 == Settings.Instance.LevelCount)
+		{
+			LLFInstance = (LastLevelFinished)LastLevelFinishedPS.Instantiate();
+			AddChild(LLFInstance);
+		}
+		else
+		{
+			LFInstance = (LevelFinished)LevelFinishedPS.Instantiate();
+			LFInstance.CurrentLevel = WhichLevel;
+			AddChild(LFInstance);
+		}
 	}
 
 	public override void _Ready()
 	{
 		LevelFinishedPS = GD.Load<PackedScene>("res://Scenes/LevelFinished.tscn");
+		LastLevelFinishedPS = GD.Load<PackedScene>("res://Scenes/LastLevelFinished.tscn");
 		Signals.Instance.LevelFinished += OnLevelFinished;
 	}
 

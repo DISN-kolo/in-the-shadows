@@ -134,7 +134,6 @@ public partial class SceneSwitcher : Node
 		catch (Exception e)
 		{
 			GD.Print("Failed in rewriting a savefile:", e.Message);
-			// TODO go into "savefileless" mode?
 		}
 	}
 
