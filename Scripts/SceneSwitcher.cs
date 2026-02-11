@@ -19,6 +19,11 @@ public partial class SceneSwitcher : Node
 		ChangeSceneToPath("res://Scenes/MainMenu.tscn");
 	}
 
+	private void BackToLevels()
+	{
+		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
+	}
+
 	private void NewGame()
 	{
 		Settings.Instance.DevMode = false;
@@ -122,6 +127,12 @@ public partial class SceneSwitcher : Node
 		{
 			return ;
 		}
+		GD.Print("saving progress! WL: ", WhichLevel);
+		if (WhichLevel + 1 <= Settings.Instance.MaxAvailableLevel)
+		{
+			GD.Print("nevermind. SIMAL: ", Settings.Instance.MaxAvailableLevel);
+			return ;
+		}
 		WhichLevel += 1;
 		try
 		{
@@ -150,6 +161,7 @@ public partial class SceneSwitcher : Node
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Signals.Instance.SayYesToBacking += BackToMenu;
 		Signals.Instance.ReturnFromFinished += BackToMenu;
+		Signals.Instance.BackToLevels += BackToLevels;
 		Signals.Instance.BackFromLevels += BackToMenu;
 		Signals.Instance.NewGame += NewGame;
 		Signals.Instance.LoadGame += LoadGame;

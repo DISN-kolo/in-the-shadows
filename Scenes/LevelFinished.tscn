@@ -2,6 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="1_5ag5p"]
 [ext_resource type="Script" uid="uid://deegdh3ebxb80" path="res://Scripts/LevelFinished.cs" id="1_opcev"]
+[ext_resource type="Script" uid="uid://rgk0xoaypcew" path="res://Scripts/BackToLevels.cs" id="3_2olve"]
 [ext_resource type="Script" uid="uid://ctv7sqmn6qai6" path="res://Scripts/ReturnFromFinished.cs" id="3_64d30"]
 [ext_resource type="Script" uid="uid://d24wune40y88l" path="res://Scripts/NextLevelPls.cs" id="4_2olve"]
 
@@ -47,12 +48,12 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ReturnFromFinished" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1204896309]
+[node name="BackToLevels" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1305876093]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_5ag5p")
-text = "Return to menu"
-script = ExtResource("3_64d30")
+text = "Back to levels"
+script = ExtResource("3_2olve")
 
 [node name="NextLevelPls" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1186943025]
 custom_minimum_size = Vector2(200, 0)
@@ -60,3 +61,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_5ag5p")
 text = "Next level"
 script = ExtResource("4_2olve")
+
+[node name="ReturnFromFinished" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1204896309]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5ag5p")
+text = "Return to menu"
+script = ExtResource("3_64d30")
