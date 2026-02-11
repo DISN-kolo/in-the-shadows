@@ -9,7 +9,7 @@ public partial class Levels : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		LevelName = GetNode<Label>("../GeneralInterface/LevelNamePanel/LevelName");
+		LevelName = GetNode<Label>("../GeneralInterface/LevelNameContainer/LevelNamePanel/LevelName");
 		ChangeLevelTo(Settings.Instance.YouNeedThisLevel);
 		Settings.Instance.LevelCount = GetChildren().Count;
 		var NodeOfSignals = GetNode<Signals>("/root/Signals");

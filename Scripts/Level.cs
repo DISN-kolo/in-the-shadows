@@ -6,6 +6,9 @@ public partial class Level : Node3D
 	private Signals NodeOfSignals;
 	public int LevelNumber;
 
+	private Vector3 OffsetOne = new Vector3(0.0f, 0.0f, 0.0f);
+	private Vector3 OffsetTwo = new Vector3(0.0f, 0.0f, 0.0f);
+
 	[Export]
 	public string[] MeshScenesPaths = {};
 
@@ -33,6 +36,7 @@ public partial class Level : Node3D
 
 	private bool[] InRotations = {};
 
+	[Export]
 	private double MagicMargin = 0.1;
 	private bool InMovementSolution = false;
 
@@ -50,16 +54,28 @@ public partial class Level : Node3D
 		{
 			UnsolveMovement();
 			GD.Print("Congratulations! Everyone is in correct rotation. Begin pos check");
-			if (OffsetClose(DebugSignals.OffsetCurrent, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
+			if (OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
 			{
 				GD.Print("You're within marings");
 				MovementSolved();
 				return ;
 			}
 		}
+		else if (MeshScenesAmt == 3)
+		{
+			UnsolveMovement();
+			GD.Print("Congratulations! Everyone (3) is in correct rotation. Begin pos check");
+			if (OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin)
+				&& OffsetClose(OffsetTwo, new Vector3(SCOffsets[3], SCOffsets[4], SCOffsets[5]), MagicMargin))
+			{
+				GD.Print("You're within triple marings");
+				MovementSolved();
+				return ;
+			}
+		}
 		else
 		{
-			// XXX if you're ever gonna go for 3 meshes, remember to implement better conditions here
+			// XXX if you're ever gonna go for 4 meshes, remember to implement conditions here
 			MovementSolved();
 		}
 	}
@@ -100,7 +116,7 @@ public partial class Level : Node3D
 			CurrentShadowCasterInstance.ImOuttaRotation += OnSCOuttaRot;
 			if (MeshScenesAmt > 1)
 			{
-				CurrentShadowCasterInstance.LocalDepth = -2 + i*3;
+				CurrentShadowCasterInstance.LocalDepth = -2.5f + i*2.5f;
 			}
 			if (LevelNumber == 0)
 			{
@@ -118,11 +134,11 @@ public partial class Level : Node3D
 
 	public void UnloadLevel()
 	{
-		foreach (var LocalNode in GetChildren())
+		foreach (ShadowCaster LocalNode in GetChildren())
 		{
 			LocalNode.QueueFree();
-			((ShadowCaster)LocalNode).ImInRotation -= OnSCInRot;
-			((ShadowCaster)LocalNode).ImOuttaRotation -= OnSCOuttaRot;
+			LocalNode.ImInRotation -= OnSCInRot;
+			LocalNode.ImOuttaRotation -= OnSCOuttaRot;
 		}
 		Visible = false;
 	}
@@ -165,8 +181,21 @@ public partial class Level : Node3D
 	{
 		if (Visible && MeshScenesAmt == 2)
 		{
-			DebugSignals.OffsetCurrent = ((CharacterBody3D)GetChildren()[1]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
-			if (InMovementSolution && !OffsetClose(DebugSignals.OffsetCurrent, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
+			OffsetOne = ((CharacterBody3D)GetChildren()[1]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
+			DebugSignals.OffsetCurrent = OffsetOne;
+			if (InMovementSolution && !OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
+			{
+				UnsolveMovement();
+			}
+		}
+		else if (Visible && MeshScenesAmt == 3)
+		{
+			OffsetOne = ((CharacterBody3D)GetChildren()[1]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
+			OffsetTwo = ((CharacterBody3D)GetChildren()[2]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
+			DebugSignals.OffsetCurrent = OffsetTwo;
+			if (InMovementSolution
+					&& !OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin)
+					&& !OffsetClose(OffsetTwo, new Vector3(SCOffsets[3], SCOffsets[4], SCOffsets[5]), MagicMargin))
 			{
 				UnsolveMovement();
 			}
