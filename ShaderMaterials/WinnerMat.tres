@@ -5,7 +5,10 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_y32dm")
-shader_parameter/parameter = -0.023999977389999982
-shader_parameter/band = 20.0
+shader_parameter/parameter = 1.1770000796575
+shader_parameter/band = 49.462002349445
+shader_parameter/mini_band_width = 8.7190003666525
 shader_parameter/max_x = 128.0
+shader_parameter/part_of_max_x = 3.550000144875
 shader_parameter/max_y = 128.0
+shader_parameter/colorization = Color(0.6, 1, 0, 1)

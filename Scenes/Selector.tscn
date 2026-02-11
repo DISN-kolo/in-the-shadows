@@ -2,8 +2,8 @@
 
 [ext_resource type="Material" uid="uid://c6nt6aetslsgg" path="res://ShaderMaterials/WinnerMat.tres" id="1_h32ys"]
 [ext_resource type="Script" uid="uid://blnlhvvexl684" path="res://Scripts/Selector.cs" id="1_q75pq"]
-[ext_resource type="Texture2D" uid="uid://rfhk4maiffj6" path="res://icon.svg" id="2_c44gr"]
 [ext_resource type="Texture2D" uid="uid://b8bsamilbrxa8" path="res://Icons/levelDoneMark.png" id="3_c44gr"]
+[ext_resource type="Texture2D" uid="uid://du36l7v33mhex" path="res://Icons/iconsOfSin1.png" id="3_fc8d2"]
 [ext_resource type="Material" uid="uid://cvjwrf8oq2cl7" path="res://ShaderMaterials/GreenCompleteBlurMat.tres" id="3_h32ys"]
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="3_ji8yk"]
 
@@ -135,6 +135,8 @@ offset_bottom = 171.0
 pivot_offset = Vector2(68, 70)
 script = ExtResource("1_q75pq")
 
+[node name="UnlockAnimPlayer" type="AnimationPlayer" parent="." unique_id=550345007]
+
 [node name="SelectorButton" type="Button" parent="." unique_id=888963911]
 material = ExtResource("1_h32ys")
 layout_mode = 2
@@ -146,7 +148,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_q75pq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ji8yk")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_c44gr")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_q75pq")
-icon = ExtResource("2_c44gr")
+icon = ExtResource("3_fc8d2")
 icon_alignment = 1
 
 [node name="WinGreen" type="TextureRect" parent="SelectorButton" unique_id=384258120]
@@ -162,9 +164,6 @@ texture = ExtResource("3_c44gr")
 
 [node name="WinAnimPlayer" type="AnimationPlayer" parent="SelectorButton" unique_id=1390327136]
 libraries/ = SubResource("AnimationLibrary_ji8yk")
-
-[node name="UnlockAnimPlayer" type="AnimationPlayer" parent="SelectorButton" unique_id=550345007]
-root_node = NodePath("../..")
 
 [node name="SelectorLabel" type="Label" parent="." unique_id=1826702530]
 layout_mode = 2
