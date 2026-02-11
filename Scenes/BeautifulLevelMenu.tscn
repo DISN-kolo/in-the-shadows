@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xkpuauraudoi" path="res://Scenes/Selector.tscn" id="1_wglqq"]
 [ext_resource type="Script" uid="uid://c01j0u6tssoeo" path="res://Scripts/LeftBordering.cs" id="2_8taqd"]
 [ext_resource type="Material" uid="uid://bckssxr3hfnb5" path="res://ShaderMaterials/LeftBorderingShaderMaterial.tres" id="2_hovvf"]
+[ext_resource type="Shader" uid="uid://spsfhlcwrj1x" path="res://Shaders/WinnerMatShader.gdshader" id="3_4a76l"]
 [ext_resource type="Script" uid="uid://eiqgydletesq" path="res://Scripts/RightBordering.cs" id="3_lu74g"]
 [ext_resource type="Material" uid="uid://u5dboc56jn3u" path="res://ShaderMaterials/RightBorderingShaderMaterial.tres" id="4_ttatj"]
 [ext_resource type="FontFile" uid="uid://c3skjfxqk6bkc" path="res://Fonts/Space_Mono/SpaceMono-Italic.ttf" id="7_w7wot"]
@@ -16,6 +17,36 @@ colors = PackedColorArray(0.43529412, 0.43529412, 0.5529412, 1, 0.105882354, 0.0
 gradient = SubResource("Gradient_wglqq")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11dh8"]
+resource_local_to_scene = true
+shader = ExtResource("3_4a76l")
+shader_parameter/parameter = 0.3600000171
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fs0yn"]
+resource_local_to_scene = true
+shader = ExtResource("3_4a76l")
+shader_parameter/parameter = 0.3600000171
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqs0n"]
+resource_local_to_scene = true
+shader = ExtResource("3_4a76l")
+shader_parameter/parameter = 0.3600000171
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71wvy"]
+resource_local_to_scene = true
+shader = ExtResource("3_4a76l")
+shader_parameter/parameter = 0.3600000171
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ow88"]
+resource_local_to_scene = true
+shader = ExtResource("3_4a76l")
+shader_parameter/parameter = 0.3600000171
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mkk6r"]
+resource_local_to_scene = true
+shader = ExtResource("3_4a76l")
+shader_parameter/parameter = 0.3600000171
 
 [sub_resource type="Gradient" id="Gradient_iy4kw"]
 colors = PackedColorArray(0.6745098, 0.9098039, 0.88235295, 0.29411766, 0.36078432, 0.45490196, 0.7647059, 0)
@@ -54,50 +85,56 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="WhatIsItSelector" parent="AllTheLevels" unique_id=470632917 instance=ExtResource("1_wglqq")]
+material = SubResource("ShaderMaterial_11dh8")
 layout_mode = 0
-offset_left = 179.0
-offset_top = 186.0
-offset_right = 315.0
-offset_bottom = 357.0
+offset_left = 155.0
+offset_top = 212.0
+offset_right = 291.0
+offset_bottom = 383.0
 
 [node name="TeapotSelector" parent="AllTheLevels" unique_id=742027133 instance=ExtResource("1_wglqq")]
+material = SubResource("ShaderMaterial_fs0yn")
 layout_mode = 0
-offset_left = 542.0
-offset_top = 354.0
-offset_right = 678.0
-offset_bottom = 525.0
+offset_left = 444.0
+offset_top = 351.0
+offset_right = 580.0
+offset_bottom = 522.0
 LevelNumber = 1
 
 [node name="ElephantSelector" parent="AllTheLevels" unique_id=837811573 instance=ExtResource("1_wglqq")]
+material = SubResource("ShaderMaterial_jqs0n")
 layout_mode = 0
-offset_left = 894.0
-offset_top = 230.0
-offset_right = 1030.0
-offset_bottom = 401.0
+offset_left = 786.0
+offset_top = 324.0
+offset_right = 922.0
+offset_bottom = 495.0
 LevelNumber = 2
 
 [node name="GlobeSelector" parent="AllTheLevels" unique_id=2138558527 instance=ExtResource("1_wglqq")]
+material = SubResource("ShaderMaterial_71wvy")
 layout_mode = 0
-offset_left = 1271.0
-offset_top = 319.0
-offset_right = 1407.0
-offset_bottom = 490.0
+offset_left = 1111.0
+offset_top = 241.0
+offset_right = 1247.0
+offset_bottom = 412.0
 LevelNumber = 3
 
 [node name="42Selector" parent="AllTheLevels" unique_id=1828937612 instance=ExtResource("1_wglqq")]
+material = SubResource("ShaderMaterial_2ow88")
 layout_mode = 0
-offset_left = 1563.0
-offset_top = 120.0
-offset_right = 1699.0
-offset_bottom = 291.0
+offset_left = 1440.0
+offset_top = 193.0
+offset_right = 1576.0
+offset_bottom = 364.0
 LevelNumber = 4
 
 [node name="FinalSelector" parent="AllTheLevels" unique_id=1829289249 instance=ExtResource("1_wglqq")]
+material = SubResource("ShaderMaterial_mkk6r")
 layout_mode = 0
-offset_left = 1850.0
-offset_top = 381.0
-offset_right = 1986.0
-offset_bottom = 552.0
+offset_left = 1803.0
+offset_top = 281.0
+offset_right = 1939.0
+offset_bottom = 452.0
 LevelNumber = 5
 
 [node name="LeftBordering" type="TextureRect" parent="." unique_id=1709764563]

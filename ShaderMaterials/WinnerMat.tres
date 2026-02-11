@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c6nt6aetslsgg"]
+
+[ext_resource type="Shader" uid="uid://spsfhlcwrj1x" path="res://Shaders/WinnerMatShader.gdshader" id="1_y32dm"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_y32dm")
+shader_parameter/parameter = -0.023999977389999982
+shader_parameter/band = 20.0
+shader_parameter/max_x = 128.0
+shader_parameter/max_y = 128.0

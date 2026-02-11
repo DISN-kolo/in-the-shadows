@@ -5,8 +5,11 @@ public partial class Selector : VBoxContainer
 {
 	private Signals NodeOfSignals;
 	private Button SelectorButton;
+	private Label SelectorLabel;
 	private TextureRect WinGreen;
 	private AnimationPlayer WinAnimPlayer;
+	private ShaderMaterial BtnShaderMat;
+	private ShaderMaterial LblShaderMat;
 
 	[Export]
 	public int LevelNumber = 0;
@@ -21,9 +24,21 @@ public partial class Selector : VBoxContainer
 
 	public override void _Ready()
 	{
-		SelectorButton = GetNode<Button>("SelectorButton");
-		WinGreen = GetNode<TextureRect>("SelectorButton/WinGreen");
-		WinAnimPlayer = GetNode<AnimationPlayer>("SelectorButton/WinAnimPlayer");
+		// why not apply these material-related things in the nodes themselves?
+		// well, I don't want to make 2 more scripts just for that. also, the spawn order and
+		//container-based sizing/positioning might be affected by the load process
+		SelectorButton = GetNode<Button>("VBoxSelector/SelectorButton");
+		BtnShaderMat = (ShaderMaterial)(SelectorButton.GetMaterial());
+		SelectorLabel = GetNode<Label>("VBoxSelector/SelectorLabel");
+//		LblShaderMat = (ShaderMaterial)(SelectorLabel.GetMaterial());
+
+		BtnShaderMat.SetShaderParameter("max_x", SelectorButton.Size.X);
+		BtnShaderMat.SetShaderParameter("max_y", SelectorButton.Size.Y);
+//		LblShaderMat.SetShaderParameter("max_x", SelectorLabel.Size.X);
+//		LblShaderMat.SetShaderParameter("max_y", SelectorLabel.Size.Y);
+
+		WinGreen = GetNode<TextureRect>("VBoxSelector/SelectorButton/WinGreen");
+		WinAnimPlayer = GetNode<AnimationPlayer>("VBoxSelector/SelectorButton/WinAnimPlayer");
 		if (Settings.Instance.DevMode)
 		{
 			WinGreen.Visible = false;
@@ -54,11 +69,11 @@ public partial class Selector : VBoxContainer
 		if ((LevelNumber > Settings.Instance.MaxAvailableLevel) && (Settings.Instance.DevMode == false))
 		{
 			SelectorButton.Disabled = true;
-			GetNode<Label>("SelectorLabel").Text = "???";
+			SelectorLabel.Text = "???";
 		}
 		else
 		{
-			GetNode<Label>("SelectorLabel").Text = Settings.Instance.LevelNames[LevelNumber];
+			SelectorLabel.Text = Settings.Instance.LevelNames[LevelNumber];
 		}
 	}
 
