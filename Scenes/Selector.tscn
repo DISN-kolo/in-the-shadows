@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xkpuauraudoi"]
 
-[ext_resource type="Material" uid="uid://c6nt6aetslsgg" path="res://ShaderMaterials/WinnerMat.tres" id="1_h32ys"]
+[ext_resource type="Material" uid="uid://c6nt6aetslsgg" path="res://ShaderMaterials/ShiningBandMaterial.tres" id="1_h32ys"]
 [ext_resource type="Script" uid="uid://blnlhvvexl684" path="res://Scripts/Selector.cs" id="1_q75pq"]
 [ext_resource type="Texture2D" uid="uid://b8bsamilbrxa8" path="res://Icons/levelDoneMark.png" id="3_c44gr"]
 [ext_resource type="Texture2D" uid="uid://du36l7v33mhex" path="res://Icons/iconsOfSin1.png" id="3_fc8d2"]
@@ -36,7 +36,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1.5691688, 1),
 "update": 0,
-"values": [-0.11599998175999998, 1.1650000790875001]
+"values": [-0.11599998175999998, 1.1650000790875]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fc8d2"]

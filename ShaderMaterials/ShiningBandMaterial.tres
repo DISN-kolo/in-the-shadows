@@ -1,10 +1,10 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://c6nt6aetslsgg"]
 
-[ext_resource type="Shader" uid="uid://spsfhlcwrj1x" path="res://Shaders/WinnerMatShader.gdshader" id="1_y32dm"]
+[ext_resource type="Shader" uid="uid://spsfhlcwrj1x" path="res://Shaders/ShiningBand.gdshader" id="1_i261s"]
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource("1_y32dm")
+shader = ExtResource("1_i261s")
 shader_parameter/parameter = -0.197999985655
 shader_parameter/band = 49.462002349445
 shader_parameter/mini_band_width = 8.7190003666525
