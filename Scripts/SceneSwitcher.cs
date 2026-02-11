@@ -45,6 +45,7 @@ public partial class SceneSwitcher : Node
 				// TODO go into "savefileless" mode
 			}
 			Settings.Instance.CompletionShown = [false, false, false, false, false, false];
+			Settings.Instance.UnlockShown = [false, false, false, false, false, false];
 			Settings.Instance.MaxAvailableLevel = 0;
 		}
 		else
@@ -75,6 +76,7 @@ public partial class SceneSwitcher : Node
 		}
 		Settings.Instance.MaxAvailableLevel = 0;
 		Settings.Instance.CompletionShown = [false, false, false, false, false, false];
+		Settings.Instance.UnlockShown = [false, false, false, false, false, false];
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
 

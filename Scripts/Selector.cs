@@ -8,6 +8,7 @@ public partial class Selector : VBoxContainer
 	private Label SelectorLabel;
 	private TextureRect WinGreen;
 	private AnimationPlayer WinAnimPlayer;
+	private AnimationPlayer UnlockAnimPlayer;
 	private ShaderMaterial BtnShaderMat;
 	private ShaderMaterial LblShaderMat;
 
@@ -27,9 +28,9 @@ public partial class Selector : VBoxContainer
 		// why not apply these material-related things in the nodes themselves?
 		// well, I don't want to make 2 more scripts just for that. also, the spawn order and
 		//container-based sizing/positioning might be affected by the load process
-		SelectorButton = GetNode<Button>("VBoxSelector/SelectorButton");
+		SelectorButton = GetNode<Button>("SelectorButton");
 		BtnShaderMat = (ShaderMaterial)(SelectorButton.GetMaterial());
-		SelectorLabel = GetNode<Label>("VBoxSelector/SelectorLabel");
+		SelectorLabel = GetNode<Label>("SelectorLabel");
 //		LblShaderMat = (ShaderMaterial)(SelectorLabel.GetMaterial());
 
 		BtnShaderMat.SetShaderParameter("max_x", SelectorButton.Size.X);
@@ -37,8 +38,9 @@ public partial class Selector : VBoxContainer
 //		LblShaderMat.SetShaderParameter("max_x", SelectorLabel.Size.X);
 //		LblShaderMat.SetShaderParameter("max_y", SelectorLabel.Size.Y);
 
-		WinGreen = GetNode<TextureRect>("VBoxSelector/SelectorButton/WinGreen");
-		WinAnimPlayer = GetNode<AnimationPlayer>("VBoxSelector/SelectorButton/WinAnimPlayer");
+		WinGreen = GetNode<TextureRect>("SelectorButton/WinGreen");
+		WinAnimPlayer = GetNode<AnimationPlayer>("SelectorButton/WinAnimPlayer");
+		UnlockAnimPlayer = GetNode<AnimationPlayer>("UnlockAnimPlayer");
 		if (Settings.Instance.DevMode)
 		{
 			WinGreen.Visible = false;
@@ -55,12 +57,24 @@ public partial class Selector : VBoxContainer
 				else
 				{
 					WinAnimPlayer.SetCurrentAnimation("PlopDown");
+					UnlockAnimPlayer.SetCurrentAnimation("RESET");
 					Settings.Instance.CompletionShown[LevelNumber] = true;
+					Settings.Instance.UnlockShown[LevelNumber] = true;
 				}
 			}
 			else
 			{
 				WinGreen.Visible = false;
+				if (LevelNumber == Settings.Instance.MaxAvailableLevel
+						&& Settings.Instance.UnlockShown[LevelNumber] == false)
+				{
+					UnlockAnimPlayer.SetCurrentAnimation("Unlock");
+					Settings.Instance.UnlockShown[LevelNumber] = true;
+				}
+				else
+				{
+					UnlockAnimPlayer.SetCurrentAnimation("RESET");
+				}
 			}
 		}
 		SelectorButton.Icon = GD.Load<Texture2D>($"res://Icons/iconsOfSin{LevelNumber + 1}.png");
