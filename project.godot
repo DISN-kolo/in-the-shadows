@@ -26,6 +26,12 @@ DebugSignals="*res://Scripts/DebugSignals.cs"
 Signals="*res://Scripts/Signals.cs"
 SceneSwitcher="*uid://cq58nwxk87b24"
 
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="In The Shadows"
