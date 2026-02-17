@@ -219,6 +219,7 @@ public partial class ShadowCaster : CharacterBody3D
 		NodeOfDebugSignals.EmitSignal(DebugSignals.SignalName.FirstSpawned, this);
 		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
 		DiscoveredCorrectTimerNode = GetNode<Timer>("./DiscoveredCorrectTimer");
+		DiscoveredCorrectTimerNode.WaitTime = 0.5f;
 		DiscoveredCorrectTimerNode.Timeout += _OnDCTTimeout;
 		Signals.Instance.ActivateObject += OnActivatedObject;
 		MoveMode = Signals.CurrentMoveMode;
