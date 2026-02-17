@@ -175,10 +175,8 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 	}
 
-	public override void _Ready()
+	private void RotationRandomizer(Random rand)
 	{
-		ScreenSize = GetViewport().GetVisibleRect().Size;
-		var rand = new Random();
 		if (HMovOnly)
 		{
 			Rotation = Rotation with {
@@ -193,6 +191,18 @@ public partial class ShadowCaster : CharacterBody3D
 				Y = (float)rand.NextDouble() * (float)Math.PI * 2.0f
 			};
 		}
+	}
+
+	public override void _Ready()
+	{
+		ScreenSize = GetViewport().GetVisibleRect().Size;
+		var rand = new Random();
+		RotationRandomizer(rand);
+		while (AreRotsClose(Rotation, IntendedRot, Delta))
+		{
+			RotationRandomizer(rand);
+		}
+
 		TargetReal = Rotation;
 		Target = Target with {
 			X = Rotation.Y * ScreenSize.X / (float)Math.PI,
