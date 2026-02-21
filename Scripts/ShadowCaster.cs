@@ -41,13 +41,18 @@ public partial class ShadowCaster : CharacterBody3D
 	[Signal]
 	public delegate void ImOuttaRotationEventHandler(int MyNumber);
 
+	private Vector3 WholeRevolutions = new Vector3(0, 0, 0);
 
 	private float SelectedXRotFinal = 0.0f;
 	private float SelectedYRotFinal = 0.0f;
 
 	public void SetRotTgtToClosestTgt()
 	{
-		TargetReal = new Vector3(SelectedXRotFinal, SelectedYRotFinal, 0.0f);
+		TargetReal = new Vector3(
+				SelectedXRotFinal + WholeRevolutions.X * 2 * (float)Math.PI,
+				SelectedYRotFinal + WholeRevolutions.Y * 2 * (float)Math.PI,
+				0.0f);
+		GD.Print("Done set rot tgt to closest tgt: ", TargetReal);
 	}
 
 	private void SetFinalRot(bool XOrY, float Tgt)
@@ -77,13 +82,13 @@ public partial class ShadowCaster : CharacterBody3D
 		if ((Rot + Diff >= Tgt) && (Rot - Diff <= Tgt))
 		{
 			SetFinalRot(XOrY, Tgt);
-			GD.Print("setting to Tgt");
+			GD.Print("setting to Tgt, ", XOrY);
 			return true;
 		}
 		else if ((Rot + Diff >= TgtAdj) && (Rot - Diff <= TgtAdj))
 		{
 			SetFinalRot(XOrY, TgtAdj);
-			GD.Print("setting to TgtAdj");
+			GD.Print("setting to TgtAdj, ", XOrY);
 			return true;
 		}
 		if (localFlip)
@@ -93,52 +98,55 @@ public partial class ShadowCaster : CharacterBody3D
 			if ((Rot + Diff >= TgtFlipped) && (Rot - Diff <= TgtFlipped))
 			{
 				SetFinalRot(XOrY, TgtFlipped);
-				GD.Print("setting to TgtFlipped");
+				GD.Print("setting to TgtFlipped, ", XOrY);
 				return true;
 			}
 			if ((Rot + Diff >= TgtFlippedAdj) && (Rot - Diff <= TgtFlippedAdj))
 			{
 				SetFinalRot(XOrY, TgtFlippedAdj);
-				GD.Print("setting to TgtFlippedAdj");
+				GD.Print("setting to TgtFlippedAdj, ", XOrY);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private void VecPiRemainder(ref Vector3 Input, int Ax)
-	{
-		Input[Ax] = Input[Ax] % (float)Math.PI;
-	}
-
 	private void VecTwoPiRemainder(ref Vector3 Input, int Ax)
 	{
+//		while (Input[Ax] < 0)
+//		{
+//			Input[Ax] += 2*(float)Math.PI;
+//		}
+//		while (Input[Ax] > 2*(float)Math.PI)
+//		{
+//			Input[Ax] -= 2*(float)Math.PI;
+//		}
 		Input[Ax] = Input[Ax] % (2 * (float)Math.PI);
+		if (Input[Ax] < 0)
+		{
+			Input[Ax] += 2*(float)Math.PI;
+		}
 	}
 
 	// Please keep in mind that all this flippability is here because we basically don't consider symmetry of 3d objects at all
 	private bool AreRotsClose(Vector3 Rot, Vector3 Tgt, float Diff)
 	{
-		if (FlippableX)
+		GD.Print("firstly, before the check, Rot is ", Rot, " and Tgt is ", Tgt);
+		WholeRevolutions[0] = (Rot.X - Rot.X % (2 * (float)Math.PI))/(2 * (float)Math.PI);
+		WholeRevolutions[1] = (Rot.Y - Rot.Y % (2 * (float)Math.PI))/(2 * (float)Math.PI);
+		if (Rot.X < 0)
 		{
-			VecPiRemainder(ref Rot, 0);
-			VecPiRemainder(ref Tgt, 0);
+			WholeRevolutions[0] -= 1;
 		}
-		else
+		if (Rot.Y < 0)
 		{
-			VecTwoPiRemainder(ref Rot, 0);
-			VecTwoPiRemainder(ref Tgt, 0);
+			WholeRevolutions[1] -= 1;
 		}
-		if (FlippableY)
-		{
-			VecPiRemainder(ref Rot, 1);
-			VecPiRemainder(ref Tgt, 1);
-		}
-		else
-		{
-			VecTwoPiRemainder(ref Rot, 1);
-			VecTwoPiRemainder(ref Tgt, 1);
-		}
+		VecTwoPiRemainder(ref Rot, 0);
+		VecTwoPiRemainder(ref Tgt, 0);
+		VecTwoPiRemainder(ref Rot, 1);
+		VecTwoPiRemainder(ref Tgt, 1);
+		GD.Print("thusly, before the check, Rot is ", Rot, " and Tgt is ", Tgt);
 		if (AreAnglesClose(Rot.X, Tgt.X, Diff, true)
 			&& AreAnglesClose(Rot.Y, Tgt.Y, Diff, false))
 		{
@@ -208,6 +216,7 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public override void _Ready()
 	{
+		GD.Print(39.5322 - 39.5322f % (2 * (float)Math.PI));
 		ScreenSize = GetViewport().GetVisibleRect().Size;
 		var rand = new Random();
 		RotationRandomizer(rand);
