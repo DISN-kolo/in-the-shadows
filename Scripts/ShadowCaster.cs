@@ -43,7 +43,6 @@ public partial class ShadowCaster : CharacterBody3D
 
 	private bool AreAnglesClose(float Rot, float Tgt, float Diff, bool XOrY)
 	{
-		float Temp = Tgt;
 		bool localFlip = false;
 		if (XOrY)
 		{
@@ -53,25 +52,22 @@ public partial class ShadowCaster : CharacterBody3D
 		{
 			localFlip = FlippableY;
 		}
-		if (Rot > Tgt)
+		float TgtAdj = Tgt + 2*(float)Math.PI;
+		if ( ((Rot + Diff >= Tgt) && (Rot - Diff <= Tgt))
+			|| ((Rot + Diff >= TgtAdj && (Rot - Diff <= TgtAdj)) )
 		{
-			Tgt = Rot;
-			Rot = Temp;
+			return true;
 		}
-		float OtherEnd = 0;
 		if (localFlip)
 		{
-			OtherEnd = (float)Math.PI - Diff;
+			float RotAdj = Rot + (float)Math.PI;
+			if ( ((RotAdj + Diff >= Tgt) && (RotAdj - Diff <= Tgt))
+				|| ((RotAdj + Diff >= TgtAdj && (RotAdj - Diff <= TgtAdj)) )
+			{
+				return true;
+			}
 		}
-		else
-		{
-			OtherEnd = 2 * (float)Math.PI - Diff;
-		}
-		if ((Tgt - Rot > Diff) && (Tgt - Rot < OtherEnd))
-		{
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 	private void VecPiRemainder(ref Vector3 Input, int Ax)
