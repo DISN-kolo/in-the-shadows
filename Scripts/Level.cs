@@ -37,7 +37,10 @@ public partial class Level : Node3D
 	private bool[] InRotations = {};
 
 	[Export]
-	private double MagicMargin = 0.1;
+	private float[] RotMargins = {};
+
+	[Export]
+	private double MoveMargin = 0.1;
 	private bool InMovementSolution = false;
 
 	private void CheckAllIns()
@@ -54,7 +57,7 @@ public partial class Level : Node3D
 		{
 			UnsolveMovement();
 			GD.Print("Congratulations! Everyone is in correct rotation. Begin pos check");
-			if (OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
+			if (OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MoveMargin))
 			{
 				GD.Print("You're within marings");
 				MovementSolved();
@@ -65,8 +68,8 @@ public partial class Level : Node3D
 		{
 			UnsolveMovement();
 			GD.Print("Congratulations! Everyone (3) is in correct rotation. Begin pos check");
-			if (OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin)
-				&& OffsetClose(OffsetTwo, new Vector3(SCOffsets[3], SCOffsets[4], SCOffsets[5]), MagicMargin))
+			if (OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MoveMargin)
+				&& OffsetClose(OffsetTwo, new Vector3(SCOffsets[3], SCOffsets[4], SCOffsets[5]), MoveMargin))
 			{
 				GD.Print("You're within triple marings");
 				MovementSolved();
@@ -76,6 +79,7 @@ public partial class Level : Node3D
 		else
 		{
 			// XXX if you're ever gonna go for 4 meshes, remember to implement conditions here
+			// or just refactor this to be n-mesh-ready but it ain't gonna get to this point prolly
 			MovementSolved();
 		}
 	}
@@ -93,8 +97,7 @@ public partial class Level : Node3D
 
 	public void LoadLevel()
 	{
-		GD.Print("BAM!, ", LevelNumber);
-		MeshScenesAmt = MeshScenesPaths.Length;
+		GD.Print("Loading level!, ", LevelNumber);
 		InRotations = new bool[MeshScenesAmt];
 		for (int i = 0; i < MeshScenesAmt; i++)
 		{
@@ -114,6 +117,7 @@ public partial class Level : Node3D
 			CurrentShadowCasterInstance.Number = i;
 			CurrentShadowCasterInstance.ImInRotation += OnSCInRot;
 			CurrentShadowCasterInstance.ImOuttaRotation += OnSCOuttaRot;
+			CurrentShadowCasterInstance.Epsilon = RotMargins[i];
 			if (MeshScenesAmt > 1)
 			{
 				CurrentShadowCasterInstance.LocalDepth = -2.5f + i*2.5f;
@@ -148,15 +152,20 @@ public partial class Level : Node3D
 		InMovementSolution = true;
 		GD.Print("Movement solved!");
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelFinished, LevelNumber);
-		GD.Print("YOU NEED TO BLOCK CONTROLS IMMEDIATELY"); // TODO
 	}
 
 	public override void _Ready()
 	{
+		MeshScenesAmt = MeshScenesPaths.Length;
 		LevelNumber = GetIndex();
 		GD.Print("LevelNumber: ", LevelNumber);
 		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		ShadowCasterScene = GD.Load<PackedScene>("res://Scenes/ShadowCaster.tscn");
+		if (RotMargins == null || RotMargins.Length == 0)
+		{
+			RotMargins = new float[MeshScenesAmt];
+			Array.Fill(RotMargins, 0.1f);
+		}
 		if (!Visible)
 			return ;
 		LoadLevel();
@@ -183,7 +192,7 @@ public partial class Level : Node3D
 		{
 			OffsetOne = ((CharacterBody3D)GetChildren()[1]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
 			DebugSignals.OffsetCurrent = OffsetOne;
-			if (InMovementSolution && !OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin))
+			if (InMovementSolution && !OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MoveMargin))
 			{
 				UnsolveMovement();
 			}
@@ -194,8 +203,8 @@ public partial class Level : Node3D
 			OffsetTwo = ((CharacterBody3D)GetChildren()[2]).GlobalPosition - ((CharacterBody3D)GetChildren()[0]).GlobalPosition;
 			DebugSignals.OffsetCurrent = OffsetTwo;
 			if (InMovementSolution
-					&& !OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MagicMargin)
-					&& !OffsetClose(OffsetTwo, new Vector3(SCOffsets[3], SCOffsets[4], SCOffsets[5]), MagicMargin))
+					&& !OffsetClose(OffsetOne, new Vector3(SCOffsets[0], SCOffsets[1], SCOffsets[2]), MoveMargin)
+					&& !OffsetClose(OffsetTwo, new Vector3(SCOffsets[3], SCOffsets[4], SCOffsets[5]), MoveMargin))
 			{
 				UnsolveMovement();
 			}

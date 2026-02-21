@@ -24,8 +24,7 @@ public partial class ShadowCaster : CharacterBody3D
 
 	private Timer DiscoveredCorrectTimerNode;
 
-	public float Epsilon = 0.01f;
-	public float Delta = 0.1f;
+	public float Epsilon = 0.1f;
 
 	public bool CurrentlyInsideSolution = false;
 
@@ -198,7 +197,7 @@ public partial class ShadowCaster : CharacterBody3D
 		ScreenSize = GetViewport().GetVisibleRect().Size;
 		var rand = new Random();
 		RotationRandomizer(rand);
-		while (AreRotsClose(Rotation, IntendedRot, Delta))
+		while (AreRotsClose(Rotation, IntendedRot, Epsilon))
 		{
 			RotationRandomizer(rand);
 		}
@@ -255,7 +254,7 @@ public partial class ShadowCaster : CharacterBody3D
 				Position.Y, MovTargetReal.Y, delta * Settings.Instance.RotateVel
 			), -3.0, 3.0)
 		};
-		if (AreRotsClose(Rotation, IntendedRot, Delta))
+		if (AreRotsClose(Rotation, IntendedRot, Epsilon))
 		{
 			if (!LMBDown && DiscoveredCorrectTimerNode.IsStopped() && !CurrentlyInsideSolution)
 			{
