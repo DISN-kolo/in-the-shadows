@@ -40,8 +40,11 @@ public partial class Level : Node3D
 	private float[] RotMargins = {};
 
 	[Export]
-	private double MoveMargin = 0.1;
+	private float MoveMargin = 0.1f;
 	private bool InMovementSolution = false;
+
+	public float[] RotationCloseness = {};
+	public float[] MoveCloseness = {};
 
 	private void CheckAllIns()
 	{
@@ -151,6 +154,13 @@ public partial class Level : Node3D
 	{
 		InMovementSolution = true;
 		GD.Print("Movement solved!");
+		foreach (ShadowCaster LocalNode in GetChildren())
+		{
+			LocalNode.SolutionFinalized = true;
+			LocalNode.SetRotTgtToClosestTgt();
+//			LocalNode.MovTargetReal = LocalNode.IntendedPos;
+		}
+		// need to start the helpful animation here :)
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelFinished, LevelNumber);
 	}
 
@@ -166,12 +176,19 @@ public partial class Level : Node3D
 			RotMargins = new float[MeshScenesAmt];
 			Array.Fill(RotMargins, 0.1f);
 		}
+		RotationCloseness = new float[MeshScenesAmt];
+		Array.Fill(RotationCloseness, 0.0f);
+		if (MeshScenesAmt > 1)
+		{
+			MoveCloseness = new float[MeshScenesAmt - 1];
+			Array.Fill(MoveCloseness, 0.0f);
+		}
 		if (!Visible)
 			return ;
 		LoadLevel();
 	}
 
-	private bool OffsetClose(Vector3 Off, Vector3 Tgt, double Margin)
+	private bool OffsetClose(Vector3 Off, Vector3 Tgt, float Margin)
 	{
 		if ((Off.X - Margin > Tgt.X) || (Off.X + Margin < Tgt.X))
 			return false;

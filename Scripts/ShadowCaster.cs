@@ -16,13 +16,11 @@ public partial class ShadowCaster : CharacterBody3D
 	public Vector2 ScreenSize = new Vector2(0, 0);
 
 	public Vector3 IntendedRot = new Vector3(0, 0, 0);
-	public Vector3 IntendedPos = new Vector3(0, 0, 0);
+//	public Vector3 IntendedPos = new Vector3(0, 0, 0);
 
 	public string MeshScenePath { get; set; } = "";
 	public PackedScene TempVarForMeshScene;
 	public Node InstanceOfTempMeshScene;
-
-	private Timer DiscoveredCorrectTimerNode;
 
 	public float Epsilon = 0.1f;
 
@@ -35,11 +33,34 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public float LocalDepth = 0.0f;
 
+	public bool SolutionFinalized = false;
+
 	[Signal]
 	public delegate void ImInRotationEventHandler(int MyNumber);
 
 	[Signal]
 	public delegate void ImOuttaRotationEventHandler(int MyNumber);
+
+
+	private float SelectedXRotFinal = 0.0f;
+	private float SelectedYRotFinal = 0.0f;
+
+	public void SetRotTgtToClosestTgt()
+	{
+		TargetReal = new Vector3(SelectedXRotFinal, SelectedYRotFinal, 0.0f);
+	}
+
+	private void SetFinalRot(bool XOrY, float Tgt)
+	{
+		if (XOrY)
+		{
+			SelectedXRotFinal = Tgt;
+		}
+		else
+		{
+			SelectedYRotFinal = Tgt;
+		}
+	}
 
 	private bool AreAnglesClose(float Rot, float Tgt, float Diff, bool XOrY)
 	{
@@ -53,17 +74,32 @@ public partial class ShadowCaster : CharacterBody3D
 			localFlip = FlippableY;
 		}
 		float TgtAdj = Tgt + 2*(float)Math.PI;
-		if ( ((Rot + Diff >= Tgt) && (Rot - Diff <= Tgt))
-			|| ((Rot + Diff >= TgtAdj) && (Rot - Diff <= TgtAdj)) )
+		if ((Rot + Diff >= Tgt) && (Rot - Diff <= Tgt))
 		{
+			SetFinalRot(XOrY, Tgt);
+			GD.Print("setting to Tgt");
+			return true;
+		}
+		else if ((Rot + Diff >= TgtAdj) && (Rot - Diff <= TgtAdj))
+		{
+			SetFinalRot(XOrY, TgtAdj);
+			GD.Print("setting to TgtAdj");
 			return true;
 		}
 		if (localFlip)
 		{
-			float RotAdj = Rot + (float)Math.PI;
-			if ( ((RotAdj + Diff >= Tgt) && (RotAdj - Diff <= Tgt))
-				|| ((RotAdj + Diff >= TgtAdj) && (RotAdj - Diff <= TgtAdj)) )
+			float TgtFlipped = Tgt + (float)Math.PI;
+			float TgtFlippedAdj = TgtAdj + (float)Math.PI;
+			if ((Rot + Diff >= TgtFlipped) && (Rot - Diff <= TgtFlipped))
 			{
+				SetFinalRot(XOrY, TgtFlipped);
+				GD.Print("setting to TgtFlipped");
+				return true;
+			}
+			if ((Rot + Diff >= TgtFlippedAdj) && (Rot - Diff <= TgtFlippedAdj))
+			{
+				SetFinalRot(XOrY, TgtFlippedAdj);
+				GD.Print("setting to TgtFlippedAdj");
 				return true;
 			}
 		}
@@ -133,24 +169,6 @@ public partial class ShadowCaster : CharacterBody3D
 			LocalDepth
 		);
 		return res;
-	}
-
-	private void _OnDCTTimeout()
-	{
-		GD.Print("KARAMBA! from ", this);
-		CurrentlyInsideSolution = true;
-		EmitSignal(SignalName.ImInRotation, Number);
-	}
-
-	private void AbortCount()
-	{
-		CurrentlyInsideSolution = false;
-		EmitSignal(SignalName.ImOuttaRotation, Number);
-		if (!DiscoveredCorrectTimerNode.IsStopped())
-		{
-			DiscoveredCorrectTimerNode.Stop();
-			GD.Print("Pre-stopped timer");
-		}
 	}
 
 	private void OnAskedUpdateMoveMode(bool ToggledOn)
@@ -223,16 +241,17 @@ public partial class ShadowCaster : CharacterBody3D
 		GD.Print("I really need to emit 'first spawned'");
 		NodeOfDebugSignals.EmitSignal(DebugSignals.SignalName.FirstSpawned, this);
 		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
-		DiscoveredCorrectTimerNode = GetNode<Timer>("./DiscoveredCorrectTimer");
-		DiscoveredCorrectTimerNode.WaitTime = 0.5f;
-		DiscoveredCorrectTimerNode.Timeout += _OnDCTTimeout;
 		Signals.Instance.ActivateObject += OnActivatedObject;
 		MoveMode = Signals.CurrentMoveMode;
 	}
 
 	public override void _Process(double delta)
 	{
-		TargetReal = CalculateAngle();
+		if (!SolutionFinalized)
+		{
+			MovTargetReal = CalculateMov();
+			TargetReal = CalculateAngle();
+		}
 		Rotation = Rotation with {
 			X = (float)Mathf.Lerp(
 				Rotation.X, TargetReal.X, delta * Settings.Instance.RotateVel
@@ -241,7 +260,6 @@ public partial class ShadowCaster : CharacterBody3D
 				Rotation.Y, TargetReal.Y, delta * Settings.Instance.RotateVel
 			)
 		};
-		MovTargetReal = CalculateMov();
 		Position = Position with {
 			X = (float)Math.Clamp(Mathf.Lerp(
 				Position.X, MovTargetReal.X, delta * Settings.Instance.RotateVel
@@ -250,30 +268,39 @@ public partial class ShadowCaster : CharacterBody3D
 				Position.Y, MovTargetReal.Y, delta * Settings.Instance.RotateVel
 			), -3.0, 3.0)
 		};
-		if (AreRotsClose(Rotation, IntendedRot, Epsilon))
+
+		if (!SolutionFinalized)
 		{
-			if (!LMBDown && DiscoveredCorrectTimerNode.IsStopped() && !CurrentlyInsideSolution)
+			if (AreRotsClose(Rotation, IntendedRot, Epsilon))
 			{
-				DiscoveredCorrectTimerNode.Start();
-				GD.Print("Started timer");
+				if (!LMBDown && !CurrentlyInsideSolution)
+				{
+					GD.Print("In solution margins for SC number ", Number);
+					CurrentlyInsideSolution = true;
+					EmitSignal(SignalName.ImInRotation, Number);
+				}
 			}
-		}
-		else
-		{
-			AbortCount();
+			else
+			{
+				if (CurrentlyInsideSolution)
+				{
+					GD.Print("Left solution margins for SC number ", Number);
+					CurrentlyInsideSolution = false;
+					EmitSignal(SignalName.ImOuttaRotation, Number);
+				}
+			}
 		}
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (!Activated)
+		if (!Activated || SolutionFinalized)
 		{
 			return ;
 		}
 		if (Input.IsActionJustPressed("LMB"))
 		{
 			LMBDown = true;
-			AbortCount();
 		}
 		else if (Input.IsActionJustReleased("LMB"))
 		{
@@ -316,7 +343,6 @@ public partial class ShadowCaster : CharacterBody3D
 	public override void _ExitTree()
 	{
 		Signals.Instance.AskUpdateMoveMode -= OnAskedUpdateMoveMode;
-		DiscoveredCorrectTimerNode.Timeout -= _OnDCTTimeout;
 		Signals.Instance.ActivateObject -= OnActivatedObject;
 	}
 }
