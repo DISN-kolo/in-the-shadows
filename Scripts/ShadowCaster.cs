@@ -54,7 +54,7 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 		float TgtAdj = Tgt + 2*(float)Math.PI;
 		if ( ((Rot + Diff >= Tgt) && (Rot - Diff <= Tgt))
-			|| ((Rot + Diff >= TgtAdj && (Rot - Diff <= TgtAdj)) )
+			|| ((Rot + Diff >= TgtAdj) && (Rot - Diff <= TgtAdj)) )
 		{
 			return true;
 		}
@@ -62,7 +62,7 @@ public partial class ShadowCaster : CharacterBody3D
 		{
 			float RotAdj = Rot + (float)Math.PI;
 			if ( ((RotAdj + Diff >= Tgt) && (RotAdj - Diff <= Tgt))
-				|| ((RotAdj + Diff >= TgtAdj && (RotAdj - Diff <= TgtAdj)) )
+				|| ((RotAdj + Diff >= TgtAdj) && (RotAdj - Diff <= TgtAdj)) )
 			{
 				return true;
 			}
