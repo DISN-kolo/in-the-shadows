@@ -93,8 +93,8 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 		if (localFlip)
 		{
-			float TgtFlipped = Tgt + (float)Math.PI;
-			float TgtFlippedAdj = TgtAdj + (float)Math.PI;
+			float TgtFlipped = Tgt - (float)Math.PI;
+			float TgtFlippedAdj = TgtAdj - (float)Math.PI;
 			if ((Rot + Diff >= TgtFlipped) && (Rot - Diff <= TgtFlipped))
 			{
 				SetFinalRot(XOrY, TgtFlipped);
@@ -143,9 +143,7 @@ public partial class ShadowCaster : CharacterBody3D
 			WholeRevolutions[1] -= 1;
 		}
 		VecTwoPiRemainder(ref Rot, 0);
-		VecTwoPiRemainder(ref Tgt, 0);
 		VecTwoPiRemainder(ref Rot, 1);
-		VecTwoPiRemainder(ref Tgt, 1);
 		GD.Print("thusly, before the check, Rot is ", Rot, " and Tgt is ", Tgt);
 		if (AreAnglesClose(Rot.X, Tgt.X, Diff, true)
 			&& AreAnglesClose(Rot.Y, Tgt.Y, Diff, false))
@@ -216,7 +214,8 @@ public partial class ShadowCaster : CharacterBody3D
 
 	public override void _Ready()
 	{
-		GD.Print(39.5322 - 39.5322f % (2 * (float)Math.PI));
+		VecTwoPiRemainder(ref IntendedRot, 0);
+		VecTwoPiRemainder(ref IntendedRot, 1);
 		ScreenSize = GetViewport().GetVisibleRect().Size;
 		var rand = new Random();
 		RotationRandomizer(rand);
