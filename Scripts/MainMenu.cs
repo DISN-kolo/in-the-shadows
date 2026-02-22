@@ -19,7 +19,7 @@ public partial class MainMenu : Control
 	{
 		OvPromptScene = GD.Load<PackedScene>("res://Scenes/AreYouOverwriting.tscn");
 		Signals.Instance.PromptOverwrite += SpawnOvPromptWindow;
-		if (File.Exists(Settings.Instance.SavePath))
+		if (File.Exists(Settings.Instance.SavePath) || Settings.Instance.MaxAvailableLevel != 0)
 		{
 			GetNode<Button>("Centrerer/StuffVBox/Container/VBoxContainer/LoadGameButton").Disabled = false;
 		}

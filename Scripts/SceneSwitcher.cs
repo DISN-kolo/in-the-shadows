@@ -37,7 +37,6 @@ public partial class SceneSwitcher : Node
 		catch (Exception e)
 		{
 			GD.Print("Failed to write savefile: ", e.Message);
-			// TODO go into "savefileless" mode
 		}
 	}
 
@@ -97,7 +96,6 @@ public partial class SceneSwitcher : Node
 		catch (Exception e)
 		{
 			GD.Print("Failed in reading a savefile:", e.Message);
-			// TODO go into "savefileless" mode
 		}
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
