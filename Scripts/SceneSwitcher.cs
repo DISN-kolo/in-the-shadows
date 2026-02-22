@@ -24,6 +24,23 @@ public partial class SceneSwitcher : Node
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
 
+	private void WriteSaveFile(int LevelN)
+	{
+		try
+		{
+			using (FileStream fs = File.Create(Settings.Instance.SavePath))
+			{
+				byte[] info = new UTF8Encoding(true).GetBytes(LevelN.ToString());
+				fs.Write(info, 0, info.Length);
+			}
+		}
+		catch (Exception e)
+		{
+			GD.Print("Failed to write savefile: ", e.Message);
+			// TODO go into "savefileless" mode
+		}
+	}
+
 	private void NewGame()
 	{
 		Settings.Instance.DevMode = false;
@@ -31,19 +48,7 @@ public partial class SceneSwitcher : Node
 		GD.Print("Attempting to create a savefile...");
 		if (!File.Exists(Settings.Instance.SavePath))
 		{
-			try
-			{
-				using (FileStream fs = File.Create(Settings.Instance.SavePath))
-				{
-					byte[] info = new UTF8Encoding(true).GetBytes("0");
-					fs.Write(info, 0, info.Length);
-				}
-			}
-			catch (Exception e)
-			{
-				GD.Print("Failed in creating a new savefile:", e.Message);
-				// TODO go into "savefileless" mode
-			}
+			WriteSaveFile(0);
 			Settings.Instance.CompletionShown = new bool[Settings.Instance.LevelNames.Length];
 			Settings.Instance.UnlockShown = new bool[Settings.Instance.LevelNames.Length];
 			Settings.Instance.MaxAvailableLevel = 0;
@@ -61,19 +66,7 @@ public partial class SceneSwitcher : Node
 	{
 		GD.Print("This should be a regular game, but with savefile overwrite");
 		GD.Print("Attempting to create a savefile...");
-		try
-		{
-			using (FileStream fs = File.Create(Settings.Instance.SavePath))
-			{
-				byte[] info = new UTF8Encoding(true).GetBytes("0");
-				fs.Write(info, 0, info.Length);
-			}
-		}
-		catch (Exception e)
-		{
-			GD.Print("Failed in creating a new savefile:", e.Message);
-			// TODO go into "savefileless" mode
-		}
+		WriteSaveFile(0);
 		Settings.Instance.MaxAvailableLevel = 0;
 		Settings.Instance.CompletionShown = new bool[Settings.Instance.LevelNames.Length];
 		Settings.Instance.UnlockShown = new bool[Settings.Instance.LevelNames.Length];
@@ -136,18 +129,7 @@ public partial class SceneSwitcher : Node
 			return ;
 		}
 		WhichLevel += 1;
-		try
-		{
-			using (FileStream fs = File.Create(Settings.Instance.SavePath))
-			{
-				byte[] info = new UTF8Encoding(true).GetBytes(WhichLevel.ToString());
-				fs.Write(info, 0, info.Length);
-			}
-		}
-		catch (Exception e)
-		{
-			GD.Print("Failed in rewriting a savefile:", e.Message);
-		}
+		WriteSaveFile(WhichLevel);
 	}
 
 	private void UpdateMaxLvl(int WhichLevel)
