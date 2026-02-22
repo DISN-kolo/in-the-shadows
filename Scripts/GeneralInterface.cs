@@ -13,12 +13,14 @@ public partial class GeneralInterface : Control
 		if (WhichLevel + 1 == Settings.Instance.LevelCount)
 		{
 			LLFInstance = (LastLevelFinished)LastLevelFinishedPS.Instantiate();
+			LLFInstance.SetAppropriateAnim();
 			AddChild(LLFInstance);
 		}
 		else
 		{
 			LFInstance = (LevelFinished)LevelFinishedPS.Instantiate();
 			LFInstance.CurrentLevel = WhichLevel;
+			LFInstance.SetAppropriateAnim();
 			AddChild(LFInstance);
 		}
 	}

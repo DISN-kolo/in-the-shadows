@@ -5,6 +5,11 @@ public partial class LevelFinished : PanelContainer
 {
 	public int CurrentLevel = 0;
 
+	public void SetAppropriateAnim()
+	{
+		GetNode<AnimationPlayer>("LFAnim").SetCurrentAnimation("FadeIn");
+	}
+
 	private void OnInteracted()
 	{
 		QueueFree();

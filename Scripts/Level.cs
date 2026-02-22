@@ -160,7 +160,6 @@ public partial class Level : Node3D
 			LocalNode.SetRotTgtToClosestTgt();
 //			LocalNode.MovTargetReal = LocalNode.IntendedPos;
 		}
-		// need to start the helpful animation here :)
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelFinished, LevelNumber);
 	}
 

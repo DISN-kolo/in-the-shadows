@@ -23,6 +23,7 @@ public partial class ShadowCaster : CharacterBody3D
 	public Node InstanceOfTempMeshScene;
 
 	public float Epsilon = 0.1f;
+	public float FinishedVelModifier = 1.0f;
 
 	public bool CurrentlyInsideSolution = false;
 
@@ -52,7 +53,6 @@ public partial class ShadowCaster : CharacterBody3D
 				SelectedXRotFinal + WholeRevolutions.X * 2 * (float)Math.PI,
 				SelectedYRotFinal + WholeRevolutions.Y * 2 * (float)Math.PI,
 				0.0f);
-		GD.Print("Done set rot tgt to closest tgt: ", TargetReal);
 	}
 
 	private void SetFinalRot(bool XOrY, float Tgt)
@@ -82,13 +82,11 @@ public partial class ShadowCaster : CharacterBody3D
 		if ((Rot + Diff >= Tgt) && (Rot - Diff <= Tgt))
 		{
 			SetFinalRot(XOrY, Tgt);
-			GD.Print("setting to Tgt, ", XOrY);
 			return true;
 		}
 		else if ((Rot + Diff >= TgtAdj) && (Rot - Diff <= TgtAdj))
 		{
 			SetFinalRot(XOrY, TgtAdj);
-			GD.Print("setting to TgtAdj, ", XOrY);
 			return true;
 		}
 		if (localFlip)
@@ -98,13 +96,11 @@ public partial class ShadowCaster : CharacterBody3D
 			if ((Rot + Diff >= TgtFlipped) && (Rot - Diff <= TgtFlipped))
 			{
 				SetFinalRot(XOrY, TgtFlipped);
-				GD.Print("setting to TgtFlipped, ", XOrY);
 				return true;
 			}
 			if ((Rot + Diff >= TgtFlippedAdj) && (Rot - Diff <= TgtFlippedAdj))
 			{
 				SetFinalRot(XOrY, TgtFlippedAdj);
-				GD.Print("setting to TgtFlippedAdj, ", XOrY);
 				return true;
 			}
 		}
@@ -131,7 +127,6 @@ public partial class ShadowCaster : CharacterBody3D
 	// Please keep in mind that all this flippability is here because we basically don't consider symmetry of 3d objects at all
 	private bool AreRotsClose(Vector3 Rot, Vector3 Tgt, float Diff)
 	{
-		GD.Print("firstly, before the check, Rot is ", Rot, " and Tgt is ", Tgt);
 		WholeRevolutions[0] = (Rot.X - Rot.X % (2 * (float)Math.PI))/(2 * (float)Math.PI);
 		WholeRevolutions[1] = (Rot.Y - Rot.Y % (2 * (float)Math.PI))/(2 * (float)Math.PI);
 		if (Rot.X < 0)
@@ -144,7 +139,6 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 		VecTwoPiRemainder(ref Rot, 0);
 		VecTwoPiRemainder(ref Rot, 1);
-		GD.Print("thusly, before the check, Rot is ", Rot, " and Tgt is ", Tgt);
 		if (AreAnglesClose(Rot.X, Tgt.X, Diff, true)
 			&& AreAnglesClose(Rot.Y, Tgt.Y, Diff, false))
 		{
@@ -246,7 +240,6 @@ public partial class ShadowCaster : CharacterBody3D
 		InstanceOfTempMeshScene = TempVarForMeshScene.Instantiate();
 		AddChild(InstanceOfTempMeshScene);
 		NodeOfDebugSignals = GetNode<DebugSignals>("/root/DebugSignals");
-		GD.Print("I really need to emit 'first spawned'");
 		NodeOfDebugSignals.EmitSignal(DebugSignals.SignalName.FirstSpawned, this);
 		Signals.Instance.AskUpdateMoveMode += OnAskedUpdateMoveMode;
 		Signals.Instance.ActivateObject += OnActivatedObject;
@@ -262,10 +255,10 @@ public partial class ShadowCaster : CharacterBody3D
 		}
 		Rotation = Rotation with {
 			X = (float)Mathf.Lerp(
-				Rotation.X, TargetReal.X, delta * Settings.Instance.RotateVel
+				Rotation.X, TargetReal.X, delta * Settings.Instance.RotateVel * FinishedVelModifier
 			),
 			Y = (float)Mathf.Lerp(
-				Rotation.Y, TargetReal.Y, delta * Settings.Instance.RotateVel
+				Rotation.Y, TargetReal.Y, delta * Settings.Instance.RotateVel * FinishedVelModifier
 			)
 		};
 		Position = Position with {
@@ -284,8 +277,7 @@ public partial class ShadowCaster : CharacterBody3D
 				if (!LMBDown && !CurrentlyInsideSolution)
 				{
 					GD.Print("In solution margins for SC number ", Number);
-					CurrentlyInsideSolution = true;
-					EmitSignal(SignalName.ImInRotation, Number);
+					StartBeingSolved();
 				}
 			}
 			else
@@ -293,11 +285,24 @@ public partial class ShadowCaster : CharacterBody3D
 				if (CurrentlyInsideSolution)
 				{
 					GD.Print("Left solution margins for SC number ", Number);
-					CurrentlyInsideSolution = false;
-					EmitSignal(SignalName.ImOuttaRotation, Number);
+					StopBeingSolved();
 				}
 			}
 		}
+	}
+
+	private void StopBeingSolved()
+	{
+		CurrentlyInsideSolution = false;
+		EmitSignal(SignalName.ImOuttaRotation, Number);
+		FinishedVelModifier = 1.0f;
+	}
+
+	private void StartBeingSolved()
+	{
+		CurrentlyInsideSolution = true;
+		EmitSignal(SignalName.ImInRotation, Number);
+		FinishedVelModifier = 0.1f;
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -309,6 +314,11 @@ public partial class ShadowCaster : CharacterBody3D
 		if (Input.IsActionJustPressed("LMB"))
 		{
 			LMBDown = true;
+			if (CurrentlyInsideSolution)
+			{
+				GD.Print("Clicked and leaving solved state for SC number ", Number);
+				StopBeingSolved();
+			}
 		}
 		else if (Input.IsActionJustReleased("LMB"))
 		{
