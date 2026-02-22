@@ -108,14 +108,6 @@ public partial class ShadowCaster : CharacterBody3D
 
 	private void VecTwoPiRemainder(ref Vector3 Input, int Ax)
 	{
-//		while (Input[Ax] < 0)
-//		{
-//			Input[Ax] += 2*(float)Math.PI;
-//		}
-//		while (Input[Ax] > 2*(float)Math.PI)
-//		{
-//			Input[Ax] -= 2*(float)Math.PI;
-//		}
 		Input[Ax] = Input[Ax] % (2 * (float)Math.PI);
 		if (Input[Ax] < 0)
 		{
