@@ -3,8 +3,6 @@ using System;
 
 public partial class SelectObjectController : VBoxContainer
 {
-	private Signals NodeOfSignals;
-
 	private void OnLevelLoaded(int MeshesAmt)
 	{
 		if (MeshesAmt <= 1)
@@ -19,7 +17,6 @@ public partial class SelectObjectController : VBoxContainer
 
 	public override void _Ready()
 	{
-		NodeOfSignals = GetNode<Signals>("/root/Signals");
 		Signals.Instance.LevelLoaded += OnLevelLoaded;
 	}
 
