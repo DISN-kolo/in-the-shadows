@@ -10,5 +10,3 @@ The project currently has six playable levels, but adding more is simple. Put th
 On-screen level "debug" information can be enabled via the `LabelDebug` node in the main 3D scene. By default, it should display object offset, and is easily configurable through code (`LabelDebug.cs`).
 
 _Sidenote: the project relies on Godot-style signals implemented as C# events. After adding new signal subscriptions in code, make sure to also add unsubscribing via the `-=` operator (the `_ExitTree` function of the node is a good place to start). Disconnecting signals during node destruction prevents seemingly illogical and hard-to-trace bugs when reconnecting the same signals in the future._
-
-_Sidenote 2: the project can most certainly be improved via a quick implementation of a custom rotation margin field in the `Level.cs` file. Which I'll do in a short while, along with other QoL improvements._
