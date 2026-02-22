@@ -196,7 +196,7 @@ MeshScenesPaths = PackedStringArray("res://Scenes/MeshScenes/ElephantMesh.tscn")
 SCRotations = PackedFloat32Array(0.53, 1.01, 0)
 AllowFlippedVEx = Array[bool]([true])
 AllowFlippedHEx = Array[bool]([true])
-RotMargins = PackedFloat32Array(0.2)
+RotMargins = PackedFloat32Array(0.12)
 
 [node name="LevelTeapot" parent="Levels" unique_id=2109112050 instance=ExtResource("4_24ajx")]
 visible = false
@@ -212,6 +212,8 @@ SCRotations = PackedFloat32Array(1.5, 0, 0, 0.5, 0, 0)
 SCOffsets = PackedFloat32Array(0, 0, 0)
 AllowFlippedVEx = Array[bool]([false, true])
 AllowFlippedHEx = Array[bool]([true, true])
+RotMargins = PackedFloat32Array(0.1, 0.3)
+MoveMargin = 0.4
 
 [node name="Level42" parent="Levels" unique_id=1841831335 instance=ExtResource("4_24ajx")]
 visible = false
@@ -220,6 +222,7 @@ SCRotations = PackedFloat32Array(0, 0, 0, 0, 0, 0)
 SCOffsets = PackedFloat32Array(2.8, 0, 0)
 AllowFlippedVEx = Array[bool]([false, false])
 AllowFlippedHEx = Array[bool]([false, false])
+MoveMargin = 0.2
 
 [node name="LevelSmiley" parent="Levels" unique_id=2102325955 instance=ExtResource("4_24ajx")]
 visible = false
@@ -228,6 +231,8 @@ SCRotations = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
 SCOffsets = PackedFloat32Array(1.84, 1.14, 0, -0.36, 2.06, 0)
 AllowFlippedVEx = Array[bool]([false, false, false])
 AllowFlippedHEx = Array[bool]([false, false, false])
+RotMargins = PackedFloat32Array(0.2, 0.2, 0.1)
+MoveMargin = 0.2
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1032416890]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -7)
