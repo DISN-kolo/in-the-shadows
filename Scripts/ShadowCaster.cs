@@ -16,7 +16,6 @@ public partial class ShadowCaster : CharacterBody3D
 	public Vector2 ScreenSize = new Vector2(0, 0);
 
 	public Vector3 IntendedRot = new Vector3(0, 0, 0);
-//	public Vector3 IntendedPos = new Vector3(0, 0, 0);
 
 	public string MeshScenePath { get; set; } = "";
 	public PackedScene TempVarForMeshScene;
