@@ -44,8 +44,8 @@ public partial class SceneSwitcher : Node
 				GD.Print("Failed in creating a new savefile:", e.Message);
 				// TODO go into "savefileless" mode
 			}
-			Settings.Instance.CompletionShown = [false, false, false, false, false, false];
-			Settings.Instance.UnlockShown = [false, false, false, false, false, false];
+			Settings.Instance.CompletionShown = new bool[Settings.Instance.LevelNames.Length];
+			Settings.Instance.UnlockShown = new bool[Settings.Instance.LevelNames.Length];
 			Settings.Instance.MaxAvailableLevel = 0;
 		}
 		else
@@ -75,8 +75,8 @@ public partial class SceneSwitcher : Node
 			// TODO go into "savefileless" mode
 		}
 		Settings.Instance.MaxAvailableLevel = 0;
-		Settings.Instance.CompletionShown = [false, false, false, false, false, false];
-		Settings.Instance.UnlockShown = [false, false, false, false, false, false];
+		Settings.Instance.CompletionShown = new bool[Settings.Instance.LevelNames.Length];
+		Settings.Instance.UnlockShown = new bool[Settings.Instance.LevelNames.Length];
 		ChangeSceneToPath("res://Scenes/BeautifulLevelMenu.tscn");
 	}
 

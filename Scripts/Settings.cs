@@ -28,8 +28,6 @@ public partial class Settings : Node
 		SavePath = "./savefile";
 		MaxAvailableLevel = 0;
 		DevMode = false;
-		CompletionShown = [false, false, false, false, false, false];
-		UnlockShown = [false, false, false, false, false, false];
 		LevelNames = [
 			"Baby Don't Hurt Me", /* a very simple heart that can only be rotated horizontally */
 			"Trunk",
@@ -38,5 +36,7 @@ public partial class Settings : Node
 			"THE Answer",
 			"Be Happy" /* stupid smiley thing */
 		];
+		CompletionShown = new bool[LevelNames.Length];
+		UnlockShown = new bool[LevelNames.Length];
 	}
 }
