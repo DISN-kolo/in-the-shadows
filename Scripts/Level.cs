@@ -60,11 +60,11 @@ public partial class Level : Node3D
 		{
 			if (OffsetClose(
 						new Vector2(
-							RealOffsetArray[i - 1],
+							RealOffsetArray[(i - 1)*2],
 							RealOffsetArray[(i - 1)*2 + 1]
 							),
 						new Vector2(
-							SCOffsets[i - 1],
+							SCOffsets[(i - 1)*2],
 							SCOffsets[(i - 1)*2 + 1]
 							),
 						MoveMargin))
