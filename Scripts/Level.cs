@@ -164,9 +164,9 @@ public partial class Level : Node3D
 	{
 		foreach (ShadowCaster LocalNode in GetChildren())
 		{
-			LocalNode.QueueFree();
 			LocalNode.ImInRotation -= OnSCInRot;
 			LocalNode.ImOuttaRotation -= OnSCOuttaRot;
+			LocalNode.QueueFree();
 		}
 		Visible = false;
 	}
