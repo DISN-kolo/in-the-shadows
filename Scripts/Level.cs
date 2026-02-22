@@ -32,6 +32,7 @@ public partial class Level : Node3D
 
 	public PackedScene ShadowCasterScene;
 	public ShadowCaster CurrentShadowCasterInstance;
+	private ShadowCaster[] ShadowCasters = {};
 
 	private bool[] InRotations = {};
 
@@ -123,6 +124,7 @@ public partial class Level : Node3D
 		GD.Print("Loading level!, ", LevelNumber);
 		InRotations = new bool[MeshScenesAmt];
 		RealOffsetArray = new float[MeshScenesAmt*2];
+		ShadowCasters = new ShadowCaster[MeshScenesAmt];
 		for (int i = 0; i < MeshScenesAmt; i++)
 		{
 			CurrentShadowCasterInstance = (ShadowCaster)ShadowCasterScene.Instantiate();
@@ -154,6 +156,7 @@ public partial class Level : Node3D
 			{
 				CurrentShadowCasterInstance.HMovOnly = false;
 			}
+			ShadowCasters[i] = CurrentShadowCasterInstance;
 			AddChild(CurrentShadowCasterInstance);
 		}
 		Visible = true;
@@ -162,12 +165,13 @@ public partial class Level : Node3D
 
 	public void UnloadLevel()
 	{
-		foreach (ShadowCaster LocalNode in GetChildren())
+		foreach (ShadowCaster LocalNode in ShadowCasters)
 		{
 			LocalNode.ImInRotation -= OnSCInRot;
 			LocalNode.ImOuttaRotation -= OnSCOuttaRot;
 			LocalNode.QueueFree();
 		}
+		ShadowCasters = [];
 		Visible = false;
 	}
 
@@ -176,13 +180,13 @@ public partial class Level : Node3D
 		InMovementSolution = true;
 		GD.Print("Movement solved!");
 		int localIndex = 0;
-		foreach (ShadowCaster LocalNode in GetChildren())
+		foreach (ShadowCaster LocalNode in ShadowCasters)
 		{
 			LocalNode.SolutionFinalized = true;
 			LocalNode.SetRotTgtToClosestTgt();
 			if (localIndex != 0)
 			{
-				LocalNode.MovTargetReal = ((ShadowCaster)GetChildren()[0]).GlobalPosition + new Vector3(
+				LocalNode.MovTargetReal = ShadowCasters[0].GlobalPosition + new Vector3(
 						SCOffsets[(localIndex - 1)*2],
 						SCOffsets[(localIndex - 1)*2 + 1],
 						0.0f);
@@ -226,8 +230,8 @@ public partial class Level : Node3D
 		{
 			for (int i = 1; i < MeshScenesAmt; i++)
 			{
-				RealOffsetArray[(i - 1)*2] = ((CharacterBody3D)GetChildren()[i]).GlobalPosition.X - ((CharacterBody3D)GetChildren()[0]).GlobalPosition.X;
-				RealOffsetArray[(i - 1)*2 + 1] = ((CharacterBody3D)GetChildren()[i]).GlobalPosition.Y - ((CharacterBody3D)GetChildren()[0]).GlobalPosition.Y;
+				RealOffsetArray[(i - 1)*2] = ShadowCasters[i].GlobalPosition.X - ShadowCasters[0].GlobalPosition.X;
+				RealOffsetArray[(i - 1)*2 + 1] = ShadowCasters[i].GlobalPosition.Y - ShadowCasters[0].GlobalPosition.Y;
 			}
 			if (InMovementSolution && AtLeastOneOffsetBad())
 			{
