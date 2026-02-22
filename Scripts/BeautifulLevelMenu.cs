@@ -48,12 +48,13 @@ public partial class BeautifulLevelMenu : Control
 	public override void _Process(double delta)
 	{
 		ScreenMid = GetViewport().GetVisibleRect().Size.X / 2.0;
+		float moveDelta = (float)delta * MoveSpeed * (-(float)RightRef.Intensity + (float)LeftRef.Intensity);
 		if (MoveMe.Position.X >= ScreenMid - MinX)
 		{
 			MoveMe.Position = MoveMe.Position with { X = (float)ScreenMid - (float)MinX };
 			if (RightRef.Intensity > 0.0)
 			{
-				MoveMe.Position = MoveMe.Position with { X = MoveMe.Position.X + (float)delta * MoveSpeed * (-(float)RightRef.Intensity + (float)LeftRef.Intensity)};
+				MoveMe.Position = MoveMe.Position with { X = MoveMe.Position.X + moveDelta };
 			}
 		}
 		else if (MoveMe.Position.X <= ScreenMid - MaxX)
@@ -61,12 +62,12 @@ public partial class BeautifulLevelMenu : Control
 			MoveMe.Position = MoveMe.Position with { X = (float)ScreenMid - (float)MaxX };
 			if (LeftRef.Intensity > 0.0)
 			{
-				MoveMe.Position = MoveMe.Position with { X = MoveMe.Position.X + (float)delta * MoveSpeed * (-(float)RightRef.Intensity + (float)LeftRef.Intensity)};
+				MoveMe.Position = MoveMe.Position with { X = MoveMe.Position.X + moveDelta };
 			}
 		}
 		else
 		{
-			MoveMe.Position = MoveMe.Position with { X = MoveMe.Position.X + (float)delta * MoveSpeed * (-(float)RightRef.Intensity + (float)LeftRef.Intensity)};
+			MoveMe.Position = MoveMe.Position with { X = MoveMe.Position.X + moveDelta };
 		}
 	}
 }

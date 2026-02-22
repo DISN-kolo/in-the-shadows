@@ -205,11 +205,9 @@ public partial class Level : Node3D
 			Array.Fill(RotMargins, 0.1f);
 		}
 		RotationCloseness = new float[MeshScenesAmt];
-		Array.Fill(RotationCloseness, 0.0f);
 		if (MeshScenesAmt > 1)
 		{
 			MoveCloseness = new float[MeshScenesAmt - 1];
-			Array.Fill(MoveCloseness, 0.0f);
 		}
 		if (!Visible)
 			return ;
