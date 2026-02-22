@@ -175,11 +175,19 @@ public partial class Level : Node3D
 	{
 		InMovementSolution = true;
 		GD.Print("Movement solved!");
+		int localIndex = 0;
 		foreach (ShadowCaster LocalNode in GetChildren())
 		{
 			LocalNode.SolutionFinalized = true;
 			LocalNode.SetRotTgtToClosestTgt();
-//			LocalNode.MovTargetReal = LocalNode.IntendedPos;
+			if (localIndex != 0)
+			{
+				LocalNode.MovTargetReal = ((ShadowCaster)GetChildren()[0]).GlobalPosition + new Vector3(
+						SCOffsets[(localIndex - 1)*2],
+						SCOffsets[(localIndex - 1)*2 + 1],
+						0.0f);
+			}
+			localIndex++;
 		}
 		NodeOfSignals.EmitSignal(Signals.SignalName.LevelFinished, LevelNumber);
 	}
