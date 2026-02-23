@@ -11,7 +11,7 @@ You need to rotate and move around different 3D objects in order to make their s
 <p align=center><i>A harder level with two independent objects<br><br><br></i></p>
 
 ## Technical side
-The project currently has six playable levels, but adding more is simple. Put the level's name in the appropriate array within the `Settings.cs`. Then create the required 3D model with the correct silhouette and place it in the main 3D hub scene that contains all the levels. Enter the valid solution coordinates into the appropriate field in the Level object. Levels can also consist of multiple models. In that case, also specify the positional offsets between elements. To make the level accesible, create a corresponding button in the level selection scene (`BeautifulLevelMenu.tscn`) and position it as needed, set the id to match the one in the `Settings.cs`.
+The project currently has six playable levels, but adding more is simple. Put the level's name in the appropriate array within the `Settings.cs`. Then create the required 3D model with the correct silhouette and place it in the main 3D hub scene that contains all the levels. Enter the valid solution coordinates (and the acceptable margins!) into the appropriate field in the Level object. Levels can also consist of multiple models. In that case, also specify the positional offsets between elements. To make the level accesible, create a corresponding button in the level selection scene (`BeautifulLevelMenu.tscn`) and position it as needed, set the id to match the one in the `Settings.cs`.
 
 On-screen level "debug" information can be enabled via the `LabelDebug` node in the main 3D scene. By default, it should display object offset, and is easily configurable through code (`LabelDebug.cs`).
 
