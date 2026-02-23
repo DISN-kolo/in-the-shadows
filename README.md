@@ -4,10 +4,10 @@ In the shadows is a videogame project. The original task was created in School 4
 ## Game synopsis
 You need to rotate and move around different 3D objects in order to make their shadows appear as the silhouettes that are asked for in each level. Of course, the level names are quite cryptic to make the task a little less obvious.
 
-![Simple level](VideoMaterials/montage1.mp4)
+![Simple level](VideoMaterials/montage1.webp)
 <p align=center><i>A simple level with only horizontal rotations<br><br><br></i></p>
 
-![Complicated level](VideoMaterials/montage2.mp4)
+![Complicated level](VideoMaterials/montage2.webp)
 <p align=center><i>A harder level with two independent objects<br><br><br></i></p>
 
 ## Technical side
